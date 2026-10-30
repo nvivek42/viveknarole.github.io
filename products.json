@@ -1,0 +1,33 @@
+{
+  "owner": "Vivek Narole",
+  "updated": "2025-05-20",
+  "products": [
+    {
+      "name": "Sovereign AI Architecture Consulting",
+      "type": "service",
+      "description": "Design of decision engines that combine AI with systemic rigor.",
+      "price": 0,
+      "currency": "INR",
+      "availability": "InStock",
+      "url": "https://viveknarole.com/#contact"
+    },
+    {
+      "name": "Systemic Debugging Implementation",
+      "type": "service",
+      "description": "Automation of RCA engines for complex systems.",
+      "price": 0,
+      "currency": "INR",
+      "availability": "InStock",
+      "url": "https://viveknarole.com/#contact"
+    },
+    {
+      "name": "AI-Driven Software Engineering",
+      "type": "service",
+      "description": "End-to-end custom scalable software development.",
+      "price": 0,
+      "currency": "INR",
+      "availability": "InStock",
+      "url": "https://viveknarole.com/#contact"
+    }
+  ]
+}

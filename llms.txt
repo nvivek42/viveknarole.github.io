@@ -1,0 +1,25 @@
+# Vivek Narole
+
+> AI-Driven Software Engineer based in Mumbai, India. I build Sovereign Decision Engines and scalable software by combining AI engineering, systemic root cause analysis, and philosophical grounding.
+
+Last updated: 2025-05-20
+
+## About
+- Site: https://viveknarole.com/
+- Contact: viveknarole100@gmail.com
+- Skills: Sovereign AI Architecture, Systemic Root Cause Analysis, AI-Driven Software Engineering, Financial Psychology
+
+## Journey
+- 2024–now: Building Sovereign Decision Engines and scaling AI-assisted development.
+- 2021–2024: Intensive study of Psychology and UPSC CSE, focusing on pattern recognition.
+- 2018–2021: Mechanical Engineering and foundations in systemic thinking.
+
+## Products and services
+- Sovereign AI Architecture Consulting (Custom): Design of decision engines that combine AI with systemic rigor. Buy or enquire: https://viveknarole.com/#contact
+- Systemic Debugging Implementation (Custom): Automation of RCA engines for complex systems. Buy or enquire: https://viveknarole.com/#contact
+- AI-Driven Software Engineering (Custom): End-to-end custom scalable software development. Buy or enquire: https://viveknarole.com/#contact
+
+## Links
+- Products feed (JSON): https://viveknarole.com/products.json
+- LinkedIn: https://www.linkedin.com/in/viveknarole
+- GitHub: https://github.com/viveknarole
