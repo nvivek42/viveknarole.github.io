@@ -17,6 +17,12 @@ Software engineer focused on systemic precision and pattern recognition.
 - Balaji Srinivasan: Decentralization and the Network State.
 - Flow (Mihaly Csikszentmihalyi): Optimal experience and focus.
 
+## Portfolio
+- Portfolio: https://viveknarole.com/portfolio/
+- Wiki source: wiki/portfolio/
+- Categories: experiences, projects, lessons
+- Guidelines: wiki/portfolio/GUIDELINES.md
+
 ## Contact
 - Email: viveknarole100@gmail.com
 - GitHub: https://github.com/nvivek42
