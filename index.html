@@ -1,330 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vivek Narole</title>
-<meta name="description" content="Software engineer focused on systemic precision and pattern recognition.">
-<link rel="canonical" href="https://viveknarole.com/">
-<link rel="alternate" type="text/markdown" href="/llms.txt">
-<meta property="og:title" content="Vivek Narole">
-<meta property="og:description" content="Software engineer focused on systemic precision and pattern recognition.">
-<meta property="og:url" content="https://viveknarole.com/">
-<style>
- /* ============================================
-    DESIGN TOKENS — 8px Baseline Grid
-    ============================================ */
- :root{
-   --base:8px;
-   --space-1:8px;   --space-2:16px;  --space-3:24px;
-   --space-4:32px;  --space-5:40px;  --space-6:48px;
-   --space-7:56px;  --space-8:64px;  --space-9:72px;
-   --space-10:80px; --space-12:96px; --space-16:128px;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vivek Narole</title>
+  <meta name="description" content="I build software systems, AI workflows, and debugging infrastructure for teams dealing with ambiguity and scale.">
+  <link rel="canonical" href="https://viveknarole.com/">
+  <link rel="alternate" type="text/markdown" href="/llms.txt">
+  <meta property="og:title" content="Vivek Narole">
+  <meta property="og:description" content="I build software systems, AI workflows, and debugging infrastructure for teams dealing with ambiguity and scale.">
+  <meta property="og:url" content="https://viveknarole.com/">
+  <style>
+    :root{
+      --bg: #f7f3ee;
+      --bg-strong: #efe5dc;
+      --panel: rgba(255,255,255,0.8);
+      --panel-strong: #fffaf6;
+      --ink: #171512;
+      --muted: #5f564f;
+      --subtle: #8d8177;
+      --line: rgba(23,21,18,0.12);
+      --accent: #c76838;
+      --accent-strong: #9d4727;
+      --shadow: 0 18px 40px rgba(23,21,18,0.08);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --space-1: 8px;
+      --space-2: 12px;
+      --space-3: 16px;
+      --space-4: 20px;
+      --space-5: 28px;
+      --space-6: 36px;
+      --space-7: 48px;
+      --space-8: 64px;
+      --space-9: 80px;
+      --max: 1180px;
+    }
 
-   --bg:#fafafa;
-   --bg-elevated:#ffffff;
-   --ink:#1a1a2e;
-   --ink-muted:#5a5a7a;
-   --ink-subtle:#8a8a9e;
-   --line:#e8e8f0;
-   --accent:#c85c2e;
-   --accent-hover:#a64a24;
-   --accent-strong:#8a3a1c;
-   --accent-light:#fef7f4;
-   --shadow-1:0 1px 3px rgba(26,26,46,0.06), 0 1px 2px rgba(26,26,46,0.04);
-   --shadow-2:0 4px 12px rgba(26,26,46,0.08), 0 2px 4px rgba(26,26,46,0.04);
-   --radius:8px;
-   --transition:180ms cubic-bezier(0.25,0.46,0.45,0.94);
-   --max-width:44rem;
-   --font-sans:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
- }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 600px at 100% 0%, rgba(199,104,56,0.12), transparent 60%),
+        radial-gradient(800px 500px at 0% 100%, rgba(199,104,56,0.08), transparent 55%),
+        var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
- @media (prefers-color-scheme:dark){
-   :root{
-     --bg:#0a0a10;
-     --bg-elevated:#12121c;
-     --ink:#f0f0f5;
-     --ink-muted:#9a9ac0;
-     --ink-subtle:#6a6a80;
-     --line:#222232;
-     --accent:#e87a4a;
-     --accent-hover:#ff9666;
-     --accent-strong:#ffb38d;
-     --accent-light:#2a1812;
-     --shadow-1:0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
-     --shadow-2:0 4px 12px rgba(0,0,0,0.45), 0 2px 4px rgba(0,0,0,0.35);
-   }
- }
+    a { color: inherit; }
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px 22px 64px;
+    }
 
- *, *::before, *::after{box-sizing:border-box}
- html{scroll-behavior:smooth}
- @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0 28px;
+    }
+    .brand {
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.25);
+      border-radius: 999px;
+      transition: all 180ms ease;
+    }
+    .nav a:hover {
+      border-color: rgba(199,104,56,0.35);
+      color: var(--accent-strong);
+      background: rgba(199,104,56,0.04);
+    }
 
- body{
-   margin:0;background:var(--bg);color:var(--ink);
-   font-family:var(--font-sans);font-size:16px;line-height:1.7;
-   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-   text-rendering:optimizeLegibility;
- }
+    .hero {
+      padding: 12px 0 12px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: end;
+      gap: 24px;
+      min-height: 430px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid rgba(199,104,56,0.28);
+      background: rgba(199,104,56,0.05);
+      color: var(--accent-strong);
+      border-radius: 999px;
+      font-size: 0.73rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 18px 0 16px;
+      font-size: clamp(3rem, 6vw, 5.3rem);
+      line-height: 0.94;
+      letter-spacing: -0.08em;
+      max-width: 680px;
+    }
+    .lead {
+      max-width: 650px;
+      font-size: clamp(1.06rem, 1.8vw, 1.28rem);
+      color: var(--muted);
+      margin: 0 0 26px;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 180ms ease;
+      border: 1px solid transparent;
+    }
+    .btn.primary {
+      background: var(--ink);
+      color: #f9f5f2;
+      box-shadow: var(--shadow);
+    }
+    .btn.primary:hover {
+      transform: translateY(-1px);
+      background: var(--accent);
+    }
+    .btn.secondary {
+      background: rgba(255,255,255,0.34);
+      color: var(--ink);
+      border-color: var(--line);
+    }
+    .btn.secondary:hover {
+      border-color: rgba(199,104,56,0.35);
+      color: var(--accent-strong);
+      background: rgba(199,104,56,0.04);
+    }
 
- body::before{
-   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0.4;
-   background-image:
-     radial-gradient(ellipse 45% 30% at 90% 0%, var(--accent-light) 0%, transparent 55%),
-     radial-gradient(ellipse 30% 45% at 5% 100%, var(--accent-light) 0%, transparent 50%);
- }
- @media (prefers-color-scheme:dark){body::before{opacity:0.1}}
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.45));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 18px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .mini-label {
+      color: var(--subtle);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .stat {
+      padding: 18px 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.3);
+    }
+    .stat strong {
+      display: block;
+      font-size: clamp(1.5rem, 2vw, 2.1rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      margin-bottom: 6px;
+    }
+    .stat span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
- .page{max-width:var(--max-width);margin:0 auto;padding:0 var(--space-4)}
+    section {
+      padding-top: 32px;
+      padding-bottom: 10px;
+    }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      font-weight: 700;
+    }
+    .section-kicker {
+      color: var(--muted);
+      font-size: 0.82rem;
+      max-width: 30ch;
+    }
 
- section{
-   padding:var(--space-10) 0;
-   border-top:1px solid transparent;
- }
- section:first-of-type{padding-top:var(--space-6)}
+    .focus-grid,
+    .work-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .focus-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .focus-card,
+    .work-item {
+      background: rgba(255,255,255,0.45);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 18px 18px 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+    }
+    .focus-card strong,
+    .work-item h3 {
+      display: block;
+      font-size: 1.02rem;
+      margin: 0 0 8px;
+      letter-spacing: -0.03em;
+    }
+    .focus-card p,
+    .work-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
 
- section:not(:first-of-type)::before{
-   content:"";display:block;margin:0 auto var(--space-6);
-   width:48px;height:1px;
-   background:linear-gradient(90deg, transparent, var(--accent), transparent);
-   opacity:0.35;
- }
+    .work-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .work-item {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .tag {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(199,104,56,0.08);
+      color: var(--accent-strong);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
 
- header{padding:var(--space-12) 0 var(--space-8);text-align:center}
+    .contact-wrap {
+      margin-top: 14px;
+      padding: 22px 20px 18px;
+      background: linear-gradient(180deg, rgba(23,21,18,0.96), rgba(33,26,22,0.96));
+      border-radius: var(--radius);
+      color: #f8f2ee;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow);
+    }
+    .contact-wrap p {
+      margin: 0 0 10px;
+      color: rgba(255,255,255,0.7);
+      max-width: 44ch;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(1.1rem, 2vw, 1.7rem);
+      letter-spacing: -0.05em;
+      text-decoration: none;
+      font-weight: 600;
+      color: #fff;
+    }
+    .contact-link:hover { color: #ffc8aa; }
 
- section{opacity:0;transform:translateY(12px);animation:reveal 0.5s var(--transition) forwards}
- section:nth-child(1){animation-delay:0.05s}
- section:nth-child(2){animation-delay:0.12s}
- section:nth-child(3){animation-delay:0.19s}
- section:nth-child(4){animation-delay:0.26s}
- @keyframes reveal{to{opacity:1;transform:translateY(0)}}
- @media (prefers-reduced-motion:reduce){section{opacity:1;transform:none;animation:none}}
+    footer {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--accent-strong); }
 
- h1{
-   font-size:clamp(2rem,4vw,3rem);
-   font-weight:700;letter-spacing:-0.04em;line-height:1.08;
-   margin:0 auto var(--space-2);color:var(--ink);max-width:14ch;
- }
- .lead{
-   font-size:clamp(1rem,2.2vw,1.2rem);
-   color:var(--ink-muted);font-weight:400;line-height:1.6;
-   max-width:36rem;margin:0 auto var(--space-4);
- }
- h2{
-   font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-   color:var(--ink-subtle);margin:0 0 var(--space-3);
-   padding-left:var(--space-3);border-left:2px solid var(--accent);
-   position:relative;
- }
- h2::before{
-   content:"";position:absolute;left:-2px;top:50%;transform:translateY(-50%);
-   width:2px;height:2px;background:var(--accent);border-radius:50%;
- }
- h3{margin:0 0 var(--space-1);font-size:1rem;line-height:1.4}
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .focus-grid,
+      .work-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hero-card { min-height: auto; }
+    }
 
- .eyebrow{
-   display:inline-flex;align-items:center;gap:var(--space-1);
-   margin-bottom:var(--space-3);padding:var(--space-1) var(--space-2);
-   border:1px solid rgba(200,92,46,0.28);border-radius:999px;
-   background:rgba(200,92,46,0.06);color:var(--accent-strong);
-   font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
- }
-
- .nav{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-2);margin-top:var(--space-4)}
- .nav a{
-   font-size:0.8rem;font-weight:500;color:var(--ink-muted);
-   padding:var(--space-1) var(--space-3);border-radius:100px;
-   border:1px solid var(--line);background:var(--bg-elevated);
-   text-decoration:none;transition:all var(--transition);
- }
- .nav a:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-light);transform:translateY(-1px)}
-
- .hero-actions {
-   display:flex;justify-content:center;align-items:center;gap:var(--space-2);flex-wrap:wrap;
-   margin:0 auto var(--space-4);
- }
- .primary-btn,.secondary-btn {
-   display:inline-flex;align-items:center;justify-content:center;
-   min-height:44px;padding:0.8rem 1.2rem;border-radius:999px;
-   text-decoration:none;font-weight:600;transition:all var(--transition);
- }
- .primary-btn{
-   background:var(--ink);color:var(--bg);box-shadow:var(--shadow-1);
- }
- .primary-btn:hover{background:var(--accent);transform:translateY(-1px)}
- .secondary-btn{
-   background:var(--bg-elevated);color:var(--ink);border:1px solid var(--line);
- }
- .secondary-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
-
- .focus-grid,.work-list,.proof-grid{
-   display:grid;gap:var(--space-3)
- }
- .focus-grid,.proof-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
- .focus-card,.proof-stat,.work-item{
-   background:var(--bg-elevated);border:1px solid var(--line);
-   border-radius:var(--radius);padding:var(--space-4);
-   box-shadow:var(--shadow-1);
-   transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
- }
- .focus-card:hover,.proof-stat:hover,.work-item:hover{
-   transform:translateY(-2px);box-shadow:var(--shadow-2);border-color:rgba(200,92,46,0.25)
- }
- .focus-card p,.proof-stat span,.work-desc{margin:0;color:var(--ink-muted);line-height:1.6}
- .focus-card strong,.proof-stat strong{display:block;color:var(--ink);font-size:1.05rem;margin-bottom:var(--space-1)}
- .proof-stat strong{font-size:1.5rem;letter-spacing:-0.04em}
- .proof-stat span{font-size:0.83rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-subtle)}
-
- .work-list{grid-template-columns:1fr;}
- .work-item{position:relative;overflow:hidden;}
- .work-item::before{
-   content:"";position:absolute;top:0;left:0;right:0;height:3px;
-   background:linear-gradient(90deg,var(--accent),transparent);
-   transform:scaleX(0);transform-origin:left;transition:transform var(--transition);
- }
- .work-item:hover::before{transform:scaleX(1)}
- .work-title{font-weight:600;color:var(--ink);margin:0 0 var(--space-1);font-size:0.95rem}
- .work-desc{font-size:0.9rem}
-
- #contact{text-align:center}
- .contact-card{
-   background:var(--ink);color:var(--bg);border-radius:var(--radius);
-   padding:var(--space-5) var(--space-6);box-shadow:var(--shadow-2);
-   display:inline-flex;flex-direction:column;align-items:center;gap:var(--space-2);
-   max-width:32rem;width:100%;margin:0 auto;
- }
- .contact-card a{color:var(--bg);font-weight:600;font-size:1.05rem;border-bottom:2px solid var(--bg);padding-bottom:2px;text-decoration:none;transition:border-color var(--transition),color var(--transition)}
- .contact-card a:hover{color:var(--accent);border-bottom-color:var(--accent)}
- .contact-hint{font-size:0.85rem;color:rgba(250,250,250,0.55)}
-
- footer{padding:var(--space-10) 0 var(--space-6);text-align:center;color:var(--ink-subtle);font-size:0.75rem;border-top:1px solid var(--line)}
- .footer-links{display:flex;justify-content:center;gap:var(--space-5);margin-bottom:var(--space-2);flex-wrap:wrap}
- .footer-links a{color:var(--ink-subtle);text-decoration:none;font-weight:500;font-size:0.85rem;transition:color var(--transition)}
- .footer-links a:hover{color:var(--accent)}
-
- @media (max-width: 700px){
-   .focus-grid,.proof-grid{grid-template-columns:1fr;}
-   .page{padding:0 var(--space-3)}
-   header{padding-top:var(--space-10)}
- }
- @media (max-width: 480px){
-   .hero-actions{flex-direction:column;align-items:stretch}
-   .primary-btn,.secondary-btn{width:100%}
-   .contact-card{padding:var(--space-4) var(--space-3)}
- }
-
- @media print{
-   body::before{display:none}
-   section:not(:first-of-type)::before{display:none}
-   .work-item,.contact-card,.focus-card,.proof-stat{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
-   a{text-decoration:underline;color:#000}
- }
-</style>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Person",
-  "name":"Vivek Narole",
-  "url":"https://viveknarole.com/",
-  "email":"viveknarole100@gmail.com",
-  "description":"Software engineer focused on systemic precision and pattern recognition.",
-  "knowsAbout":["Systemic Root Cause Analysis","AI-Assisted Software Engineering","Pattern Recognition","Financial Psychology","Vedanta Philosophy","Flow Psychology"],
-  "sameAs":["https://github.com/nvivek42","https://topmate.io/vivek_narole"]
-}
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    @media (max-width: 680px) {
+      .page { padding: 16px 16px 50px; }
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav {
+        width: 100%;
+      }
+      .focus-grid,
+      .work-grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn { width: 100%; }
+      .contact-link { font-size: 1.25rem; }
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="page">
-<header>
-  <div class="eyebrow">Available for systems, AI, and product engineering work</div>
-  <h1>I help teams turn complexity into clear decisions.</h1>
-  <p class="lead">Software engineer focused on systemic precision, AI-assisted delivery, and debugging the root causes behind noisy systems.</p>
-  <div class="hero-actions" aria-label="Primary calls to action">
-    <a class="primary-btn" href="mailto:viveknarole100@gmail.com">Book a 15-minute intro</a>
-    <a class="secondary-btn" href="#work">See selected work</a>
-  </div>
-  <nav class="nav" aria-label="Sections">
-    <a href="#focus">Focus</a>
-    <a href="#work">Work</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+  <div class="page">
+    <header class="topbar" aria-label="Main navigation">
+      <a class="brand" href="#top">Vivek Narole</a>
+      <nav class="nav">
+        <a href="#focus">Focus</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-<main>
-<section id="focus">
-  <h2>Focus</h2>
-  <div class="focus-grid">
-    <article class="focus-card">
-      <strong>Systems thinking</strong>
-      <p>I trace patterns across layers of complexity so the real problem becomes visible before it becomes expensive.</p>
-    </article>
-    <article class="focus-card">
-      <strong>AI-assisted engineering</strong>
-      <p>I build software that pairs human judgment with automation—reducing noise, accelerating iteration, and making decisions stick.</p>
-    </article>
-    <article class="focus-card">
-      <strong>Root-cause clarity</strong>
-      <p>From debugging failures to designing decision pipelines, I convert confusing signals into concrete, actionable systems.</p>
-    </article>
-  </div>
-</section>
+    <main id="top">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Available for systems, AI, and product work</div>
+          <h1>I build systems that make complexity legible.</h1>
+          <p class="lead">I’m Vivek Narole — a software engineer focused on roots, patterns, and leverage. I work with teams that need clarity under pressure: AI workflows, debugging infrastructure, and systems that turn noisy decisions into better ones.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="mailto:viveknarole100@gmail.com">Book a 15-minute intro</a>
+            <a class="btn secondary" href="#work">See selected work</a>
+          </div>
+        </div>
 
-<section id="proof">
-  <h2>Proof</h2>
-  <div class="proof-grid">
-    <div class="proof-stat">
-      <strong>Distributed systems</strong>
-      <span>Signal + debugging</span>
-    </div>
-    <div class="proof-stat">
-      <strong>AI workflows</strong>
-      <span>Human + machine leverage</span>
-    </div>
-    <div class="proof-stat">
-      <strong>Clarity-first work</strong>
-      <span>Decision quality</span>
-    </div>
-  </div>
-</section>
+        <aside class="hero-card" aria-label="Quick profile summary">
+          <div>
+            <div class="mini-label">Profile</div>
+            <div class="stats">
+              <div class="stat">
+                <strong>Systems</strong>
+                <span>thinking</span>
+              </div>
+              <div class="stat">
+                <strong>AI</strong>
+                <span>delivery</span>
+              </div>
+              <div class="stat">
+                <strong>RCA</strong>
+                <span>debugging</span>
+              </div>
+              <div class="stat">
+                <strong>Clarity</strong>
+                <span>design</span>
+              </div>
+            </div>
+          </div>
+          <div class="mini-label">Open to collaborations, product work, and AI systems</div>
+        </aside>
+      </section>
 
-<section id="work">
-  <h2>Work</h2>
-  <div class="work-list">
-    <article class="work-item">
-      <h3 class="work-title">Systemic Debugging</h3>
-      <p class="work-desc">Building RCA engines that correlate signals across distributed systems to identify failure patterns before they cascade.</p>
-    </article>
-    <article class="work-item">
-      <h3 class="work-title">AI-Assisted Engineering</h3>
-      <p class="work-desc">Implementing scalable software by leveraging sovereign AI agent workflows—from architecture to production.</p>
-    </article>
-    <article class="work-item">
-      <h3 class="work-title">Pattern Recognition</h3>
-      <p class="work-desc">Applying systemic rigor to financial and technical signals—post-mortem trade logs, exam optimization, system modeling.</p>
-    </article>
-  </div>
-</section>
+      <section id="focus">
+        <div class="section-head">
+          <h2>Focus</h2>
+          <div class="section-kicker">I help teams see the real problem before it becomes expensive.</div>
+        </div>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <div class="contact-card">
-    <a href="mailto:viveknarole100@gmail.com">viveknarole100@gmail.com</a>
-    <span class="contact-hint">Open to collaborations, AI systems, and product conversations</span>
-  </div>
-</section>
-</main>
+        <div class="focus-grid">
+          <article class="focus-card">
+            <strong>Systems thinking</strong>
+            <p>I trace the pattern behind the noise so the real issue becomes visible before it compounds.</p>
+          </article>
+          <article class="focus-card">
+            <strong>AI-assisted engineering</strong>
+            <p>I build software that pairs human judgment with automation — faster iteration, cleaner decisions, less drag.</p>
+          </article>
+          <article class="focus-card">
+            <strong>Root-cause clarity</strong>
+            <p>I debug ambiguity, untangle failure loops, and design systems that are easier to reason about.</p>
+          </article>
+        </div>
+      </section>
 
-<footer>
-  <div class="footer-links">
-    <a href="/llms.txt" rel="alternate">llms.txt</a>
-    <a href="https://github.com/nvivek42" rel="me">GitHub</a>
-    <a href="https://topmate.io/vivek_narole" rel="me">Topmate</a>
+      <section id="work">
+        <div class="section-head">
+          <h2>Selected work</h2>
+          <div class="section-kicker">Mostly focused on systems, signals, and software that needs to hold under complexity.</div>
+        </div>
+
+        <div class="work-grid">
+          <article class="work-item">
+            <div>
+              <span class="tag">Systems</span>
+              <h3>Systemic debugging</h3>
+            </div>
+            <p>Building RCA systems that connect failure signals across distributed environments and surface the pattern before it cascades.</p>
+          </article>
+
+          <article class="work-item">
+            <div>
+              <span class="tag">AI</span>
+              <h3>AI-assisted delivery</h3>
+            </div>
+            <p>Designing software workflows that let teams move faster without sacrificing judgment, quality, or context.</p>
+          </article>
+
+          <article class="work-item">
+            <div>
+              <span class="tag">Pattern</span>
+              <h3>Signal analysis</h3>
+            </div>
+            <p>Applying system-level thinking to technical and financial signals — turning noise into insight and action.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-head">
+          <h2>Contact</h2>
+        </div>
+
+        <div class="contact-wrap">
+          <p>I’m open to product, AI, and systems engineering conversations — especially the kind where the problem is messy, important, and worth solving properly.</p>
+          <a class="contact-link" href="mailto:viveknarole100@gmail.com">viveknarole100@gmail.com</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-links">
+        <a href="/llms.txt" rel="alternate">llms.txt</a>
+        <a href="https://github.com/nvivek42" rel="me">GitHub</a>
+        <a href="https://topmate.io/vivek_narole" rel="me">Topmate</a>
+      </div>
+      <div>© 2025 Vivek Narole</div>
+    </footer>
   </div>
-  <p>© 2025 Vivek Narole · Built with intention</p>
-</footer>
-</div>
 </body>
 </html>
