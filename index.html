@@ -12,47 +12,51 @@
 <meta property="og:url" content="https://viveknarole.com/">
 <style>
 /* ============================================
-   DESIGN TOKENS — Psychology-driven
+   DESIGN TOKENS
    ============================================ */
 :root{
-  /* Color Psychology: Deep charcoal (competence) + Warm accent (approachability) */
   --bg:#fafafa;
   --bg-elevated:#ffffff;
   --ink:#1a1a2e;
   --ink-muted:#5a5a7a;
   --ink-subtle:#8a8a9e;
   --line:#e8e8f0;
-  --accent:#c85c2e;     /* Terracotta — warmth, energy, grounded precision */
+  --accent:#c85c2e;
   --accent-hover:#a64a24;
   --accent-light:#fef7f4;
+  --accent-strong:#8b3e1e;
   --shadow-1:0 1px 3px rgba(26,26,46,0.06), 0 1px 2px rgba(26,26,46,0.04);
-  --shadow-2:0 4px 12px rgba(26,26,46,0.08), 0 2px 4px rgba(26,26,46,0.04);
-  --shadow-3:0 12px 28px rgba(26,26,46,0.10), 0 4px 8px rgba(26,26,46,0.05);
-  --radius:8px;
-  --transition:180ms cubic-bezier(0.25,0.46,0.45,0.94);
-  --max-width:42rem;
+  --shadow-2:0 8px 24px rgba(26,26,46,0.08), 0 2px 6px rgba(26,26,46,0.04);
+  --shadow-3:0 20px 40px rgba(26,26,46,0.10), 0 8px 16px rgba(26,26,46,0.05);
+  --radius:10px;
+  --radius-sm:6px;
+  --transition:200ms cubic-bezier(0.25,0.46,0.45,0.94);
+  --transition-slow:400ms cubic-bezier(0.25,0.46,0.45,0.94);
+  --max-width:64rem;
   --space-1:0.5rem;
   --space-2:1rem;
   --space-3:1.5rem;
   --space-4:2rem;
   --space-5:3rem;
   --space-6:4.5rem;
+  --space-7:6rem;
 }
 
 @media (prefers-color-scheme:dark){
   :root{
-    --bg:#0d0d14;
-    --bg-elevated:#141420;
+    --bg:#0a0a10;
+    --bg-elevated:#12121c;
     --ink:#f0f0f5;
-    --ink-muted:#a0a0b8;
-    --ink-subtle:#707088;
-    --line:#2a2a3e;
+    --ink-muted:#9a9ac0;
+    --ink-subtle:#6a6a80;
+    --line:#222232;
     --accent:#e87a4a;
     --accent-hover:#ff9666;
-    --accent-light:#2a1a14;
-    --shadow-1:0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-    --shadow-2:0 4px 12px rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.25);
-    --shadow-3:0 12px 28px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.3);
+    --accent-light:#2a1812;
+    --accent-strong:#d46b3e;
+    --shadow-1:0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+    --shadow-2:0 8px 24px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.35);
+    --shadow-3:0 20px 40px rgba(0,0,0,0.5), 0 8px 16px rgba(0,0,0,0.4);
   }
 }
 
@@ -70,7 +74,7 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--ink);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   font-size:16px;
   line-height:1.7;
   -webkit-font-smoothing:antialiased;
@@ -78,122 +82,274 @@ body{
   text-rendering:optimizeLegibility;
 }
 
-/* ============================================
-   LAYOUT — Gestalt: Figure/Ground, Proximity
-   ============================================ */
-.page{max-width:var(--max-width);margin:0 auto;padding:0 var(--space-3)}
-
-header{
-  padding:var(--space-6) 0 var(--space-4);
-  text-align:center;
-  /* Subtle gradient figure-ground separation */
-  background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-light) 0%, transparent 70%),
-    var(--bg);
+/* Subtle organic background texture */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 80% 10%, var(--accent-light) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 10% 90%, var(--accent-light) 0%, transparent 50%);
+  pointer-events:none;
+  z-index:-1;
+  opacity:0.6;
 }
 
-main{padding-bottom:var(--space-6)}
+@media (prefers-color-scheme:dark){
+  body::before{opacity:0.15}
+}
 
-section{opacity:0;transform:translateY(16px);animation:reveal 0.6s var(--transition) forwards}
-section:nth-child(1){animation-delay:0.05s}
-section:nth-child(2){animation-delay:0.15s}
-section:nth-child(3){animation-delay:0.25s}
-section:nth-child(4){animation-delay:0.35s}
+@media (prefers-reduced-motion:reduce){
+  body::before{display:none}
+}
+
+/* ============================================
+   LAYOUT — Asymmetric Grid
+   ============================================ */
+.page{max-width:var(--max-width);margin:0 auto;padding:0 var(--space-4)}
+
+header{
+  padding:var(--space-7) 0 var(--space-5);
+  position:relative;
+}
+
+header::after{
+  content:"";
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--line), transparent);
+}
+
+main{padding-bottom:var(--space-7)}
+
+.section{
+  opacity:0;
+  transform:translateY(24px);
+  animation:reveal 0.7s var(--transition-slow) forwards;
+}
+
+.section:nth-child(1){animation-delay:0.05s}
+.section:nth-child(2){animation-delay:0.15s}
+.section:nth-child(3){animation-delay:0.25s}
+.section:nth-child(4){animation-delay:0.35s}
 
 @keyframes reveal{to{opacity:1;transform:translateY(0)}}
 
 @media (prefers-reduced-motion:reduce){
-  section{opacity:1;transform:none;animation:none}
+  .section{opacity:1;transform:none;animation:none}
 }
 
 /* ============================================
-   TYPOGRAPHY — Hierarchy, Cognitive Load
+   HERO — Asymmetric, Expressive
    ============================================ */
+.hero{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--space-6);
+  align-items:start;
+}
+
+@media (min-width:768px){
+  .hero{
+    grid-template-columns:1.2fr 0.8fr;
+    align-items:center;
+  }
+}
+
+.hero-content{position:relative}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:var(--space-1);
+  font-size:0.7rem;
+  font-weight:600;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+  background:var(--accent-light);
+  padding:var(--space-1) var(--space-2);
+  border-radius:100px;
+  margin-bottom:var(--space-4);
+  border:1px solid transparent;
+  transition:border-color var(--transition);
+}
+
+.hero-badge:hover{border-color:var(--accent)}
+
+.hero-badge::before{
+  content:"";
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  animation:pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+@media (prefers-reduced-motion:reduce){
+  .hero-badge::before{animation:none}
+}
+
 h1{
-  font-size:clamp(1.75rem,4vw,2.5rem);
-  font-weight:700;
-  letter-spacing:-0.02em;
-  line-height:1.15;
-  margin:0 0 var(--space-2);
+  font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:800;
+  letter-spacing:-0.03em;
+  line-height:1.05;
+  margin:0 0 var(--space-3);
   color:var(--ink);
 }
 
-.tagline{
-  font-size:clamp(1rem,2.5vw,1.125rem);
-  color:var(--ink-muted);
-  font-weight:400;
-  line-height:1.6;
-  max-width:32ch;
-  margin:0 auto var(--space-3);
-}
-
-h2{
-  font-size:0.7rem;
-  font-weight:700;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--ink-subtle);
-  margin:var(--space-5) 0 var(--space-3);
-  padding-left:0.5ch;
+h1 .accent-word{
+  color:var(--accent);
   position:relative;
 }
 
-h2::before{
+h1 .accent-word::after{
   content:"";
   position:absolute;
-  left:0;top:50%;
-  transform:translateY(-50%);
-  width:3px;height:1.2em;
+  bottom:0.15em;left:0;right:0;
+  height:0.12em;
   background:var(--accent);
-  border-radius:2px;
+  opacity:0.25;
+  border-radius:1px;
 }
 
-p{margin:var(--space-1) 0;color:var(--ink)}
-
-a{
-  color:var(--accent);
-  text-decoration:none;
-  border-bottom:1px solid transparent;
-  transition:border-color var(--transition), color var(--transition);
+.tagline{
+  font-size:clamp(1rem,2.5vw,1.25rem);
+  color:var(--ink-muted);
+  font-weight:400;
+  line-height:1.65;
+  max-width:45ch;
+  margin:0 0 var(--space-5);
 }
 
-a:hover{color:var(--accent-hover);border-bottom-color:var(--accent-hover)}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+/* Hero visual — Abstract geometric composition */
+.hero-visual{
+  position:relative;
+  aspect-ratio:1;
+  max-width:280px;
+  margin:0 auto;
+}
 
-/* ============================================
-   NAV — Spatial consistency
-   ============================================ */
+@media (min-width:768px){
+  .hero-visual{max-width:none;margin:0}
+}
+
+.visual-layer{
+  position:absolute;
+  border-radius:var(--radius);
+  transition:transform var(--transition-slow), opacity var(--transition-slow);
+}
+
+.layer-1{
+  inset:0;
+  background:linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  opacity:0.12;
+  animation:float 6s ease-in-out infinite;
+}
+
+.layer-2{
+  top:8%;left:8%;right:8%;bottom:8%;
+  background:var(--bg-elevated);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-2);
+  animation:float 6s ease-in-out infinite reverse;
+}
+
+.layer-3{
+  top:16%;left:16%;right:16%;bottom:16%;
+  background:linear-gradient(135deg, var(--accent-light) 0%, transparent 100%);
+  opacity:0.6;
+}
+
+@keyframes float{
+  0%,100%{transform:translate(0,0) rotate(0deg)}
+  25%{transform:translate(4px,-4px) rotate(0.5deg)}
+  50%{transform:translate(-2px,6px) rotate(-0.3deg)}
+  75%{transform:translate(6px,2px) rotate(0.2deg)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .visual-layer{animation:none}
+}
+
+/* Nav — Left aligned on desktop */
 .nav{
   display:flex;
-  justify-content:center;
-  gap:var(--space-3);
-  margin-top:var(--space-4);
   flex-wrap:wrap;
+  gap:var(--space-2);
+  margin-top:var(--space-4);
+}
+
+@media (min-width:768px){
+  .nav{justify-content:flex-start}
 }
 
 .nav a{
   font-size:0.85rem;
   font-weight:500;
   color:var(--ink-muted);
-  padding:var(--space-1) var(--space-2);
-  border-radius:var(--radius);
+  padding:var(--space-1) var(--space-3);
+  border-radius:100px;
+  border:1px solid var(--line);
+  background:var(--bg-elevated);
+  transition:all var(--transition);
   border-bottom:none;
-  background:transparent;
-  transition:color var(--transition), background var(--transition);
 }
 
 .nav a:hover{
-  color:var(--ink);
+  color:var(--accent);
+  border-color:var(--accent);
   background:var(--accent-light);
-  border-bottom:none;
+  transform:translateY(-1px);
 }
 
 /* ============================================
-   CARDS — Depth, Elevation, Figure/Ground
+   SECTION HEADER — Asymmetric
    ============================================ */
-.card-grid{
+.section-header{
+  margin-bottom:var(--space-5);
+  padding-left:var(--space-3);
+  border-left:3px solid var(--accent);
+}
+
+.section-header h2{
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--ink-subtle);
+  margin:0 0 var(--space-1);
+}
+
+.section-header p{
+  font-size:0.95rem;
+  color:var(--ink-muted);
+  margin:0;
+  max-width:50ch;
+}
+
+/* ============================================
+   WORK GRID — Masonry-like
+   ============================================ */
+.work-grid{
   display:grid;
   gap:var(--space-3);
+  grid-template-columns:1fr;
+}
+
+@media (min-width:640px){
+  .work-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media (min-width:1024px){
+  .work-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
 }
 
 .card{
@@ -205,6 +361,8 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   position:relative;
   overflow:hidden;
+  display:flex;
+  flex-direction:column;
 }
 
 .card::before{
@@ -212,27 +370,42 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   position:absolute;
   top:0;left:0;right:0;
   height:3px;
-  background:linear-gradient(90deg,var(--accent),transparent);
-  opacity:0;
-  transition:opacity var(--transition);
+  background:linear-gradient(90deg,var(--accent),var(--accent-strong));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform var(--transition-slow);
 }
 
 .card:hover{
-  transform:translateY(-2px);
+  transform:translateY(-4px);
   box-shadow:var(--shadow-2);
-  border-color:var(--accent);
+  border-color:rgba(200,92,46,0.3);
 }
 
-.card:hover::before{opacity:1}
+.card:hover::before{transform:scaleX(1)}
+
+.card-icon{
+  width:40px;height:40px;
+  border-radius:var(--radius-sm);
+  background:var(--accent-light);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);
+  margin-bottom:var(--space-3);
+  transition:transform var(--transition), background var(--transition);
+}
+
+.card:hover .card-icon{
+  transform:scale(1.05) rotate(2deg);
+  background:var(--accent);
+  color:var(--bg);
+}
 
 .card-title{
-  font-size:0.95rem;
+  font-size:1rem;
   font-weight:600;
   color:var(--ink);
   margin:0 0 var(--space-1);
-  display:flex;
-  align-items:center;
-  gap:var(--space-2);
+  flex:1;
 }
 
 .card-desc{
@@ -243,11 +416,20 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 }
 
 /* ============================================
-   RECOMMENDATIONS — Authority, Social Proof
+   RECOMMENDATIONS — Illustrated Cards
    ============================================ */
 .rec-grid{
   display:grid;
   gap:var(--space-3);
+  grid-template-columns:1fr;
+}
+
+@media (min-width:640px){
+  .rec-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (min-width:1024px){
+  .rec-grid{grid-template-columns:repeat(4,1fr)}
 }
 
 .rec-card{
@@ -256,62 +438,96 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   border-radius:var(--radius);
   padding:var(--space-4);
   box-shadow:var(--shadow-1);
-  transition:transform var(--transition), box-shadow var(--transition);
+  transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   display:flex;
-  gap:var(--space-3);
+  flex-direction:column;
   align-items:flex-start;
+  text-align:left;
 }
 
 .rec-card:hover{
-  transform:translateX(4px);
+  transform:translateY(-4px);
   box-shadow:var(--shadow-2);
   border-color:var(--accent);
 }
 
-.rec-icon{
-  flex-shrink:0;
-  width:44px;height:44px;
-  border-radius:10px;
+.rec-illustration{
+  width:56px;height:56px;
+  border-radius:12px;
   background:var(--accent-light);
   display:flex;align-items:center;justify-content:center;
-  color:var(--accent);
-  font-size:1.25rem;
+  margin-bottom:var(--space-3);
+  flex-shrink:0;
+  transition:all var(--transition-slow);
 }
 
-.rec-content{flex:1;min-width:0}
+.rec-card:hover .rec-illustration{
+  background:var(--accent);
+  transform:rotate(3deg) scale(1.05);
+}
+
+.rec-illustration svg{
+  width:28px;height:28px;
+  stroke:var(--accent);
+  transition:stroke var(--transition);
+}
+
+.rec-card:hover .rec-illustration svg{stroke:var(--bg)}
 
 .rec-name{
   font-weight:600;
   color:var(--ink);
   font-size:0.95rem;
-  margin:0 0 0.25rem;
+  margin:0 0 var(--space-1);
 }
 
 .rec-desc{
   font-size:0.85rem;
   color:var(--ink-muted);
-  line-height:1.5;
+  line-height:1.55;
   margin:0;
+  flex:1;
 }
 
 /* ============================================
-   CONTACT — Clear CTA
+   CONTACT — Prominent CTA
    ============================================ */
+.contact-section{
+  text-align:center;
+  padding:var(--space-2) 0;
+}
+
 .contact-card{
   background:var(--ink);
   color:var(--bg);
   border-radius:var(--radius);
-  padding:var(--space-4) var(--space-5);
-  text-align:center;
-  box-shadow:var(--shadow-2);
+  padding:var(--space-5) var(--space-6);
+  box-shadow:var(--shadow-3);
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--space-2);
+  position:relative;
+  overflow:hidden;
+}
+
+.contact-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at center, rgba(200,92,46,0.15) 0%, transparent 70%);
+  pointer-events:none;
 }
 
 .contact-card a{
   color:var(--bg);
   font-weight:600;
-  font-size:1rem;
-  border-bottom:1px solid var(--bg);
-  padding-bottom:2px;
+  font-size:1.1rem;
+  border-bottom:2px solid var(--bg);
+  padding-bottom:4px;
+  transition:border-color var(--transition), color var(--transition);
+  position:relative;
+  z-index:1;
 }
 
 .contact-card a:hover{
@@ -320,14 +536,14 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 }
 
 .contact-hint{
-  font-size:0.8rem;
+  font-size:0.9rem;
   color:rgba(250,250,250,0.6);
-  margin-top:var(--space-2);
-  display:block;
+  position:relative;
+  z-index:1;
 }
 
 /* ============================================
-   FOOTER — Subtle closure
+   FOOTER
    ============================================ */
 footer{
   padding:var(--space-5) 0 var(--space-3);
@@ -338,23 +554,25 @@ footer{
   margin-top:var(--space-5);
 }
 
-.footer-links{display:flex;justify-content:center;gap:var(--space-4);margin-bottom:var(--space-2);flex-wrap:wrap}
+.footer-links{display:flex;justify-content:center;gap:var(--space-5);margin-bottom:var(--space-2);flex-wrap:wrap}
 
-.footer-links a{color:var(--ink-subtle);border-bottom:none;font-weight:500}
+.footer-links a{color:var(--ink-subtle);border-bottom:none;font-weight:500;font-size:0.85rem}
 .footer-links a:hover{color:var(--accent)}
 
 /* ============================================
-   REDUCED MOTION & ACCESSIBILITY
+   REDUCED MOTION
    ============================================ */
 @media (prefers-reduced-motion:reduce){
-  .card,.rec-card,.contact-card,.nav a{transition:none}
+  .visual-layer,.card,.rec-card,.nav a,.hero-badge::before{animation:none;transition:none}
+  .card:hover::before{transform:scaleX(1)}
 }
 
 /* ============================================
    PRINT
    ============================================ */
 @media print{
-  header{background:none}
+  body::before{display:none}
+  .hero-visual{display:none}
   .card,.rec-card,.contact-card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
   a{text-decoration:underline;color:#000}
   .nav{display:none}
@@ -372,81 +590,110 @@ footer{
   "sameAs":["https://github.com/nvivek42"]
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="page">
 <header>
-  <h1>Vivek Narole</h1>
-  <p class="tagline">Software engineer. Focused on systemic precision and pattern recognition.</p>
-  <nav class="nav" aria-label="Sections">
-    <a href="#focus">Focus</a>
-    <a href="#work">Work</a>
-    <a href="#recs">Recommendations</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">Engineering · Systems · Patterns</span>
+      <h1>Vivek Narole<span class="accent-word">.</span></h1>
+      <p class="tagline">Software engineer. Focused on systemic precision and pattern recognition—building tools that transform noise into signals.</p>
+      <nav class="nav" aria-label="Sections">
+        <a href="#focus">Focus</a>
+        <a href="#work">Work</a>
+        <a href="#recs">Recommendations</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="visual-layer layer-1"></div>
+      <div class="visual-layer layer-2"></div>
+      <div class="visual-layer layer-3"></div>
+    </div>
+  </div>
 </header>
 
 <main>
-<section id="focus" aria-labelledby="focus-heading">
-  <h2 id="focus-heading">Focus</h2>
-  <p>I build tools that transform noise into signals. My work lives at the intersection of AI-assisted engineering, systemic root cause analysis, and cognitive patterns—creating clarity where complexity hides.</p>
+<section id="focus" class="section" aria-labelledby="focus-heading">
+  <div class="section-header">
+    <h2 id="focus-heading">Focus</h2>
+    <p>I build tools that transform noise into signals. My work lives at the intersection of AI-assisted engineering, systemic root cause analysis, and cognitive patterns—creating clarity where complexity hides.</p>
+  </div>
 </section>
 
-<section id="work" aria-labelledby="work-heading">
-  <h2 id="work-heading">Work</h2>
-  <div class="card-grid">
+<section id="work" class="section" aria-labelledby="work-heading">
+  <div class="section-header">
+    <h2 id="work-heading">Work</h2>
+    <p>Three areas where I apply systemic rigor to real problems.</p>
+  </div>
+  <div class="work-grid">
     <article class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
       <h3 class="card-title">Systemic Debugging</h3>
       <p class="card-desc">Building RCA engines that correlate signals across distributed systems to identify failure patterns before they cascade.</p>
     </article>
     <article class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><path d="M12 22V12"/><path d="M22 8.5V15.5"/><path d="M2 8.5V15.5"/></svg>
+      </div>
       <h3 class="card-title">AI-Assisted Engineering</h3>
       <p class="card-desc">Implementing scalable software by leveraging sovereign AI agent workflows—from architecture to production.</p>
     </article>
     <article class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
+      </div>
       <h3 class="card-title">Pattern Analysis</h3>
       <p class="card-desc">Applying systemic rigor to financial and technical signals—post-mortem trade logs, exam optimization, system modeling.</p>
     </article>
   </div>
 </section>
 
-<section id="recs" aria-labelledby="recs-heading">
-  <h2 id="recs-heading">Recommendations</h2>
-  <p style="color:var(--ink-muted);margin-bottom:var(--space-2);max-width:40ch">People and ideas that shaped my thinking—curated for leverage.</p>
+<section id="recs" class="section" aria-labelledby="recs-heading">
+  <div class="section-header">
+    <h2 id="recs-heading">Recommendations</h2>
+    <p>People and ideas that shaped my thinking—curated for leverage.</p>
+  </div>
   <div class="rec-grid">
     <article class="rec-card">
-      <div class="rec-icon" aria-hidden="true">📐</div>
-      <div class="rec-content">
-        <h3 class="rec-name">Naval Ravikant</h3>
-        <p class="rec-desc">On wealth, judgment, and the leverage of specific knowledge. <em>The Almanack</em> is a reference manual for life.</p>
+      <div class="rec-illustration">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 2 L28 8 L28 20 L16 26 L4 20 L4 8 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 8 L16 20" stroke="currentColor" stroke-width="1.5"/><path d="M4 14 L28 14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="14" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
+      <h3 class="rec-name">Naval Ravikant</h3>
+      <p class="rec-desc">On wealth, judgment, and the leverage of specific knowledge. <em>The Almanack</em> is a reference manual for life.</p>
     </article>
     <article class="rec-card">
-      <div class="rec-icon" aria-hidden="true">🌐</div>
-      <div class="rec-content">
-        <h3 class="rec-name">Balaji Srinivasan</h3>
-        <p class="rec-desc">On the network state, decentralization, and building parallel institutions. Essential for systems thinkers.</p>
+      <div class="rec-illustration">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><path d="M16 6 L16 26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M6 16 L26 16" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M10 10 L22 22" stroke="currentColor" stroke-width="1.5"/><path d="M22 10 L10 22" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
+      <h3 class="rec-name">Balaji Srinivasan</h3>
+      <p class="rec-desc">On the network state, decentralization, and building parallel institutions. Essential for systems thinkers.</p>
     </article>
     <article class="rec-card">
-      <div class="rec-icon" aria-hidden="true">🌊</div>
-      <div class="rec-content">
-        <h3 class="rec-name">Flow — Mihaly Csikszentmihalyi</h3>
-        <p class="rec-desc">The psychology of optimal experience. The framework for deep work, intrinsic motivation, and mastery.</p>
+      <div class="rec-illustration">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4 C24 4, 28 12, 24 18 C20 24, 12 28, 8 22 C4 16, 8 6, 16 4 Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.15"/><path d="M16 10 C20 10, 20 16, 16 16 C12 16, 12 10, 16 10 Z" stroke="currentColor" stroke-width="1.5"/><path d="M16 16 C18 16, 18 20, 16 20 C14 20, 14 16, 16 16 Z" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
+      <h3 class="rec-name">Flow — Mihaly Csikszentmihalyi</h3>
+      <p class="rec-desc">The psychology of optimal experience. The framework for deep work, intrinsic motivation, and mastery.</p>
     </article>
     <article class="rec-card">
-      <div class="rec-icon" aria-hidden="true">🧠</div>
-      <div class="rec-content">
-        <h3 class="rec-name">Vedanta Philosophy</h3>
-        <p class="rec-desc">Non-dualistic frameworks for decision-making under uncertainty. Grounding for high-stakes environments.</p>
+      <div class="rec-illustration">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 2 L6 8 L6 20 L16 26 L26 20 L26 8 Z" stroke="currentColor" stroke-width="2"/><path d="M16 8 L16 22" stroke="currentColor" stroke-width="1.5"/><ellipse cx="16" cy="16" rx="6" ry="4" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.1"/></svg>
       </div>
+      <h3 class="rec-name">Vedanta Philosophy</h3>
+      <p class="rec-desc">Non-dualistic frameworks for decision-making under uncertainty. Grounding for high-stakes environments.</p>
     </article>
   </div>
 </section>
 
-<section id="contact" aria-labelledby="contact-heading">
-  <h2 id="contact-heading">Contact</h2>
+<section id="contact" class="section contact-section" aria-labelledby="contact-heading">
+  <h2 id="contact-heading" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Contact</h2>
   <div class="contact-card">
     <a href="mailto:viveknarole100@gmail.com">viveknarole100@gmail.com</a>
     <span class="contact-hint">Open to collaborations, conversations, and coffee</span>
@@ -459,7 +706,7 @@ footer{
     <a href="/llms.txt" rel="alternate">llms.txt</a>
     <a href="https://github.com/nvivek42" rel="me">GitHub</a>
   </div>
-  <p>© 2025 Vivek Narole · Built with minimalism</p>
+  <p>© 2025 Vivek Narole · Built with intention</p>
 </footer>
 </div>
 </body>
