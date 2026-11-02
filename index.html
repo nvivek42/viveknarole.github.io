@@ -12,28 +12,11 @@
 <meta property="og:url" content="https://viveknarole.com/">
 <style>
 /* ============================================
-   DESIGN TOKENS — Baseline Grid System
+   DESIGN TOKENS
    ============================================ */
 :root{
-  /* 8px baseline grid — all spacing multiples of 8 */
-  --base:8px;
-  --space-1:calc(var(--base)*1);   /* 8px  */
-  --space-2:calc(var(--base)*2);   /* 16px */
-  --space-3:calc(var(--base)*3);   /* 24px */
-  --space-4:calc(var(--base)*4);   /* 32px */
-  --space-5:calc(var(--base)*5);   /* 40px */
-  --space-6:calc(var(--base)*6);   /* 48px */
-  --space-7:calc(var(--base)*7);   /* 56px */
-  --space-8:calc(var(--base)*8);   /* 64px */
-  --space-9:calc(var(--base)*9);   /* 72px */
-  --space-10:calc(var(--base)*10); /* 80px */
-  --space-12:calc(var(--base)*12); /* 96px */
-  --space-16:calc(var(--base)*16); /* 128px */
-
-  /* Color Psychology */
   --bg:#fafafa;
   --bg-elevated:#ffffff;
-  --bg-muted:#f3f3f8;
   --ink:#1a1a2e;
   --ink-muted:#5a5a7a;
   --ink-subtle:#8a8a9e;
@@ -50,14 +33,19 @@
   --transition:200ms cubic-bezier(0.25,0.46,0.45,0.94);
   --transition-slow:400ms cubic-bezier(0.25,0.46,0.45,0.94);
   --max-width:64rem;
-  --font-sans:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --space-1:0.5rem;
+  --space-2:1rem;
+  --space-3:1.5rem;
+  --space-4:2rem;
+  --space-5:3rem;
+  --space-6:4.5rem;
+  --space-7:6rem;
 }
 
 @media (prefers-color-scheme:dark){
   :root{
     --bg:#0a0a10;
     --bg-elevated:#12121c;
-    --bg-muted:#181822;
     --ink:#f0f0f5;
     --ink-muted:#9a9ac0;
     --ink-subtle:#6a6a80;
@@ -73,7 +61,7 @@
 }
 
 /* ============================================
-   RESET & BASELINE GRID
+   RESET & BASE
    ============================================ */
 *, *::before, *::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -86,333 +74,488 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--ink);
-  font-family:var(--font-sans);
+  font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   font-size:16px;
-  line-height:1.6;
+  line-height:1.7;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
 
-/* Subtle organic background — figure/ground */
+/* Subtle organic background texture */
 body::before{
   content:"";
-  position:fixed;inset:0;
+  position:fixed;
+  inset:0;
   background-image:
-    radial-gradient(ellipse 50% 35% at 85% 5%, var(--accent-light) 0%, transparent 55%),
-    radial-gradient(ellipse 35% 50% at 10% 95%, var(--accent-light) 0%, transparent 45%);
-  pointer-events:none;z-index:-1;opacity:0.5;
+    radial-gradient(ellipse 60% 40% at 80% 10%, var(--accent-light) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 10% 90%, var(--accent-light) 0%, transparent 50%);
+  pointer-events:none;
+  z-index:-1;
+  opacity:0.6;
 }
-@media (prefers-color-scheme:dark){body::before{opacity:0.12}}
-@media (prefers-reduced-motion:reduce){body::before{display:none}}
 
-/* Baseline grid overlay for development — remove in production */
-/* body::after{content:"";position:fixed;inset:0;background:repeating-linear-gradient(var(--bg) 0 calc(var(--base)*1 - 1px), var(--line) calc(var(--base)*1));opacity:0.03;pointer-events:none;z-index:9999} */
+@media (prefers-color-scheme:dark){
+  body::before{opacity:0.15}
+}
+
+@media (prefers-reduced-motion:reduce){
+  body::before{display:none}
+}
 
 /* ============================================
-   LAYOUT — Rhythm & Proportion
+   LAYOUT — Asymmetric Grid
    ============================================ */
 .page{max-width:var(--max-width);margin:0 auto;padding:0 var(--space-4)}
 
-/* Section rhythm — consistent vertical cadence */
-section{
-  padding:var(--space-12) 0;
-  border-top:1px solid transparent;
+header{
+  padding:var(--space-7) 0 var(--space-5);
   position:relative;
 }
 
-/* Creative section dividers — visual rhythm markers */
-section:not(:first-of-type)::before{
+header::after{
   content:"";
   position:absolute;
-  top:0;left:50%;
-  transform:translateX(-50%);
-  width:60px;height:1px;
-  background:linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity:0.4;
+  bottom:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--line), transparent);
 }
 
-section:first-of-type{padding-top:0}
+main{padding-bottom:var(--space-7)}
 
-/* Staggered reveal — Serial Position Effect */
 .section{
   opacity:0;
-  transform:translateY(20px);
-  animation:reveal 0.6s var(--transition-slow) forwards;
+  transform:translateY(24px);
+  animation:reveal 0.7s var(--transition-slow) forwards;
 }
+
 .section:nth-child(1){animation-delay:0.05s}
-.section:nth-child(2){animation-delay:0.12s}
-.section:nth-child(3){animation-delay:0.19s}
-.section:nth-child(4){animation-delay:0.26s}
-.section:nth-child(5){animation-delay:0.33s}
-.section:nth-child(6){animation-delay:0.40s}
+.section:nth-child(2){animation-delay:0.15s}
+.section:nth-child(3){animation-delay:0.25s}
+.section:nth-child(4){animation-delay:0.35s}
 
 @keyframes reveal{to{opacity:1;transform:translateY(0)}}
-@media (prefers-reduced-motion:reduce){.section{opacity:1;transform:none;animation:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .section{opacity:1;transform:none;animation:none}
+}
 
 /* ============================================
-   HERO — Asymmetric, Von Restorff
+   HERO — Asymmetric, Expressive
    ============================================ */
 .hero{
   display:grid;
   grid-template-columns:1fr;
-  gap:var(--space-10);
+  gap:var(--space-6);
   align-items:start;
-  padding-bottom:var(--space-8);
 }
 
 @media (min-width:768px){
   .hero{
-    grid-template-columns:1.3fr 0.7fr;
+    grid-template-columns:1.2fr 0.8fr;
     align-items:center;
-    gap:var(--space-12);
   }
 }
 
+.hero-content{position:relative}
+
 .hero-badge{
-  display:inline-flex;align-items:center;gap:var(--space-2);
-  font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--accent);background:var(--accent-light);
-  padding:var(--space-1) var(--space-3);border-radius:100px;
-  border:1px solid transparent;transition:border-color var(--transition);
+  display:inline-flex;
+  align-items:center;
+  gap:var(--space-1);
+  font-size:0.7rem;
+  font-weight:600;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+  background:var(--accent-light);
+  padding:var(--space-1) var(--space-2);
+  border-radius:100px;
   margin-bottom:var(--space-4);
+  border:1px solid transparent;
+  transition:border-color var(--transition);
 }
+
 .hero-badge:hover{border-color:var(--accent)}
-.hero-badge::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-@media (prefers-reduced-motion:reduce){.hero-badge::before{animation:none}}
+
+.hero-badge::before{
+  content:"";
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  animation:pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+@media (prefers-reduced-motion:reduce){
+  .hero-badge::before{animation:none}
+}
 
 h1{
-  font-size:clamp(2.25rem,5.5vw,4rem);
-  font-weight:800;letter-spacing:-0.035em;line-height:1.02;
-  margin:0 0 var(--space-4);color:var(--ink);
+  font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:800;
+  letter-spacing:-0.03em;
+  line-height:1.05;
+  margin:0 0 var(--space-3);
+  color:var(--ink);
 }
-h1 .accent-word{color:var(--accent);position:relative}
+
+h1 .accent-word{
+  color:var(--accent);
+  position:relative;
+}
+
 h1 .accent-word::after{
-  content:"";position:absolute;bottom:0.1em;left:0;right:0;
-  height:0.1em;background:var(--accent);opacity:0.2;border-radius:1px;
+  content:"";
+  position:absolute;
+  bottom:0.15em;left:0;right:0;
+  height:0.12em;
+  background:var(--accent);
+  opacity:0.25;
+  border-radius:1px;
 }
 
 .tagline{
-  font-size:clamp(1.05rem,2.2vw,1.3rem);
-  color:var(--ink-muted);font-weight:400;line-height:1.65;
-  max-width:48ch;margin:0 0 var(--space-6);
+  font-size:clamp(1rem,2.5vw,1.25rem);
+  color:var(--ink-muted);
+  font-weight:400;
+  line-height:1.65;
+  max-width:45ch;
+  margin:0 0 var(--space-5);
 }
 
-/* Hero Visual — Abstract System Diagram */
-.hero-visual{position:relative;aspect-ratio:1;max-width:320px;margin:0 auto}
-@media (min-width:768px){.hero-visual{max-width:none;margin:0}}
+/* Hero visual — Abstract geometric composition */
+.hero-visual{
+  position:relative;
+  aspect-ratio:1;
+  max-width:280px;
+  margin:0 auto;
+}
 
-.visual-node{
-  position:absolute;border-radius:50%;
+@media (min-width:768px){
+  .hero-visual{max-width:none;margin:0}
+}
+
+.visual-layer{
+  position:absolute;
+  border-radius:var(--radius);
+  transition:transform var(--transition-slow), opacity var(--transition-slow);
+}
+
+.layer-1{
+  inset:0;
+  background:linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  opacity:0.12;
+  animation:float 6s ease-in-out infinite;
+}
+
+.layer-2{
+  top:8%;left:8%;right:8%;bottom:8%;
   background:var(--bg-elevated);
   border:1px solid var(--line);
-  box-shadow:var(--shadow-1);
-  display:flex;align-items:center;justify-content:center;
-  transition:transform var(--transition-slow), box-shadow var(--transition-slow);
+  box-shadow:var(--shadow-2);
+  animation:float 6s ease-in-out infinite reverse;
 }
 
-.node-core{
-  inset:12%;width:76%;height:76%;
-  background:linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
-  opacity:0.15;
-  animation:orbit 20s linear infinite;
-}
-.node-ring-1{
-  inset:4%;width:92%;height:92%;
-  border:1px dashed var(--line);
-  animation:orbit 30s linear infinite reverse;
-}
-.node-ring-2{
-  inset:-8%;width:116%;height:116%;
-  border:1px solid transparent;
-  background:conic-gradient(from 0deg, var(--accent), transparent 30%, var(--accent));
-  opacity:0.08;
-  animation:orbit 40s linear infinite;
-}
-.node-satellite{
-  width:36px;height:36px;top:50%;left:50%;
-  transform:translate(-50%, -50%) rotate(0deg) translateX(70px) rotate(0deg);
-  background:var(--accent-light);border:1px solid var(--accent);opacity:0.8;
-  animation:orbit 12s ease-in-out infinite;
-}
-.node-satellite::before{
-  content:"";position:absolute;inset:25%;
-  background:var(--accent);border-radius:50%;
+.layer-3{
+  top:16%;left:16%;right:16%;bottom:16%;
+  background:linear-gradient(135deg, var(--accent-light) 0%, transparent 100%);
+  opacity:0.6;
 }
 
-@keyframes orbit{to{transform:rotate(360deg)}}
-@keyframes orbit-sat{
-  0%{transform:translate(-50%, -50%) rotate(0deg) translateX(70px) rotate(0deg)}
-  100%{transform:translate(-50%, -50%) rotate(360deg) translateX(70px) rotate(-360deg)}
+@keyframes float{
+  0%,100%{transform:translate(0,0) rotate(0deg)}
+  25%{transform:translate(4px,-4px) rotate(0.5deg)}
+  50%{transform:translate(-2px,6px) rotate(-0.3deg)}
+  75%{transform:translate(6px,2px) rotate(0.2deg)}
 }
+
 @media (prefers-reduced-motion:reduce){
-  .visual-node{animation:none}
-  .node-satellite{transform:translate(-50%, -50%) rotate(45deg) translateX(70px) rotate(-45deg)}
+  .visual-layer{animation:none}
 }
 
-/* Nav — Pills */
-.nav{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-5)}
-@media (min-width:768px){.nav{justify-content:flex-start}}
-.nav a{
-  font-size:0.8rem;font-weight:500;color:var(--ink-muted);
-  padding:var(--space-1) var(--space-3);border-radius:100px;
-  border:1px solid var(--line);background:var(--bg-elevated);
-  transition:all var(--transition);border-bottom:none;
+/* Nav — Left aligned on desktop */
+.nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-2);
+  margin-top:var(--space-4);
 }
-.nav a:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-light);transform:translateY(-2px)}
+
+@media (min-width:768px){
+  .nav{justify-content:flex-start}
+}
+
+.nav a{
+  font-size:0.85rem;
+  font-weight:500;
+  color:var(--ink-muted);
+  padding:var(--space-1) var(--space-3);
+  border-radius:100px;
+  border:1px solid var(--line);
+  background:var(--bg-elevated);
+  transition:all var(--transition);
+  border-bottom:none;
+}
+
+.nav a:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+  background:var(--accent-light);
+  transform:translateY(-1px);
+}
 
 /* ============================================
-   SECTION HEADER — Anchor & Rhythm
+   SECTION HEADER — Asymmetric
    ============================================ */
 .section-header{
-  margin-bottom:var(--space-8);
-  padding-left:var(--space-4);
+  margin-bottom:var(--space-5);
+  padding-left:var(--space-3);
   border-left:3px solid var(--accent);
-  position:relative;
 }
-.section-header::before{
-  content:"";position:absolute;left:-3px;top:50%;transform:translateY(-50%);
-  width:3px;height:3px;background:var(--accent);border-radius:50%;
-}
+
 .section-header h2{
-  font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--ink-subtle);margin:0 0 var(--space-2);
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--ink-subtle);
+  margin:0 0 var(--space-1);
 }
+
 .section-header p{
-  font-size:0.95rem;color:var(--ink-muted);margin:0;max-width:55ch;
+  font-size:0.95rem;
+  color:var(--ink-muted);
+  margin:0;
+  max-width:50ch;
 }
 
 /* ============================================
-   WORK GRID — Flexible Rhythm
+   WORK GRID — Masonry-like
    ============================================ */
 .work-grid{
-  display:grid;gap:var(--space-4);grid-template-columns:1fr;
+  display:grid;
+  gap:var(--space-3);
+  grid-template-columns:1fr;
 }
-@media (min-width:640px){.work-grid{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1024px){.work-grid{grid-template-columns:repeat(3,1fr)}}
+
+@media (min-width:640px){
+  .work-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media (min-width:1024px){
+  .work-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
 
 .card{
-  background:var(--bg-elevated);border:1px solid var(--line);
-  border-radius:var(--radius);padding:var(--space-5);
+  background:var(--bg-elevated);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:var(--space-4);
   box-shadow:var(--shadow-1);
   transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-  position:relative;overflow:hidden;display:flex;flex-direction:column;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
 }
+
 .card::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
   background:linear-gradient(90deg,var(--accent),var(--accent-strong));
-  transform:scaleX(0);transform-origin:left;transition:transform var(--transition-slow);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform var(--transition-slow);
 }
-.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-2);border-color:rgba(200,92,46,0.3)}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-2);
+  border-color:rgba(200,92,46,0.3);
+}
+
 .card:hover::before{transform:scaleX(1)}
 
 .card-icon{
-  width:44px;height:44px;border-radius:var(--radius-sm);
-  background:var(--accent-light);display:flex;align-items:center;justify-content:center;
-  color:var(--accent);margin-bottom:var(--space-3);
+  width:40px;height:40px;
+  border-radius:var(--radius-sm);
+  background:var(--accent-light);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);
+  margin-bottom:var(--space-3);
   transition:transform var(--transition), background var(--transition);
 }
-.card:hover .card-icon{transform:scale(1.08) rotate(3deg);background:var(--accent);color:var(--bg)}
 
-.card-title{font-size:1rem;font-weight:600;color:var(--ink);margin:0 0 var(--space-2);flex:1}
-.card-desc{font-size:0.9rem;color:var(--ink-muted);line-height:1.65;margin:0}
-
-/* ============================================
-   JOURNEY — Timeline (Topmate Integration)
-   ============================================ */
-.journey-timeline{
-  position:relative;padding-left:var(--space-6);
-}
-.journey-timeline::before{
-  content:"";position:absolute;left:calc(var(--space-6) - 8px);top:0;bottom:0;
-  width:2px;background:linear-gradient(180deg, var(--accent), transparent);
-  opacity:0.3;
+.card:hover .card-icon{
+  transform:scale(1.05) rotate(2deg);
+  background:var(--accent);
+  color:var(--bg);
 }
 
-.journey-item{
-  position:relative;padding-bottom:var(--space-8);opacity:0;
-  transform:translateX(-20px);animation:reveal 0.6s var(--transition-slow) forwards;
+.card-title{
+  font-size:1rem;
+  font-weight:600;
+  color:var(--ink);
+  margin:0 0 var(--space-1);
+  flex:1;
 }
-.journey-item:nth-child(1){animation-delay:0.1s}
-.journey-item:nth-child(2){animation-delay:0.18s}
-.journey-item:nth-child(3){animation-delay:0.26s}
-.journey-item:nth-child(4){animation-delay:0.34s}
-.journey-item:nth-child(5){animation-delay:0.42s}
-.journey-item:nth-child(6){animation-delay:0.5s}
 
-.journey-marker{
-  position:absolute;left:calc(var(--space-6) - 16px);top:2px;
-  width:12px;height:12px;border-radius:50%;
-  background:var(--accent);border:3px solid var(--bg-elevated);
-  box-shadow:0 0 0 2px var(--accent);z-index:1;
-  transition:transform var(--transition), box-shadow var(--transition);
+.card-desc{
+  font-size:0.9rem;
+  color:var(--ink-muted);
+  line-height:1.6;
+  margin:0;
 }
-.journey-item:hover .journey-marker{transform:scale(1.3);box-shadow:0 0 0 4px var(--accent-light), 0 0 0 6px var(--accent)}
-
-.journey-content{background:var(--bg-elevated);border:1px solid var(--line);border-radius:var(--radius);padding:var(--space-4);box-shadow:var(--shadow-1);transition:all var(--transition)}
-.journey-item:hover .journey-content{transform:translateX(4px);box-shadow:var(--shadow-2);border-color:rgba(200,92,46,0.3)}
-
-.journey-period{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin:0 0 var(--space-1)}
-.journey-title{font-size:0.95rem;font-weight:600;color:var(--ink);margin:0 0 var(--space-1)}
-.journey-desc{font-size:0.85rem;color:var(--ink-muted);line-height:1.6;margin:0}
 
 /* ============================================
    RECOMMENDATIONS — Illustrated Cards
    ============================================ */
-.rec-grid{display:grid;gap:var(--space-4);grid-template-columns:1fr}
-@media (min-width:640px){.rec-grid{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1024px){.rec-grid{grid-template-columns:repeat(4,1fr)}}
+.rec-grid{
+  display:grid;
+  gap:var(--space-3);
+  grid-template-columns:1fr;
+}
+
+@media (min-width:640px){
+  .rec-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (min-width:1024px){
+  .rec-grid{grid-template-columns:repeat(4,1fr)}
+}
 
 .rec-card{
-  background:var(--bg-elevated);border:1px solid var(--line);
-  border-radius:var(--radius);padding:var(--space-5);
+  background:var(--bg-elevated);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:var(--space-4);
   box-shadow:var(--shadow-1);
   transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-  display:flex;flex-direction:column;align-items:flex-start;text-align:left;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-align:left;
 }
-.rec-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-2);border-color:var(--accent)}
+
+.rec-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-2);
+  border-color:var(--accent);
+}
 
 .rec-illustration{
-  width:56px;height:56px;border-radius:12px;background:var(--accent-light);
-  display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-3);
-  flex-shrink:0;transition:all var(--transition-slow);
+  width:56px;height:56px;
+  border-radius:12px;
+  background:var(--accent-light);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:var(--space-3);
+  flex-shrink:0;
+  transition:all var(--transition-slow);
 }
-.rec-card:hover .rec-illustration{background:var(--accent);transform:rotate(4deg) scale(1.05)}
-.rec-illustration svg{width:28px;height:28px;stroke:var(--accent);transition:stroke var(--transition)}
+
+.rec-card:hover .rec-illustration{
+  background:var(--accent);
+  transform:rotate(3deg) scale(1.05);
+}
+
+.rec-illustration svg{
+  width:28px;height:28px;
+  stroke:var(--accent);
+  transition:stroke var(--transition);
+}
+
 .rec-card:hover .rec-illustration svg{stroke:var(--bg)}
 
-.rec-name{font-weight:600;color:var(--ink);font-size:0.95rem;margin:0 0 var(--space-1)}
-.rec-desc{font-size:0.85rem;color:var(--ink-muted);line-height:1.55;margin:0;flex:1}
+.rec-name{
+  font-weight:600;
+  color:var(--ink);
+  font-size:0.95rem;
+  margin:0 0 var(--space-1);
+}
+
+.rec-desc{
+  font-size:0.85rem;
+  color:var(--ink-muted);
+  line-height:1.55;
+  margin:0;
+  flex:1;
+}
 
 /* ============================================
-   CONTACT — Centered Focus
+   CONTACT — Prominent CTA
    ============================================ */
-.contact-section{text-align:center;padding:var(--space-4) 0}
-.contact-card{
-  background:var(--ink);color:var(--bg);border-radius:var(--radius);
-  padding:var(--space-6) var(--space-8);box-shadow:var(--shadow-3);
-  display:inline-flex;flex-direction:column;align-items:center;gap:var(--space-2);
-  position:relative;overflow:hidden;
+.contact-section{
+  text-align:center;
+  padding:var(--space-2) 0;
 }
+
+.contact-card{
+  background:var(--ink);
+  color:var(--bg);
+  border-radius:var(--radius);
+  padding:var(--space-5) var(--space-6);
+  box-shadow:var(--shadow-3);
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  gap:var(--space-2);
+  position:relative;
+  overflow:hidden;
+}
+
 .contact-card::before{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(ellipse at center, rgba(200,92,46,0.18) 0%, transparent 70%);
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at center, rgba(200,92,46,0.15) 0%, transparent 70%);
   pointer-events:none;
 }
+
 .contact-card a{
-  color:var(--bg);font-weight:600;font-size:1.15rem;
-  border-bottom:2px solid var(--bg);padding-bottom:4px;
-  transition:border-color var(--transition), color var(--transition);position:relative;z-index:1;
+  color:var(--bg);
+  font-weight:600;
+  font-size:1.1rem;
+  border-bottom:2px solid var(--bg);
+  padding-bottom:4px;
+  transition:border-color var(--transition), color var(--transition);
+  position:relative;
+  z-index:1;
 }
-.contact-card a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-.contact-hint{font-size:0.9rem;color:rgba(250,250,250,0.6);position:relative;z-index:1}
+
+.contact-card a:hover{
+  color:var(--accent);
+  border-bottom-color:var(--accent);
+}
+
+.contact-hint{
+  font-size:0.9rem;
+  color:rgba(250,250,250,0.6);
+  position:relative;
+  z-index:1;
+}
 
 /* ============================================
    FOOTER
    ============================================ */
-footer{padding:var(--space-10) 0 var(--space-6);text-align:center;color:var(--ink-subtle);font-size:0.75rem;border-top:1px solid var(--line);margin-top:var(--space-4)}
-.footer-links{display:flex;justify-content:center;gap:var(--space-6);margin-bottom:var(--space-3);flex-wrap:wrap}
+footer{
+  padding:var(--space-5) 0 var(--space-3);
+  text-align:center;
+  color:var(--ink-subtle);
+  font-size:0.75rem;
+  border-top:1px solid var(--line);
+  margin-top:var(--space-5);
+}
+
+.footer-links{display:flex;justify-content:center;gap:var(--space-5);margin-bottom:var(--space-2);flex-wrap:wrap}
+
 .footer-links a{color:var(--ink-subtle);border-bottom:none;font-weight:500;font-size:0.85rem}
 .footer-links a:hover{color:var(--accent)}
 
@@ -420,7 +563,7 @@ footer{padding:var(--space-10) 0 var(--space-6);text-align:center;color:var(--in
    REDUCED MOTION
    ============================================ */
 @media (prefers-reduced-motion:reduce){
-  .visual-node,.journey-item,.card,.rec-card,.contact-card,.nav a,.hero-badge::before{animation:none;transition:none}
+  .visual-layer,.card,.rec-card,.nav a,.hero-badge::before{animation:none;transition:none}
   .card:hover::before{transform:scaleX(1)}
 }
 
@@ -428,9 +571,11 @@ footer{padding:var(--space-10) 0 var(--space-6);text-align:center;color:var(--in
    PRINT
    ============================================ */
 @media print{
-  body::before{display:none}.hero-visual{display:none}
-  .card,.rec-card,.contact-card,.journey-content{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
-  a{text-decoration:underline;color:#000}.nav{display:none}
+  body::before{display:none}
+  .hero-visual{display:none}
+  .card,.rec-card,.contact-card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
+  a{text-decoration:underline;color:#000}
+  .nav{display:none}
 }
 </style>
 <script type="application/ld+json">
@@ -441,8 +586,8 @@ footer{padding:var(--space-10) 0 var(--space-6);text-align:center;color:var(--in
   "url":"https://viveknarole.com/",
   "email":"viveknarole100@gmail.com",
   "description":"Software engineer focused on systemic precision and pattern recognition.",
-  "knowsAbout":["Systemic Root Cause Analysis","AI-Assisted Software Engineering","Pattern Recognition","Financial Psychology","Vedanta Philosophy","Flow Psychology"],
-  "sameAs":["https://github.com/nvivek42","https://topmate.io/vivek_narole"]
+  "knowsAbout":["Systemic Root Cause Analysis","AI-Assisted Software Engineering","Pattern Recognition","Financial Psychology"],
+  "sameAs":["https://github.com/nvivek42"]
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -452,26 +597,24 @@ footer{padding:var(--space-10) 0 var(--space-6);text-align:center;color:var(--in
 <body>
 <div class="page">
 <header>
-  <section class="hero section" aria-labelledby="hero-title">
+  <div class="hero">
     <div class="hero-content">
       <span class="hero-badge">Engineering · Systems · Patterns</span>
-      <h1 id="hero-title">Vivek Narole<span class="accent-word">.</span></h1>
+      <h1>Vivek Narole<span class="accent-word">.</span></h1>
       <p class="tagline">Software engineer. Focused on systemic precision and pattern recognition—building tools that transform noise into signals.</p>
       <nav class="nav" aria-label="Sections">
         <a href="#focus">Focus</a>
         <a href="#work">Work</a>
-        <a href="#journey">Journey</a>
         <a href="#recs">Recommendations</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
-    <div class="hero-visual" aria-hidden="true" aria-label="System dynamics visualization">
-      <div class="visual-node node-core"></div>
-      <div class="visual-node node-ring-1"></div>
-      <div class="visual-node node-ring-2"></div>
-      <div class="visual-node node-satellite"></div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="visual-layer layer-1"></div>
+      <div class="visual-layer layer-2"></div>
+      <div class="visual-layer layer-3"></div>
     </div>
-  </section>
+  </div>
 </header>
 
 <main>
@@ -512,63 +655,6 @@ footer{padding:var(--space-10) 0 var(--space-6);text-align:center;color:var(--in
   </div>
 </section>
 
-<section id="journey" class="section" aria-labelledby="journey-heading">
-  <div class="section-header">
-    <h2 id="journey-heading">Journey</h2>
-    <p>Non-linear path. Each phase added a lens I still use today.</p>
-  </div>
-  <div class="journey-timeline">
-    <article class="journey-item">
-      <span class="journey-marker" aria-hidden="true"></span>
-      <div class="journey-content">
-        <p class="journey-period">2018 – 2021</p>
-        <h3 class="journey-title">Mechanical Engineering</h3>
-        <p class="journey-desc">Theoretical physics, thermodynamics, system dynamics. Learned to model reality before building.</p>
-      </div>
-    </article>
-    <article class="journey-item">
-      <span class="journey-marker" aria-hidden="true"></span>
-      <div class="journey-content">
-        <p class="journey-period">2021 – 2024</p>
-        <h3 class="journey-title">UPSC CSE — Psychology Optional</h3>
-        <p class="journey-desc">Three attempts. Deep study of cognitive processes, behavioral psychology, pattern recognition in complex systems. Resilience forged.</p>
-      </div>
-    </article>
-    <article class="journey-item">
-      <span class="journey-marker" aria-hidden="true"></span>
-      <div class="journey-content">
-        <p class="journey-period">2022</p>
-        <h3 class="journey-title">CDAC Diploma — Web Development</h3>
-        <p class="journey-desc">Full-stack fundamentals. Bridged engineering rigor with software craft.</p>
-      </div>
-    </article>
-    <article class="journey-item">
-      <span class="journey-marker" aria-hidden="true"></span>
-      <div class="journey-content">
-        <p class="journey-period">2022 – 2023</p>
-        <h3 class="journey-title">IT Support & Software Internship</h3>
-        <p class="journey-desc">Production systems, debugging at scale, user-facing impact. Grounded theory in reality.</p>
-      </div>
-    </article>
-    <article class="journey-item">
-      <span class="journey-marker" aria-hidden="true"></span>
-      <div class="journey-content">
-        <p class="journey-period">2023 – Present</p>
-        <h3 class="journey-title">AI-Assisted Full-Stack Development</h3>
-        <p class="journey-desc">Building with coding agents (pi, Ollama, local LLMs). Automating manual workflows. Sovereign toolchains.</p>
-      </div>
-    </article>
-    <article class="journey-item">
-      <span class="journey-marker" aria-hidden="true"></span>
-      <div class="journey-content">
-        <p class="journey-period">Continuous</p>
-        <h3 class="journey-title">Vedanta & Flow Psychology</h3>
-        <p class="journey-desc">Swami Vivekananda's practical Vedanta. Mihaly Csikszentmihalyi's optimal experience. Decision frameworks for uncertainty.</p>
-      </div>
-    </article>
-  </div>
-</section>
-
 <section id="recs" class="section" aria-labelledby="recs-heading">
   <div class="section-header">
     <h2 id="recs-heading">Recommendations</h2>
@@ -600,8 +686,8 @@ footer{padding:var(--space-10) 0 var(--space-6);text-align:center;color:var(--in
       <div class="rec-illustration">
         <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 2 L6 8 L6 20 L16 26 L26 20 L26 8 Z" stroke="currentColor" stroke-width="2"/><path d="M16 8 L16 22" stroke="currentColor" stroke-width="1.5"/><ellipse cx="16" cy="16" rx="6" ry="4" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.1"/></svg>
       </div>
-      <h3 class="rec-name">Swami Vivekananda</h3>
-      <p class="rec-desc">Practical Vedanta. Fearlessness as method. Service as synthesis. Grounding for high-stakes clarity.</p>
+      <h3 class="rec-name">Vedanta Philosophy</h3>
+      <p class="rec-desc">Non-dualistic frameworks for decision-making under uncertainty. Grounding for high-stakes environments.</p>
     </article>
   </div>
 </section>
@@ -619,7 +705,6 @@ footer{padding:var(--space-10) 0 var(--space-6);text-align:center;color:var(--in
   <div class="footer-links">
     <a href="/llms.txt" rel="alternate">llms.txt</a>
     <a href="https://github.com/nvivek42" rel="me">GitHub</a>
-    <a href="https://topmate.io/vivek_narole" rel="me">Topmate</a>
   </div>
   <p>© 2025 Vivek Narole · Built with intention</p>
 </footer>
