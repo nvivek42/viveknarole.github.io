@@ -11,25 +11,354 @@
 <meta property="og:description" content="Software engineer focused on systemic precision and pattern recognition.">
 <meta property="og:url" content="https://viveknarole.com/">
 <style>
-:root{--bg:#fff;--ink:#000;--mute:#666;--line:#eee;--accent:#000}
-@media (prefers-color-scheme:dark){:root{--bg:#000;--ink:#fff;--mute:#888;--line:#222;--accent:#fff}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,sans-serif}
-main,header,footer{max-width:35rem;margin:0 auto;padding:0 1.5rem}
-header{padding-top:5rem}
-h1{font-size:1.5rem;font-weight:600;margin:0 0 .5rem}
-h2{font-size:1rem;font-weight:600;margin:3rem 0 1rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--mute)}
-p{margin:.5rem 0}
-.lead{font-size:1.1rem;color:var(--ink)}
-nav{margin-top:1rem;display:flex;gap:1rem;font-size:0.9rem}
-a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-a:hover{color:var(--mute)}
-ul{list-style:none;padding:0;margin:0}
-li{margin:.5rem 0}
-footer{padding:5rem 0 3rem;font-size:0.8rem;color:var(--mute)}
-.rec-item{margin-bottom:1rem}
-.rec-title{font-weight:600;display:block}
-.rec-desc{font-size:0.9rem;color:var(--mute)}
+/* ============================================
+   DESIGN TOKENS — Psychology-driven
+   ============================================ */
+:root{
+  /* Color Psychology: Deep charcoal (competence) + Warm accent (approachability) */
+  --bg:#fafafa;
+  --bg-elevated:#ffffff;
+  --ink:#1a1a2e;
+  --ink-muted:#5a5a7a;
+  --ink-subtle:#8a8a9e;
+  --line:#e8e8f0;
+  --accent:#c85c2e;     /* Terracotta — warmth, energy, grounded precision */
+  --accent-hover:#a64a24;
+  --accent-light:#fef7f4;
+  --shadow-1:0 1px 3px rgba(26,26,46,0.06), 0 1px 2px rgba(26,26,46,0.04);
+  --shadow-2:0 4px 12px rgba(26,26,46,0.08), 0 2px 4px rgba(26,26,46,0.04);
+  --shadow-3:0 12px 28px rgba(26,26,46,0.10), 0 4px 8px rgba(26,26,46,0.05);
+  --radius:8px;
+  --transition:180ms cubic-bezier(0.25,0.46,0.45,0.94);
+  --max-width:42rem;
+  --space-1:0.5rem;
+  --space-2:1rem;
+  --space-3:1.5rem;
+  --space-4:2rem;
+  --space-5:3rem;
+  --space-6:4.5rem;
+}
+
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0d0d14;
+    --bg-elevated:#141420;
+    --ink:#f0f0f5;
+    --ink-muted:#a0a0b8;
+    --ink-subtle:#707088;
+    --line:#2a2a3e;
+    --accent:#e87a4a;
+    --accent-hover:#ff9666;
+    --accent-light:#2a1a14;
+    --shadow-1:0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-2:0 4px 12px rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.25);
+    --shadow-3:0 12px 28px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.3);
+  }
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *, *::before, *::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+
+/* ============================================
+   LAYOUT — Gestalt: Figure/Ground, Proximity
+   ============================================ */
+.page{max-width:var(--max-width);margin:0 auto;padding:0 var(--space-3)}
+
+header{
+  padding:var(--space-6) 0 var(--space-4);
+  text-align:center;
+  /* Subtle gradient figure-ground separation */
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-light) 0%, transparent 70%),
+    var(--bg);
+}
+
+main{padding-bottom:var(--space-6)}
+
+section{opacity:0;transform:translateY(16px);animation:reveal 0.6s var(--transition) forwards}
+section:nth-child(1){animation-delay:0.05s}
+section:nth-child(2){animation-delay:0.15s}
+section:nth-child(3){animation-delay:0.25s}
+section:nth-child(4){animation-delay:0.35s}
+
+@keyframes reveal{to{opacity:1;transform:translateY(0)}}
+
+@media (prefers-reduced-motion:reduce){
+  section{opacity:1;transform:none;animation:none}
+}
+
+/* ============================================
+   TYPOGRAPHY — Hierarchy, Cognitive Load
+   ============================================ */
+h1{
+  font-size:clamp(1.75rem,4vw,2.5rem);
+  font-weight:700;
+  letter-spacing:-0.02em;
+  line-height:1.15;
+  margin:0 0 var(--space-2);
+  color:var(--ink);
+}
+
+.tagline{
+  font-size:clamp(1rem,2.5vw,1.125rem);
+  color:var(--ink-muted);
+  font-weight:400;
+  line-height:1.6;
+  max-width:32ch;
+  margin:0 auto var(--space-3);
+}
+
+h2{
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--ink-subtle);
+  margin:var(--space-5) 0 var(--space-3);
+  padding-left:0.5ch;
+  position:relative;
+}
+
+h2::before{
+  content:"";
+  position:absolute;
+  left:0;top:50%;
+  transform:translateY(-50%);
+  width:3px;height:1.2em;
+  background:var(--accent);
+  border-radius:2px;
+}
+
+p{margin:var(--space-1) 0;color:var(--ink)}
+
+a{
+  color:var(--accent);
+  text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:border-color var(--transition), color var(--transition);
+}
+
+a:hover{color:var(--accent-hover);border-bottom-color:var(--accent-hover)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ============================================
+   NAV — Spatial consistency
+   ============================================ */
+.nav{
+  display:flex;
+  justify-content:center;
+  gap:var(--space-3);
+  margin-top:var(--space-4);
+  flex-wrap:wrap;
+}
+
+.nav a{
+  font-size:0.85rem;
+  font-weight:500;
+  color:var(--ink-muted);
+  padding:var(--space-1) var(--space-2);
+  border-radius:var(--radius);
+  border-bottom:none;
+  background:transparent;
+  transition:color var(--transition), background var(--transition);
+}
+
+.nav a:hover{
+  color:var(--ink);
+  background:var(--accent-light);
+  border-bottom:none;
+}
+
+/* ============================================
+   CARDS — Depth, Elevation, Figure/Ground
+   ============================================ */
+.card-grid{
+  display:grid;
+  gap:var(--space-3);
+}
+
+.card{
+  background:var(--bg-elevated);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:var(--space-4);
+  box-shadow:var(--shadow-1);
+  transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--accent),transparent);
+  opacity:0;
+  transition:opacity var(--transition);
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-2);
+  border-color:var(--accent);
+}
+
+.card:hover::before{opacity:1}
+
+.card-title{
+  font-size:0.95rem;
+  font-weight:600;
+  color:var(--ink);
+  margin:0 0 var(--space-1);
+  display:flex;
+  align-items:center;
+  gap:var(--space-2);
+}
+
+.card-desc{
+  font-size:0.9rem;
+  color:var(--ink-muted);
+  line-height:1.6;
+  margin:0;
+}
+
+/* ============================================
+   RECOMMENDATIONS — Authority, Social Proof
+   ============================================ */
+.rec-grid{
+  display:grid;
+  gap:var(--space-3);
+}
+
+.rec-card{
+  background:var(--bg-elevated);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:var(--space-4);
+  box-shadow:var(--shadow-1);
+  transition:transform var(--transition), box-shadow var(--transition);
+  display:flex;
+  gap:var(--space-3);
+  align-items:flex-start;
+}
+
+.rec-card:hover{
+  transform:translateX(4px);
+  box-shadow:var(--shadow-2);
+  border-color:var(--accent);
+}
+
+.rec-icon{
+  flex-shrink:0;
+  width:44px;height:44px;
+  border-radius:10px;
+  background:var(--accent-light);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);
+  font-size:1.25rem;
+}
+
+.rec-content{flex:1;min-width:0}
+
+.rec-name{
+  font-weight:600;
+  color:var(--ink);
+  font-size:0.95rem;
+  margin:0 0 0.25rem;
+}
+
+.rec-desc{
+  font-size:0.85rem;
+  color:var(--ink-muted);
+  line-height:1.5;
+  margin:0;
+}
+
+/* ============================================
+   CONTACT — Clear CTA
+   ============================================ */
+.contact-card{
+  background:var(--ink);
+  color:var(--bg);
+  border-radius:var(--radius);
+  padding:var(--space-4) var(--space-5);
+  text-align:center;
+  box-shadow:var(--shadow-2);
+}
+
+.contact-card a{
+  color:var(--bg);
+  font-weight:600;
+  font-size:1rem;
+  border-bottom:1px solid var(--bg);
+  padding-bottom:2px;
+}
+
+.contact-card a:hover{
+  color:var(--accent);
+  border-bottom-color:var(--accent);
+}
+
+.contact-hint{
+  font-size:0.8rem;
+  color:rgba(250,250,250,0.6);
+  margin-top:var(--space-2);
+  display:block;
+}
+
+/* ============================================
+   FOOTER — Subtle closure
+   ============================================ */
+footer{
+  padding:var(--space-5) 0 var(--space-3);
+  text-align:center;
+  color:var(--ink-subtle);
+  font-size:0.75rem;
+  border-top:1px solid var(--line);
+  margin-top:var(--space-5);
+}
+
+.footer-links{display:flex;justify-content:center;gap:var(--space-4);margin-bottom:var(--space-2);flex-wrap:wrap}
+
+.footer-links a{color:var(--ink-subtle);border-bottom:none;font-weight:500}
+.footer-links a:hover{color:var(--accent)}
+
+/* ============================================
+   REDUCED MOTION & ACCESSIBILITY
+   ============================================ */
+@media (prefers-reduced-motion:reduce){
+  .card,.rec-card,.contact-card,.nav a{transition:none}
+}
+
+/* ============================================
+   PRINT
+   ============================================ */
+@media print{
+  header{background:none}
+  .card,.rec-card,.contact-card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
+  a{text-decoration:underline;color:#000}
+  .nav{display:none}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -38,58 +367,100 @@ footer{padding:5rem 0 3rem;font-size:0.8rem;color:var(--mute)}
   "name":"Vivek Narole",
   "url":"https://viveknarole.com/",
   "email":"viveknarole100@gmail.com",
-  "description":"Software engineer focused on systemic precision and pattern recognition."
+  "description":"Software engineer focused on systemic precision and pattern recognition.",
+  "knowsAbout":["Systemic Root Cause Analysis","AI-Assisted Software Engineering","Pattern Recognition","Financial Psychology"],
+  "sameAs":["https://github.com/nvivek42"]
 }
 </script>
 </head>
 <body>
+<div class="page">
 <header>
   <h1>Vivek Narole</h1>
-  <p class="lead">Software engineer. Focused on systemic precision and pattern recognition.</p>
-  <nav>
-    <a href="#focus">Focus</a><a href="#work">Work</a><a href="#recs">Recommendations</a><a href="#contact">Contact</a>
+  <p class="tagline">Software engineer. Focused on systemic precision and pattern recognition.</p>
+  <nav class="nav" aria-label="Sections">
+    <a href="#focus">Focus</a>
+    <a href="#work">Work</a>
+    <a href="#recs">Recommendations</a>
+    <a href="#contact">Contact</a>
   </nav>
 </header>
 
 <main>
-<section id="focus">
-  <h2>Focus</h2>
-  <p>I build tools that transform noise into signals. My interests lie at the intersection of AI-assisted engineering, systemic root cause analysis, and cognitive patterns.</p>
+<section id="focus" aria-labelledby="focus-heading">
+  <h2 id="focus-heading">Focus</h2>
+  <p>I build tools that transform noise into signals. My work lives at the intersection of AI-assisted engineering, systemic root cause analysis, and cognitive patterns—creating clarity where complexity hides.</p>
 </section>
 
-<section id="work">
-  <h2>Work</h2>
-  <ul>
-    <li><strong>Systemic Debugging:</strong> Building RCA engines that correlate signals across distributed systems to identify failures.</li>
-    <li><strong>AI-Assisted Dev:</strong> Implementing scalable software by leveraging sovereign AI agent workflows.</li>
-    <li><strong>Pattern Recognition:</strong> Applying analytical rigor to financial psychology and system optimization.</li>
-  </ul>
-</section>
-
-<section id="recs">
-  <h2>Recommendations</h2>
-  <div class="rec-item">
-    <span class="rec-title">Naval Ravikant</span>
-    <span class="rec-desc">On wealth, judgment, and the leverage of specific knowledge.</span>
-  </div>
-  <div class="rec-item">
-    <span class="rec-title">Balaji Srinivasan</span>
-    <span class="rec-desc">On the network state and the future of decentralized systems.</span>
-  </div>
-  <div class="rec-item">
-    <span class="rec-title">Flow (Mihaly Csikszentmihalyi)</span>
-    <span class="rec-desc">The psychology of optimal experience and deep focus.</span>
+<section id="work" aria-labelledby="work-heading">
+  <h2 id="work-heading">Work</h2>
+  <div class="card-grid">
+    <article class="card">
+      <h3 class="card-title">Systemic Debugging</h3>
+      <p class="card-desc">Building RCA engines that correlate signals across distributed systems to identify failure patterns before they cascade.</p>
+    </article>
+    <article class="card">
+      <h3 class="card-title">AI-Assisted Engineering</h3>
+      <p class="card-desc">Implementing scalable software by leveraging sovereign AI agent workflows—from architecture to production.</p>
+    </article>
+    <article class="card">
+      <h3 class="card-title">Pattern Analysis</h3>
+      <p class="card-desc">Applying systemic rigor to financial and technical signals—post-mortem trade logs, exam optimization, system modeling.</p>
+    </article>
   </div>
 </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p><a href="mailto:viveknarole100@gmail.com">viveknarole100@gmail.com</a></p>
+<section id="recs" aria-labelledby="recs-heading">
+  <h2 id="recs-heading">Recommendations</h2>
+  <p style="color:var(--ink-muted);margin-bottom:var(--space-2);max-width:40ch">People and ideas that shaped my thinking—curated for leverage.</p>
+  <div class="rec-grid">
+    <article class="rec-card">
+      <div class="rec-icon" aria-hidden="true">📐</div>
+      <div class="rec-content">
+        <h3 class="rec-name">Naval Ravikant</h3>
+        <p class="rec-desc">On wealth, judgment, and the leverage of specific knowledge. <em>The Almanack</em> is a reference manual for life.</p>
+      </div>
+    </article>
+    <article class="rec-card">
+      <div class="rec-icon" aria-hidden="true">🌐</div>
+      <div class="rec-content">
+        <h3 class="rec-name">Balaji Srinivasan</h3>
+        <p class="rec-desc">On the network state, decentralization, and building parallel institutions. Essential for systems thinkers.</p>
+      </div>
+    </article>
+    <article class="rec-card">
+      <div class="rec-icon" aria-hidden="true">🌊</div>
+      <div class="rec-content">
+        <h3 class="rec-name">Flow — Mihaly Csikszentmihalyi</h3>
+        <p class="rec-desc">The psychology of optimal experience. The framework for deep work, intrinsic motivation, and mastery.</p>
+      </div>
+    </article>
+    <article class="rec-card">
+      <div class="rec-icon" aria-hidden="true">🧠</div>
+      <div class="rec-content">
+        <h3 class="rec-name">Vedanta Philosophy</h3>
+        <p class="rec-desc">Non-dualistic frameworks for decision-making under uncertainty. Grounding for high-stakes environments.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="contact" aria-labelledby="contact-heading">
+  <h2 id="contact-heading">Contact</h2>
+  <div class="contact-card">
+    <a href="mailto:viveknarole100@gmail.com">viveknarole100@gmail.com</a>
+    <span class="contact-hint">Open to collaborations, conversations, and coffee</span>
+  </div>
 </section>
 </main>
 
 <footer>
-  <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/nvivek42">GitHub</a>
+  <div class="footer-links">
+    <a href="/llms.txt" rel="alternate">llms.txt</a>
+    <a href="https://github.com/nvivek42" rel="me">GitHub</a>
+  </div>
+  <p>© 2025 Vivek Narole · Built with minimalism</p>
 </footer>
+</div>
 </body>
 </html>
