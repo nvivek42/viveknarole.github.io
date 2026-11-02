@@ -56,9 +56,6 @@
    }
  }
 
- /* ============================================
-    RESET & BASE
-    ============================================ */
  *, *::before, *::after{box-sizing:border-box}
  html{scroll-behavior:smooth}
  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -70,7 +67,6 @@
    text-rendering:optimizeLegibility;
  }
 
- /* Subtle figure/ground — organic warmth */
  body::before{
    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0.4;
    background-image:
@@ -79,19 +75,14 @@
  }
  @media (prefers-color-scheme:dark){body::before{opacity:0.1}}
 
- /* ============================================
-    LAYOUT — Consistent Rhythm
-    ============================================ */
  .page{max-width:var(--max-width);margin:0 auto;padding:0 var(--space-4)}
 
- /* Sections — uniform vertical cadence */
  section{
    padding:var(--space-10) 0;
    border-top:1px solid transparent;
  }
  section:first-of-type{padding-top:var(--space-6)}
 
- /* Creative divider — rhythm marker */
  section:not(:first-of-type)::before{
    content:"";display:block;margin:0 auto var(--space-6);
    width:48px;height:1px;
@@ -101,19 +92,14 @@
 
  header{padding:var(--space-12) 0 var(--space-8);text-align:center}
 
- /* Staggered reveal — Serial Position Effect */
  section{opacity:0;transform:translateY(12px);animation:reveal 0.5s var(--transition) forwards}
  section:nth-child(1){animation-delay:0.05s}
  section:nth-child(2){animation-delay:0.12s}
  section:nth-child(3){animation-delay:0.19s}
  section:nth-child(4){animation-delay:0.26s}
- section:nth-child(5){animation-delay:0.33s}
  @keyframes reveal{to{opacity:1;transform:translateY(0)}}
  @media (prefers-reduced-motion:reduce){section{opacity:1;transform:none;animation:none}}
 
- /* ============================================
-    TYPOGRAPHY — Hierarchy & Cognitive Ease
-    ============================================ */
  h1{
    font-size:clamp(2rem,4vw,3rem);
    font-weight:700;letter-spacing:-0.04em;line-height:1.08;
@@ -144,9 +130,6 @@
    font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
  }
 
- /* ============================================
-    NAV — Pills
-    ============================================ */
  .nav{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-2);margin-top:var(--space-4)}
  .nav a{
    font-size:0.8rem;font-weight:500;color:var(--ink-muted);
@@ -174,35 +157,26 @@
  }
  .secondary-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
 
- /* ============================================
-    FOCUS / APPROACH — Clarity
-    ============================================ */
- .focus-grid,.work-list,.rec-grid,.proof-grid{
+ .focus-grid,.work-list,.proof-grid{
    display:grid;gap:var(--space-3)
  }
  .focus-grid,.proof-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
- .focus-card,.proof-stat,
- .work-item,.rec-card{
+ .focus-card,.proof-stat,.work-item{
    background:var(--bg-elevated);border:1px solid var(--line);
    border-radius:var(--radius);padding:var(--space-4);
    box-shadow:var(--shadow-1);
    transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
  }
- .focus-card:hover,.proof-stat:hover,.work-item:hover,.rec-card:hover{
+ .focus-card:hover,.proof-stat:hover,.work-item:hover{
    transform:translateY(-2px);box-shadow:var(--shadow-2);border-color:rgba(200,92,46,0.25)
  }
- .focus-card p,.proof-stat span,.work-desc,.rec-desc{margin:0;color:var(--ink-muted);line-height:1.6}
+ .focus-card p,.proof-stat span,.work-desc{margin:0;color:var(--ink-muted);line-height:1.6}
  .focus-card strong,.proof-stat strong{display:block;color:var(--ink);font-size:1.05rem;margin-bottom:var(--space-1)}
  .proof-stat strong{font-size:1.5rem;letter-spacing:-0.04em}
  .proof-stat span{font-size:0.83rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-subtle)}
 
- /* ============================================
-    WORK — Cards with Elevation
-    ============================================ */
  .work-list{grid-template-columns:1fr;}
- .work-item{
-   position:relative;overflow:hidden;
- }
+ .work-item{position:relative;overflow:hidden;}
  .work-item::before{
    content:"";position:absolute;top:0;left:0;right:0;height:3px;
    background:linear-gradient(90deg,var(--accent),transparent);
@@ -212,17 +186,6 @@
  .work-title{font-weight:600;color:var(--ink);margin:0 0 var(--space-1);font-size:0.95rem}
  .work-desc{font-size:0.9rem}
 
- /* ============================================
-    RECOMMENDATIONS — Elevated Cards
-    ============================================ */
- .rec-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
- .rec-card{display:flex;flex-direction:column;gap:var(--space-1)}
- .rec-name{font-weight:600;color:var(--ink);font-size:0.95rem;margin:0;display:block}
- .rec-desc{font-size:0.85rem;line-height:1.55;display:block}
-
- /* ============================================
-    CONTACT — Prominent CTA
-    ============================================ */
  #contact{text-align:center}
  .contact-card{
    background:var(--ink);color:var(--bg);border-radius:var(--radius);
@@ -234,19 +197,13 @@
  .contact-card a:hover{color:var(--accent);border-bottom-color:var(--accent)}
  .contact-hint{font-size:0.85rem;color:rgba(250,250,250,0.55)}
 
- /* ============================================
-    FOOTER
-    ============================================ */
  footer{padding:var(--space-10) 0 var(--space-6);text-align:center;color:var(--ink-subtle);font-size:0.75rem;border-top:1px solid var(--line)}
  .footer-links{display:flex;justify-content:center;gap:var(--space-5);margin-bottom:var(--space-2);flex-wrap:wrap}
  .footer-links a{color:var(--ink-subtle);text-decoration:none;font-weight:500;font-size:0.85rem;transition:color var(--transition)}
  .footer-links a:hover{color:var(--accent)}
 
- /* ============================================
-    RESPONSIVE
-    ============================================ */
  @media (max-width: 700px){
-   .focus-grid,.proof-grid,.rec-grid{grid-template-columns:1fr;}
+   .focus-grid,.proof-grid{grid-template-columns:1fr;}
    .page{padding:0 var(--space-3)}
    header{padding-top:var(--space-10)}
  }
@@ -256,13 +213,10 @@
    .contact-card{padding:var(--space-4) var(--space-3)}
  }
 
- /* ============================================
-    PRINT
-    ============================================ */
  @media print{
    body::before{display:none}
    section:not(:first-of-type)::before{display:none}
-   .work-item,.rec-card,.contact-card,.focus-card,.proof-stat{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
+   .work-item,.contact-card,.focus-card,.proof-stat{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
    a{text-decoration:underline;color:#000}
  }
 </style>
@@ -295,7 +249,6 @@
   <nav class="nav" aria-label="Sections">
     <a href="#focus">Focus</a>
     <a href="#work">Work</a>
-    <a href="#recs">Principles</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -351,28 +304,6 @@
     <article class="work-item">
       <h3 class="work-title">Pattern Recognition</h3>
       <p class="work-desc">Applying systemic rigor to financial and technical signals—post-mortem trade logs, exam optimization, system modeling.</p>
-    </article>
-  </div>
-</section>
-
-<section id="recs">
-  <h2>Principles</h2>
-  <div class="rec-grid">
-    <article class="rec-card">
-      <span class="rec-name">Naval Ravikant</span>
-      <span class="rec-desc">On wealth, judgment, and the leverage of specific knowledge. <em>The Almanack</em> is a reference manual for life.</span>
-    </article>
-    <article class="rec-card">
-      <span class="rec-name">Balaji Srinivasan</span>
-      <span class="rec-desc">On the network state, decentralization, and building parallel institutions. Essential for systems thinkers.</span>
-    </article>
-    <article class="rec-card">
-      <span class="rec-name">Flow — Mihaly Csikszentmihalyi</span>
-      <span class="rec-desc">The psychology of optimal experience. The framework for deep work, intrinsic motivation, and mastery.</span>
-    </article>
-    <article class="rec-card">
-      <span class="rec-name">Swami Vivekananda</span>
-      <span class="rec-desc">Practical Vedanta. Fearlessness as method. Service as synthesis. Grounding for high-stakes clarity.</span>
     </article>
   </div>
 </section>
