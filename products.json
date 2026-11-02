@@ -1,33 +1,24 @@
 {
   "owner": "Vivek Narole",
   "updated": "2025-05-20",
-  "products": [
+  "capabilities": [
     {
-      "name": "Sovereign AI Architecture Consulting",
-      "type": "service",
-      "description": "Design of decision engines that combine AI with systemic rigor.",
-      "price": 0,
-      "currency": "INR",
-      "availability": "InStock",
-      "url": "https://viveknarole.com/#contact"
+      "name": "Systemic Debugging",
+      "description": "Implementing RCA engines to identify failures in complex software stacks.",
+      "status": "active",
+      "url": "mailto:viveknarole100@gmail.com"
     },
     {
-      "name": "Systemic Debugging Implementation",
-      "type": "service",
-      "description": "Automation of RCA engines for complex systems.",
-      "price": 0,
-      "currency": "INR",
-      "availability": "InStock",
-      "url": "https://viveknarole.com/#contact"
+      "name": "AI-Assisted Engineering",
+      "description": "Building scalable software using sovereign AI workflows.",
+      "status": "active",
+      "url": "mailto:viveknarole100@gmail.com"
     },
     {
-      "name": "AI-Driven Software Engineering",
-      "type": "service",
-      "description": "End-to-end custom scalable software development.",
-      "price": 0,
-      "currency": "INR",
-      "availability": "InStock",
-      "url": "https://viveknarole.com/#contact"
+      "name": "Pattern Analysis",
+      "description": "Applying systemic rigor to financial and technical signals.",
+      "status": "active",
+      "url": "mailto:viveknarole100@gmail.com"
     }
   ]
 }
