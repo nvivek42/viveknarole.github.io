@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Goal Clarity Engine — Govt vs Private Job</title>
-  <meta name="description" content="Structured interview to produce a decision tree for high-stakes career choices.">
+  <meta name="description" content="Structured interview using Six Honest Men framework for deep career clarity.">
   <link rel="canonical" href="https://viveknarole.com/portfolio/goal-clarity/">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Goal Clarity Engine",
-    "description": "Structured interview for high-stakes decisions. Forces the questions you're avoiding, returns a decision tree you can trust.",
+    "description": "Six Honest Men framework for high-stakes decisions. Iterative questioning until root clarity. Govt vs Private job as first domain.",
     "url": "https://viveknarole.com/portfolio/goal-clarity/",
     "applicationCategory": "DecisionSupport",
     "operatingSystem": "Web",
@@ -26,10 +26,11 @@
       --line: #e8e8f0;
       --accent: #c85c2e;
       --accent-soft: rgba(200,92,46,.08);
+      --accent-strong: rgba(200,92,46,.15);
       --card: #ffffff;
       --shadow: 0 18px 40px rgba(26,26,46,.06);
       --shadow-strong: 0 24px 48px rgba(26,26,46,.1);
-      --max: 48rem;
+      --max: 52rem;
       --radius: 18px;
       --focus: 0 0 0 3px rgba(200,92,46,.25);
     }
@@ -44,6 +45,7 @@
         --shadow: 0 18px 40px rgba(0,0,0,.3);
         --shadow-strong: 0 24px 48px rgba(0,0,0,.4);
         --accent-soft: rgba(200,92,46,.15);
+        --accent-strong: rgba(200,92,46,.25);
       }
     }
     body {
@@ -61,16 +63,18 @@
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
     header { padding: 3rem 0 1.5rem; text-align: center; }
-    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -0.04em; margin: 0 0 0.75rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -0.04em; margin: 0 0 0.5rem; }
     .subtitle { color: var(--mute); font-size: 1.1rem; margin: 0; max-width: 36ch; margin-left: auto; margin-right: auto; }
     .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 1rem; }
+    .framework-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; background: var(--accent-strong); color: var(--accent); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; margin-left: 0.5rem; vertical-align: middle; }
     main { flex: 1; display: flex; flex-direction: column; }
-    .progress-bar { height: 3px; background: var(--line); border-radius: 2px; margin-bottom: 2rem; overflow: hidden; }
+    .progress-bar { height: 3px; background: var(--line); border-radius: 2px; margin-bottom: 1.5rem; overflow: hidden; }
     .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s ease; }
     .stage-indicator { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
-    .stage-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); transition: all 0.3s ease; }
+    .stage-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); transition: all 0.3s ease; cursor: pointer; }
     .stage-dot.active { background: var(--accent); transform: scale(1.3); }
     .stage-dot.done { background: var(--accent); }
+    .stage-dot:hover:not(.done):not(.active) { background: var(--mute); }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); }
     .question { display: none; }
     .question.active { display: block; animation: fadeIn 0.3s ease; }
@@ -79,6 +83,10 @@
     .question-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; display: block; }
     .question-text { font-size: 1.15rem; line-height: 1.5; color: var(--ink); margin: 0; }
     .question-hint { font-size: 0.85rem; color: var(--mute); margin-top: 0.5rem; }
+    .six-men-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; margin: 1rem 0 1.5rem; padding: 1rem; background: var(--accent-soft); border-radius: 12px; border: 1px solid rgba(200,92,46,.15); }
+    .six-man { display: flex; flex-direction: column; gap: 0.25rem; }
+    .six-man-label { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
+    .six-man-value { font-size: 0.85rem; color: var(--ink); font-weight: 500; }
     textarea, input[type="text"], input[type="number"], select {
       width: 100%;
       background: var(--bg);
@@ -120,6 +128,9 @@
     .result-content code { font-family: 'SF Mono', 'Fira Code', monospace; }
     .result-content ul { margin: 0.75rem 0 0 1.25rem; }
     .result-content li { margin: 0.5rem 0; }
+    .result-content .six-men-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .result-content .six-man-card { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; }
+    .result-content .six-man-card h4 { margin: 0 0 0.5rem; color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
     .reflection-box { margin-top: 2rem; padding: 1.5rem; background: var(--accent-soft); border: 1px solid rgba(200,92,46,.2); border-radius: 12px; }
     .reflection-box label { display: block; font-weight: 600; margin-bottom: 0.75rem; color: var(--ink); }
     .reflection-box textarea { min-height: 120px; }
@@ -132,15 +143,18 @@
     .mode-btn { padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--mute); transition: all 0.2s; }
     .mode-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
     .mode-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+    .depth-indicator { text-align: center; margin: 1rem 0; padding: 0.75rem; background: var(--accent-soft); border-radius: 999px; display: inline-block; margin-left: auto; margin-right: auto; }
+    .depth-badge { font-size: 0.75rem; font-weight: 700; color: var(--accent); }
     @media (max-width: 600px) {
       body { padding: 0 1rem; }
       .card { padding: 1.5rem; border-radius: 14px; }
       .nav-row { flex-direction: column-reverse; }
       .btn { width: 100%; }
       .action-row { flex-direction: column; }
+      .six-men-row { grid-template-columns: repeat(2, 1fr); }
     }
     @media print {
-      .nav-row, .mode-toggle, .progress-bar, .stage-indicator, header .badge { display: none; }
+      .nav-row, .mode-toggle, .progress-bar, .stage-indicator, header .badge, .depth-indicator { display: none; }
       .question { display: block !important; page-break-inside: avoid; }
       body { max-width: none; padding: 0; }
       .card { box-shadow: none; border: none; }
@@ -149,14 +163,15 @@
 </head>
 <body>
   <header>
-    <span class="badge">v0.1 — Prototype</span>
+    <span class="badge">v0.2 — Six Honest Men</span>
     <h1>Goal Clarity Engine</h1>
-    <p class="subtitle">Structured interview for high-stakes decisions. Forces the questions you're avoiding. Returns a decision tree you can trust.</p>
+    <p class="subtitle">Structured interview for high-stakes decisions. <span class="framework-badge">WHAT · WHY · WHEN · HOW · WHERE · WHO</span></p>
+    <p class="subtitle" style="margin-top: 0.5rem; font-size: 0.95rem;">Iterative questioning until root clarity. Domain: Government vs Private Job</p>
   </header>
 
   <main>
     <div class="mode-toggle" id="modeToggle">
-      <button class="mode-btn active" data-mode="demo" onclick="setMode('demo')">Demo Mode (No API)</button>
+      <button class="mode-btn active" data-mode="demo" onclick="setMode('demo')">Demo Mode (Instant)</button>
       <button class="mode-btn" data-mode="live" onclick="setMode('live')">Live Mode (NIM API)</button>
     </div>
 
@@ -165,13 +180,17 @@
     </div>
     <div class="stage-indicator" id="stageIndicator" aria-label="Interview stages"></div>
 
+    <div class="depth-indicator" id="depthIndicator" style="display:none;">
+      <span class="depth-badge">Depth: <span id="currentDepth">1</span> / <span id="maxDepth">3</span></span>
+    </div>
+
     <div class="card" id="interviewCard">
       <!-- Questions injected here -->
     </div>
 
     <div class="card result-section" id="resultSection">
       <div class="result-header">
-        <h2 class="result-title">Your Decision Tree</h2>
+        <h2 class="result-title">Your Decision Clarity Map</h2>
         <p class="result-meta">Generated <span id="resultDate"></span> · <span id="resultMode"></span></p>
       </div>
       <div class="result-content" id="resultContent"></div>
@@ -189,93 +208,189 @@
 
   <footer>
     <p>Built with intention by <a href="/">Vivek Narole</a> · <a href="/portfolio/">Portfolio</a> · <a href="https://github.com/nvivek42" target="_blank" rel="noopener">GitHub</a></p>
-    <p style="margin-top: 0.5rem;">Powered by <a href="https://build.nvidia.com" target="_blank" rel="noopener">NVIDIA NIM</a> (Nemotron-3-Ultra) · <a href="https://pi-coding-agent.com" target="_blank" rel="noopener">Pi Coding Agent</a></p>
+    <p style="margin-top: 0.5rem;">Powered by <a href="https://build.nvidia.com" target="_blank" rel="noopener">NVIDIA NIM</a> (Nemotron-3-Ultra) · <a href="https://pi-coding-agent.com" target="_blank" rel="noopener">Pi Coding Agent</a> · Six Honest Men framework</p>
   </footer>
 
   <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
   <script>
-    // ===== QUESTION DATA =====
+    // ===== SIX HONEST MEN FRAMEWORK =====
+    const SIX_MEN = [
+      { id: 'what', label: 'WHAT', question: 'What exactly is the decision? What are the concrete options?', color: '#c85c2e' },
+      { id: 'why', label: 'WHY', question: 'Why does this matter? What values, fears, desires drive it?', color: '#b85226' },
+      { id: 'when', label: 'WHEN', question: 'When does this need to be decided? What are the time windows?', color: '#a84820' },
+      { id: 'how', label: 'HOW', question: 'How will you execute? What steps, resources, fallbacks?', color: '#983e1a' },
+      { id: 'where', label: 'WHERE', question: 'Where does this play out? Location, context, environment?', color: '#883414' },
+      { id: 'who', label: 'WHO', question: 'Who is involved? Who decides? Who is affected? Who advises?', color: '#782a0e' }
+    ];
+
+    // ===== INTERVIEW STAGES =====
     const STAGES = [
-      { id: 'context', title: 'Context', desc: 'Hard facts that constrain the decision', icon: '📋' },
-      { id: 'values', title: 'Values', desc: 'Forced ranking — no "all important"', icon: '⚖️' },
-      { id: 'scenarios', title: 'Scenarios', desc: 'Concrete 5-year day in the life', icon: '🔮' },
-      { id: 'regret', title: 'Regret', desc: 'Which failure mode hurts more', icon: '💔' },
-      { id: 'constraints', title: 'Constraints', desc: 'Non-negotiables that eliminate options', icon: '🚧' },
-      { id: 'synthesis', title: 'Synthesis', desc: 'Your current lean before AI reasoning', icon: '🧠' }
+      { id: 'context', title: 'Context', desc: 'Hard facts that constrain the decision', icon: '📋', men: ['what', 'where', 'when'] },
+      { id: 'values', title: 'Values', desc: 'Forced ranking — no "all important"', icon: '⚖️', men: ['why', 'who'] },
+      { id: 'scenarios', title: 'Scenarios', desc: 'Concrete 5-year day in the life', icon: '🔮', men: ['what', 'how', 'where', 'when'] },
+      { id: 'regret', title: 'Regret', desc: 'Which failure mode hurts more', icon: '💔', men: ['why', 'who'] },
+      { id: 'constraints', title: 'Constraints', desc: 'Non-negotiables that eliminate options', icon: '🚧', men: ['what', 'where', 'who', 'when'] },
+      { id: 'synthesis', title: 'Synthesis', desc: 'Your current lean before AI reasoning', icon: '🧠', men: ['what', 'why', 'how'] }
     ];
 
-    const QUESTIONS = [
-      // CONTEXT
-      { id: 'current_role', stage: 'context', type: 'text', label: 'Current Role', prompt: 'What is your current role? (title, industry, years experience)', required: true },
-      { id: 'age', stage: 'context', type: 'number', label: 'Age', prompt: 'Age?', min: 18, max: 65, required: true },
-      { id: 'location', stage: 'context', type: 'text', label: 'Location', prompt: 'Current city / preferred work location?', required: true },
-      { id: 'savings_months', stage: 'context', type: 'number', label: 'Financial Runway', prompt: 'Months of expenses saved (runway if income stops)?', min: 0, max: 120, required: true },
-      { id: 'dependents', stage: 'context', type: 'number', label: 'Dependents', prompt: 'Number of financial dependents (0, 1, 2, 3+)?', min: 0, max: 10, required: true },
-      { id: 'debt_monthly', stage: 'context', type: 'number', label: 'Debt Burden', prompt: 'Monthly debt payments (EMI, loans) as % of current income?', min: 0, max: 100, required: true },
-
-      // VALUES
-      { id: 'values_rank', stage: 'values', type: 'ranking', label: 'Value Ranking', prompt: 'Rank these 7 values from 1 (most important) to 7 (least important). No ties.', required: true,
-        options: [
-          { id: 'security', text: 'Financial security (predictable income, pension)' },
-          { id: 'learning', text: 'Learning/growth rate (new skills, complexity, pace)' },
-          { id: 'autonomy', text: 'Autonomy (control over what/how/when you work)' },
-          { id: 'impact', text: 'Impact (visible contribution to something meaningful)' },
-          { id: 'compensation', text: 'Compensation ceiling (total comp potential in 10 yrs)' },
-          { id: 'time_freedom', text: 'Time freedom (schedule control, leave, location flexibility)' },
-          { id: 'status', text: 'Status/prestige (social recognition, title, network)' }
+    // ===== DEEPENING QUESTIONS (Six Men applied iteratively) =====
+    const DEEPENING_QUESTIONS = {
+      context: {
+        what: [
+          { id: 'current_role', prompt: 'What is your current role? (title, industry, years experience)', type: 'text', required: true },
+          { id: 'govt_roles_known', prompt: 'What specific government roles are you actually eligible for? (list 3-5 with pay scales)', type: 'textarea', required: true },
+          { id: 'private_roles_known', prompt: 'What specific private roles match your skills? (list 3-5 with salary ranges)', type: 'textarea', required: true }
+        ],
+        where: [
+          { id: 'location', prompt: 'Where are you located? Where would each role require you to be?', type: 'text', required: true },
+          { id: 'mobility', prompt: 'Where can you realistically relocate? (city, state, remote constraints)', type: 'textarea', required: true }
+        ],
+        when: [
+          { id: 'age', prompt: 'When were you born? (Age affects pension vesting, learning curve, risk capacity)', type: 'number', min: 18, max: 65, required: true },
+          { id: 'decision_deadline', prompt: 'When must you decide? (exam dates, notice period, offer expiry)', type: 'text', required: true },
+          { id: 'savings_months', prompt: 'How many months of expenses saved? (runway if income stops)', type: 'number', min: 0, max: 120, required: true }
         ]
       },
-      { id: 'values_explain', stage: 'values', type: 'textarea', label: 'Why #1?', prompt: 'Why is your #1 truly #1? What experience taught you this?', required: true },
-
-      // SCENARIOS
-      { id: 'govt_day_5yr', stage: 'scenarios', type: 'textarea', label: 'Govt — 5yr Tuesday', prompt: 'Describe a typical Tuesday 5 years from now in a government role. Be specific: wake time, commute, tasks, meetings, lunch, end of day, energy level. (2-3 paragraphs)', required: true },
-      { id: 'private_day_5yr', stage: 'scenarios', type: 'textarea', label: 'Private — 5yr Tuesday', prompt: 'Describe a typical Tuesday 5 years from now in a private role (best realistic case). Same detail: wake time, commute, tasks, meetings, lunch, end of day, energy level.', required: true },
-      { id: 'govt_worst_5yr', stage: 'scenarios', type: 'textarea', label: 'Govt — Worst Case', prompt: 'Worst realistic 5-year outcome in government role? (stagnation, transfer, politics, obsolescence)', required: true },
-      { id: 'private_worst_5yr', stage: 'scenarios', type: 'textarea', label: 'Private — Worst Case', prompt: 'Worst realistic 5-year outcome in private role? (layoff, burnout, skill decay, toxic culture)', required: true },
-
-      // REGRET
-      { id: 'regret_govt', stage: 'regret', type: 'textarea', label: 'Regret if Govt', prompt: 'At 60, you look back. You took the government job. What do you regret *not* having experienced? (growth, wealth, autonomy, impact, excitement)', required: true },
-      { id: 'regret_private', stage: 'regret', type: 'textarea', label: 'Regret if Private', prompt: 'At 60, you look back. You took the private job. What do you regret *not* having experienced? (security, pension, stability, family time, peace)', required: true },
-      { id: 'regret_compare', stage: 'regret', type: 'textarea', label: 'Which Stings More', prompt: 'Which regret stings more viscerally right now? Why?', required: true },
-
-      // CONSTRAINTS
-      { id: 'hard_constraints', stage: 'constraints', type: 'textarea', label: 'Hard Constraints', prompt: 'List ANY non-negotiables that would make one path impossible. Examples: "Must stay in this city for parents\' care", "Need ₹X/month for loan", "Visa requires private employment", "Health condition needs specific insurance". Type "none" if truly none.', required: true },
-      { id: 'spouse_opinion', stage: 'constraints', type: 'select', label: 'Partner Preference', prompt: 'Partner/spouse preference (if applicable):', required: true,
-        options: [
-          { value: 'strongly_govt', text: 'Strongly government' },
-          { value: 'lean_govt', text: 'Lean government' },
-          { value: 'neutral', text: 'Neutral / no preference' },
-          { value: 'lean_private', text: 'Lean private' },
-          { value: 'strongly_private', text: 'Strongly private' },
-          { value: 'na', text: 'Not applicable' }
+      values: {
+        why: [
+          { id: 'values_rank', prompt: 'Rank these 7 values 1-7 (1=most important). No ties.', type: 'ranking', required: true,
+            options: [
+              { id: 'security', text: 'Financial security (predictable income, pension)' },
+              { id: 'learning', text: 'Learning/growth rate (new skills, complexity, pace)' },
+              { id: 'autonomy', text: 'Autonomy (control over what/how/when you work)' },
+              { id: 'impact', text: 'Impact (visible contribution to something meaningful)' },
+              { id: 'compensation', text: 'Compensation ceiling (total comp potential in 10 yrs)' },
+              { id: 'time_freedom', text: 'Time freedom (schedule control, leave, location flexibility)' },
+              { id: 'status', text: 'Status/prestige (social recognition, title, network)' }
+            ]
+          },
+          { id: 'values_explain', prompt: 'Why is your #1 truly #1? What specific experience taught you this?', type: 'textarea', required: true },
+          { id: 'work_meaning', prompt: 'What does "meaningful work" look like to you? Describe a day where you felt it.', type: 'textarea', required: true }
+        ],
+        who: [
+          { id: 'dependents', prompt: 'Who depends on your income? (count + relationship)', type: 'text', required: true },
+          { id: 'spouse_opinion', prompt: 'Partner/spouse preference:', type: 'select', required: true,
+            options: [
+              { value: 'strongly_govt', text: 'Strongly government' },
+              { value: 'lean_govt', text: 'Lean government' },
+              { value: 'neutral', text: 'Neutral / no preference' },
+              { value: 'lean_private', text: 'Lean private' },
+              { value: 'strongly_private', text: 'Strongly private' },
+              { value: 'na', text: 'Not applicable' }
+            ]
+          }
         ]
       },
-      { id: 'notice_period', stage: 'constraints', type: 'number', label: 'Notice Period', prompt: 'If you quit today, notice period (months)?', min: 0, max: 12, required: true },
+      scenarios: {
+        what: [
+          { id: 'govt_day_5yr', prompt: 'Govt — Typical Tuesday 5 years out. Wake time, commute, tasks, meetings, lunch, end of day, energy. Be specific.', type: 'textarea', required: true },
+          { id: 'private_day_5yr', prompt: 'Private — Best realistic Tuesday 5 years out. Same detail.', type: 'textarea', required: true }
+        ],
+        how: [
+          { id: 'govt_skill_path', prompt: 'How do skills grow in the govt role? (training, rotations, self-study, stagnation)', type: 'textarea', required: true },
+          { id: 'private_skill_path', prompt: 'How do skills grow in the private role? (projects, mentorship, job-hopping, burnout risk)', type: 'textarea', required: true }
+        ],
+        where: [
+          { id: 'govt_location_5yr', prompt: 'Where will the govt role physically place you in 5 years? (transfers, postings, city)', type: 'textarea', required: true },
+          { id: 'private_location_5yr', prompt: 'Where will the private role place you? (office, remote, travel, relocation)', type: 'textarea', required: true }
+        ],
+        when: [
+          { id: 'govt_worst_5yr', prompt: 'Worst realistic 5-year govt outcome? (stagnation, bad posting, politics, obsolescence)', type: 'textarea', required: true },
+          { id: 'private_worst_5yr', prompt: 'Worst realistic 5-year private outcome? (layoff, burnout, skill decay, toxic culture)', type: 'textarea', required: true }
+        ]
+      },
+      regret: {
+        why: [
+          { id: 'regret_govt', prompt: 'At 60, you took the govt job. What do you regret NOT experiencing? (growth, wealth, autonomy, impact, excitement)', type: 'textarea', required: true },
+          { id: 'regret_private', prompt: 'At 60, you took the private job. What do you regret NOT experiencing? (security, pension, stability, family time, peace)', type: 'textarea', required: true }
+        ],
+        who: [
+          { id: 'regret_compare', prompt: 'Which regret stings more viscerally RIGHT NOW? Why?', type: 'textarea', required: true },
+          { id: 'regret_family', prompt: 'Who else lives with your regret? (spouse, kids, parents) How do they experience it?', type: 'textarea', required: true }
+        ]
+      },
+      constraints: {
+        what: [
+          { id: 'hard_constraints', prompt: 'Non-negotiables that make one path impossible. Examples: "Must stay in city for parents", "Need ₹X/month for loan", "Visa requires private job", "Health needs specific insurance". Type "none" if truly none.', type: 'textarea', required: true }
+        ],
+        where: [
+          { id: 'geo_constraints', prompt: 'Geographic constraints? (parents\' care, spouse job, property, visa, climate)', type: 'textarea', required: true }
+        ],
+        who: [
+          { id: 'debt_monthly', prompt: 'Monthly debt payments (EMI, loans) as % of current income?', type: 'number', min: 0, max: 100, required: true },
+          { id: 'notice_period', prompt: 'If you quit today, notice period (months)?', type: 'number', min: 0, max: 12, required: true }
+        ],
+        when: [
+          { id: 'exam_timeline', prompt: 'Government exam timeline? (prep time left, attempt limits, age cutoffs)', type: 'textarea', required: true }
+        ]
+      },
+      synthesis: {
+        what: [
+          { id: 'user_synthesis', prompt: 'In 3 sentences: current lean + the ONE thing that could flip it.', type: 'textarea', required: true }
+        ],
+        why: [
+          { id: 'core_tension', prompt: 'What is the CORE tension? (e.g., "Security vs Growth", "Family expectation vs Self-expression")', type: 'text', required: true }
+        ],
+        how: [
+          { id: 'next_step', prompt: 'What is your 90-day test? (apply to 3 govt + 3 private, talk to 5 people in each, shadow someone)', type: 'textarea', required: true }
+        ]
+      }
+    };
 
-      // SYNTHESIS
-      { id: 'user_synthesis', stage: 'synthesis', type: 'textarea', label: 'Current Lean', prompt: 'In 3 sentences, what is your *current* lean and the one thing that could flip it?', required: true }
-    ];
+    // ===== QUESTIONS (flattened for UI) =====
+    const QUESTIONS = [];
+    let questionIdMap = {}; // stage -> sixMan -> [questionIds]
+    let questionCounter = 0;
+
+    Object.entries(DEEPENING_QUESTIONS).forEach(([stageId, menMap]) => {
+      Object.entries(menMap).forEach(([manId, questions]) => {
+        questions.forEach(q => {
+          const globalId = `q_${questionCounter++}`;
+          const fullQuestion = { ...q, id: globalId, stage: stageId, man: manId };
+          QUESTIONS.push(fullQuestion);
+          if (!questionIdMap[stageId]) questionIdMap[stageId] = {};
+          if (!questionIdMap[stageId][manId]) questionIdMap[stageId][manId] = [];
+          questionIdMap[stageId][manId].push(globalId);
+        });
+      });
+    });
 
     // ===== STATE =====
     let answers = {};
     let currentStageIndex = 0;
+    let currentManIndex = 0;
     let currentQuestionIndex = 0;
-    let mode = 'demo'; // 'demo' or 'live'
+    let mode = 'demo';
     let stagedQuestions = {};
+
+    // ===== NIM CONFIG =====
+    const NIM_API_KEY = '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';
+    const NIM_ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions';
+    const NIM_MODEL = 'nvidia/nemotron-3-ultra';
 
     // ===== INIT =====
     function init() {
       // Group questions by stage
-      QUESTIONS.forEach(q => {
-        if (!stagedQuestions[q.stage]) stagedQuestions[q.stage] = [];
-        stagedQuestions[q.stage].push(q);
+      STAGES.forEach(stage => {
+        stagedQuestions[stage.id] = [];
+        if (questionIdMap[stage.id]) {
+          SIX_MEN.forEach(man => {
+            if (questionIdMap[stage.id][man.id]) {
+              questionIdMap[stage.id][man.id].forEach(qid => {
+                const q = QUESTIONS.find(q => q.id === qid);
+                if (q) stagedQuestions[stage.id].push(q);
+              });
+            }
+          });
+        }
       });
 
       renderStageIndicator();
       renderQuestions();
-      showQuestion(0, 0);
+      showQuestion(0, 0, 0);
       updateProgress();
+      updateDepthIndicator();
     }
 
     // ===== RENDER =====
@@ -289,44 +404,59 @@
     function renderQuestions() {
       const container = document.getElementById('interviewCard');
       let html = '';
-      let qIndex = 0;
-      STAGES.forEach((stage, sIndex) => {
+      let globalIdx = 0;
+      STAGES.forEach((stage, sIdx) => {
         const qList = stagedQuestions[stage.id] || [];
-        html += `<div class="question-header" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line);">
+        html += `<div class="question-header" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line);">
           <span class="question-label">${stage.icon} ${stage.title}</span>
           <p style="margin: 0.5rem 0 0; color: var(--mute); font-size: 0.9rem;">${stage.desc}</p>
         </div>`;
-        qList.forEach((q, qIdx) => {
-          html += renderQuestion(q, qIndex);
-          qIndex++;
+        // Group by Six Men
+        const menGroups = {};
+        qList.forEach(q => {
+          if (!menGroups[q.man]) menGroups[q.man] = [];
+          menGroups[q.man].push(q);
         });
-        if (sIndex < STAGES.length - 1) {
+        SIX_MEN.forEach(man => {
+          if (menGroups[man.id]) {
+            html += `<div class="six-men-row" style="margin-top: 1.5rem;">
+              <div class="six-man" style="grid-column: 1 / -1;">
+                <span class="six-man-label">${man.label}</span>
+                <span class="six-man-value">${man.question}</span>
+              </div>
+            </div>`;
+            menGroups[man.id].forEach(q => {
+              html += renderQuestion(q, globalIdx++);
+            });
+          }
+        });
+        if (sIdx < STAGES.length - 1) {
           html += '<hr style="margin: 2rem 0; border-color: var(--line);">';
         }
       });
       container.innerHTML = html;
-
-      // Initialize ranking drag-drop
       document.querySelectorAll('.ranking-container').forEach(initRanking);
     }
 
     function renderQuestion(q, globalIndex) {
       const isRequired = q.required ? '<span style="color: var(--accent); margin-left: 0.25rem;">*</span>' : '';
       let inputHtml = '';
+      const man = SIX_MEN.find(m => m.id === q.man);
+      const manColor = man ? man.color : '#c85c2e';
 
       switch (q.type) {
         case 'text':
         case 'number':
-          inputHtml = `<input type="${q.type}" id="q-${q.id}" placeholder="Type your answer..." ${q.min !== undefined ? `min="${q.min}"` : ''} ${q.max !== undefined ? `max="${q.max}"` : ''} data-qid="${q.id}" oninput="saveAnswer('${q.id}', this.value)">`;
+          inputHtml = `<input type="${q.type}" id="q-${q.id}" placeholder="Type your answer..." ${q.min !== undefined ? `min="${q.min}"` : ''} ${q.max !== undefined ? `max="${q.max}"` : ''} data-qid="${q.id}" oninput="saveAnswer('${q.id}', this.value)" style="border-left: 3px solid ${manColor};">`;
           break;
         case 'textarea':
-          inputHtml = `<textarea id="q-${q.id}" placeholder="Write freely... no right answers." data-qid="${q.id}" oninput="saveAnswer('${q.id}', this.value)"></textarea>`;
+          inputHtml = `<textarea id="q-${q.id}" placeholder="Write freely... no right answers." data-qid="${q.id}" oninput="saveAnswer('${q.id}', this.value)" style="border-left: 3px solid ${manColor};"></textarea>`;
           break;
         case 'select':
-          inputHtml = `<select id="q-${q.id}" data-qid="${q.id}" onchange="saveAnswer('${q.id}', this.value)"><option value="">Select...</option>${q.options.map(o => `<option value="${o.value}">${o.text}</option>`).join('')}</select>`;
+          inputHtml = `<select id="q-${q.id}" data-qid="${q.id}" onchange="saveAnswer('${q.id}', this.value)" style="border-left: 3px solid ${manColor};"><option value="">Select...</option>${q.options.map(o => `<option value="${o.value}">${o.text}</option>`).join('')}</select>`;
           break;
         case 'ranking':
-          inputHtml = `<div class="ranking-container" id="rank-${q.id}" data-qid="${q.id}">${q.options.map((o, i) => `
+          inputHtml = `<div class="ranking-container" id="rank-${q.id}" data-qid="${q.id}" style="border-left: 3px solid ${manColor}; padding-left: 1rem;">${q.options.map((o, i) => `
             <div class="ranking-item" draggable="true" data-value="${o.id}">
               <span class="ranking-number">${i + 1}</span>
               <span class="ranking-text">${o.text}</span>
@@ -336,11 +466,10 @@
       }
 
       return `
-        <div class="question" id="question-${globalIndex}" data-stage="${q.stage}" data-qid="${q.id}">
+        <div class="question" id="question-${globalIndex}" data-stage="${q.stage}" data-man="${q.man}" data-qid="${q.id}">
           <div class="question-header">
-            <span class="question-label">${q.label}${isRequired}</span>
+            <span class="question-label" style="color: ${manColor};">${q.man.toUpperCase()} · ${q.id.replace(/^q_\d+_/, '')}${isRequired}</span>
             <p class="question-text">${q.prompt}</p>
-            ${q.hint ? `<p class="question-hint">${q.hint}</p>` : ''}
           </div>
           ${inputHtml}
         </div>
@@ -372,7 +501,6 @@
           e.preventDefault();
           updateRankingOrder(container, hiddenInput);
         });
-        // Click to move up/down (mobile fallback)
         item.addEventListener('click', () => {
           const dragging = container.querySelector('.dragging');
           if (!dragging) return;
@@ -389,7 +517,6 @@
         const order = Array.from(container.querySelectorAll('.ranking-item')).map(el => el.dataset.value);
         hiddenInput.value = JSON.stringify(order);
         saveAnswer(container.dataset.qid, order);
-        // Update numbers
         container.querySelectorAll('.ranking-item').forEach((el, i) => {
           el.querySelector('.ranking-number').textContent = i + 1;
         });
@@ -397,76 +524,151 @@
     }
 
     // ===== NAVIGATION =====
-    function showQuestion(stageIdx, qIdx) {
+    function getStageMen(stageIdx) {
+      return STAGES[stageIdx].men;
+    }
+
+    function getStageQuestions(stageIdx) {
+      return stagedQuestions[STAGES[stageIdx].id] || [];
+    }
+
+    function getManQuestions(stageIdx, manIdx) {
+      const stageId = STAGES[stageIdx].id;
+      const manId = STAGES[stageIdx].men[manIdx];
+      if (!questionIdMap[stageId] || !questionIdMap[stageId][manId]) return [];
+      return questionIdMap[stageId][manId].map(id => QUESTIONS.find(q => q.id === id)).filter(Boolean);
+    }
+
+    function showQuestion(stageIdx, manIdx, qIdx) {
+      // Validate before moving
+      if (!validateCurrentQuestion()) return;
+
+      // Find global index
+      const questions = document.querySelectorAll('.question');
+      let targetGlobalIdx = 0;
+      let found = false;
+      for (let s = 0; s <= stageIdx; s++) {
+        const stageMen = STAGES[s].men;
+        const startMan = (s === stageIdx) ? 0 : 0;
+        const endMan = (s === stageIdx) ? manIdx : stageMen.length - 1;
+        for (let m = startMan; m <= endMan; m++) {
+          const mQuestions = getManQuestions(s, m);
+          if (s === stageIdx && m === manIdx) {
+            for (let q = 0; q < mQuestions.length; q++) {
+              if (q === qIdx) { found = true; break; }
+              targetGlobalIdx++;
+            }
+            if (found) break;
+          } else {
+            targetGlobalIdx += mQuestions.length;
+          }
+        }
+        if (found) break;
+      }
+
       document.querySelectorAll('.question').forEach((el, i) => {
-        el.classList.toggle('active', i === qIdx);
+        el.classList.toggle('active', i === targetGlobalIdx);
       });
       document.querySelectorAll('.stage-dot').forEach((el, i) => {
         el.classList.toggle('active', i === stageIdx);
         el.classList.toggle('done', i < stageIdx);
       });
       currentStageIndex = stageIdx;
+      currentManIndex = manIdx;
       currentQuestionIndex = qIdx;
       updateProgress();
+      updateDepthIndicator();
       updateNavButtons();
     }
 
-    function getQuestionElements() {
-      return Array.from(document.querySelectorAll('.question'));
-    }
-
-    function getStageQuestions(stageIdx) {
-      const stageId = STAGES[stageIdx].id;
-      return stagedQuestions[stageId] || [];
-    }
-
     function nextQuestion() {
-      const questions = getQuestionElements();
-      if (currentQuestionIndex < questions.length - 1) {
-        // Validate current
-        if (!validateCurrentQuestion()) return;
-        showQuestion(currentStageIndex, currentQuestionIndex + 1);
-      } else if (currentStageIndex < STAGES.length - 1) {
-        if (!validateCurrentQuestion()) return;
-        showQuestion(currentStageIndex + 1, 0);
-      } else {
-        if (!validateCurrentQuestion()) return;
-        finishInterview();
+      const stageQuestions = getStageQuestions(currentStageIndex);
+      if (currentManIndex < getStageMen(currentStageIndex).length - 1) {
+        const nextManQuestions = getManQuestions(currentStageIndex, currentManIndex + 1);
+        if (nextManQuestions.length > 0) {
+          showQuestion(currentStageIndex, currentManIndex + 1, 0);
+          return;
+        }
       }
+      if (currentStageIndex < STAGES.length - 1) {
+        const nextStageMen = getStageMen(currentStageIndex + 1);
+        if (nextStageMen.length > 0) {
+          const firstManQuestions = getManQuestions(currentStageIndex + 1, 0);
+          if (firstManQuestions.length > 0) {
+            showQuestion(currentStageIndex + 1, 0, 0);
+            return;
+          }
+        }
+      }
+      finishInterview();
     }
 
     function prevQuestion() {
-      const questions = getQuestionElements();
-      if (currentQuestionIndex > 0) {
-        showQuestion(currentStageIndex, currentQuestionIndex - 1);
-      } else if (currentStageIndex > 0) {
-        const prevStageQs = getStageQuestions(currentStageIndex - 1);
-        showQuestion(currentStageIndex - 1, prevStageQs.length - 1);
+      if (currentManIndex > 0) {
+        const prevManQuestions = getManQuestions(currentStageIndex, currentManIndex - 1);
+        if (prevManQuestions.length > 0) {
+          showQuestion(currentStageIndex, currentManIndex - 1, prevManQuestions.length - 1);
+          return;
+        }
+      }
+      if (currentStageIndex > 0) {
+        const prevStageMen = getStageMen(currentStageIndex - 1);
+        for (let m = prevStageMen.length - 1; m >= 0; m--) {
+          const mQuestions = getManQuestions(currentStageIndex - 1, m);
+          if (mQuestions.length > 0) {
+            showQuestion(currentStageIndex - 1, m, mQuestions.length - 1);
+            return;
+          }
+        }
       }
     }
 
     function goToStage(stageIdx) {
-      const stageQs = getStageQuestions(stageIdx);
-      if (stageQs.length > 0) {
-        // Find global index of first question in this stage
-        const questions = getQuestionElements();
-        const targetIdx = questions.findIndex(q => q.dataset.stage === STAGES[stageIdx].id);
-        if (targetIdx >= 0) showQuestion(stageIdx, targetIdx);
+      const stageMen = getStageMen(stageIdx);
+      for (let m = 0; m < stageMen.length; m++) {
+        const mQuestions = getManQuestions(stageIdx, m);
+        if (mQuestions.length > 0) {
+          showQuestion(stageIdx, m, 0);
+          return;
+        }
       }
     }
 
     function updateProgress() {
-      const questions = getQuestionElements();
-      const pct = ((currentQuestionIndex + 1) / questions.length) * 100;
+      const questions = document.querySelectorAll('.question');
+      let currentGlobalIdx = 0;
+      for (let s = 0; s < currentStageIndex; s++) {
+        currentGlobalIdx += getStageQuestions(s).length;
+      }
+      for (let m = 0; m < currentManIndex; m++) {
+        currentGlobalIdx += getManQuestions(currentStageIndex, m).length;
+      }
+      currentGlobalIdx += currentQuestionIndex;
+      const pct = ((currentGlobalIdx + 1) / questions.length) * 100;
       document.getElementById('progressFill').style.width = pct + '%';
       document.getElementById('progressFill').setAttribute('aria-valuenow', Math.round(pct));
     }
 
+    function updateDepthIndicator() {
+      const indicator = document.getElementById('depthIndicator');
+      const totalMen = STAGES.reduce((sum, s) => sum + s.men.length, 0);
+      let currentMenCount = 0;
+      for (let s = 0; s < currentStageIndex; s++) currentMenCount += STAGES[s].men.length;
+      currentMenCount += currentManIndex + 1;
+      document.getElementById('currentDepth').textContent = currentMenCount;
+      document.getElementById('maxDepth').textContent = totalMen;
+      indicator.style.display = 'inline-block';
+    }
+
     function updateNavButtons() {
-      const questions = getQuestionElements();
-      const isLast = currentQuestionIndex === questions.length - 1 && currentStageIndex === STAGES.length - 1;
-      document.getElementById('btnNext').textContent = isLast ? 'Generate Decision Tree' : 'Next';
-      document.getElementById('btnPrev').style.visibility = currentQuestionIndex === 0 && currentStageIndex === 0 ? 'hidden' : 'visible';
+      const isLastStage = currentStageIndex === STAGES.length - 1;
+      const isLastMan = currentManIndex === getStageMen(currentStageIndex).length - 1;
+      const manQuestions = getManQuestions(currentStageIndex, currentManIndex);
+      const isLastQuestion = currentQuestionIndex === manQuestions.length - 1;
+      const isLast = isLastStage && isLastMan && isLastQuestion;
+
+      document.getElementById('btnNext').textContent = isLast ? 'Generate Clarity Map' : 'Next';
+      document.getElementById('btnPrev').style.visibility = (currentStageIndex === 0 && currentManIndex === 0 && currentQuestionIndex === 0) ? 'hidden' : 'visible';
     }
 
     // ===== VALIDATION =====
@@ -501,7 +703,6 @@
 
     // ===== FINISH =====
     async function finishInterview() {
-      // Final validation
       const allValid = QUESTIONS.filter(q => q.required).every(q => {
         const v = answers[q.id];
         if (q.type === 'ranking') {
@@ -511,18 +712,17 @@
       });
       if (!allValid) { showToast('Please answer all required questions', 'error'); return; }
 
-      // Hide interview, show loading
       document.getElementById('interviewCard').style.display = 'none';
       const resultSection = document.getElementById('resultSection');
       resultSection.classList.add('visible');
       resultSection.innerHTML = `
         <div class="result-header">
-          <h2 class="result-title">Generating Decision Tree...</h2>
-          <p class="result-meta">Calling ${mode === 'live' ? 'NVIDIA NIM' : 'Demo Engine'}...</p>
+          <h2 class="result-title">Generating Clarity Map...</h2>
+          <p class="result-meta">Analyzing through Six Honest Men lens...</p>
         </div>
         <div style="text-align: center; padding: 2rem;">
           <div style="width: 40px; height: 40px; border: 3px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
-          <p style="margin-top: 1rem; color: var(--mute);">${mode === 'live' ? 'Reasoning with Nemotron-3-Ultra...' : 'Building demo decision tree...'}</p>
+          <p style="margin-top: 1rem; color: var(--mute);">${mode === 'live' ? 'Reasoning with Nemotron-3-Ultra...' : 'Building structured analysis...'}</p>
         </div>
         <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
       `;
@@ -551,18 +751,15 @@
 
     // ===== NIM API =====
     async function callNIMAPI() {
-      const apiKey = prompt('Enter your NVIDIA API Key (free at build.nvidia.com):');
-      if (!apiKey) throw new Error('API key required for live mode');
-
       const prompt = buildNIMPrompt(answers);
-      const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+      const response = await fetch(NIM_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
+          'Authorization': `Bearer ${NIM_API_KEY}`
         },
         body: JSON.stringify({
-          model: 'nvidia/nemotron-3-ultra',
+          model: NIM_MODEL,
           messages: [{ role: 'user', content: prompt }],
           max_tokens: 4096,
           temperature: 0.3,
@@ -579,158 +776,227 @@
     }
 
     function buildNIMPrompt(answers) {
-      return `You are a career strategist specializing in high-stakes irreversible decisions.
+      // Extract key answers for context
+      const get = (id) => {
+        const fullId = Object.keys(answers).find(k => k.endsWith('_' + id) || k.includes(id));
+        return answers[fullId] || answers[id] || 'Not provided';
+      };
 
-USER CONTEXT:
-- Role: ${answers.current_role}, Age: ${answers.age}, Location: ${answers.location}
-- Runway: ${answers.savings_months} months, Dependents: ${answers.dependents}
-- Debt burden: ${answers.debt_monthly}% of income, Notice period: ${answers.notice_period} months
+      const parseRanking = (val) => {
+        try { return JSON.parse(val); } catch { return []; }
+      };
 
-VALUE RANKING (1=most important):
-${parseRanking(answers.values_rank).map((v, i) => `${i+1}. ${v}`).join('\n')}
-Why #1: ${answers.values_explain}
+      return `You are a career strategist using the Six Honest Men framework (Rudyard Kipling) for root-cause clarity on a high-stakes decision: Government Job vs Private Sector Job.
 
-SCENARIOS:
-Govt 5yr day: ${answers.govt_day_5yr}
-Private 5yr day: ${answers.private_day_5yr}
-Govt worst: ${answers.govt_worst_5yr}
-Private worst: ${answers.private_worst_5yr}
+The user has NO direct exposure to either world. Internet info is biased. They have internal biases. They need NEUTRAL, STRUCTURED analysis covering:
+- Cost/benefits & opportunity costs
+- Current world context (2024-2025)
+- Personality alignment
+- What they want from work
+- What they like doing
+- Time/space constraints
 
-REGRET MINIMIZATION:
-Regret if govt: ${answers.regret_govt}
-Regret if private: ${answers.regret_private}
-Which stings more: ${answers.regret_compare}
+SIX HONEST MEN ANSWERS:
 
-CONSTRAINTS:
-Hard limits: ${answers.hard_constraints}
-Spouse preference: ${answers.spouse_opinion}
+WHAT (The Decision & Options):
+- Current role: ${get('current_role')}
+- Specific govt roles eligible for: ${get('govt_roles_known')}
+- Specific private roles matching skills: ${get('private_roles_known')}
+- Core tension: ${get('core_tension')}
 
-USER'S CURRENT LEAN: ${answers.user_synthesis}
+WHY (Values, Fears, Desires):
+- Value ranking (1=most): ${parseRanking(get('values_rank')).join(' > ')}
+- Why #1: ${get('values_explain')}
+- Meaningful work looks like: ${get('work_meaning')}
+- Regret if govt: ${get('regret_govt')}
+- Regret if private: ${get('regret_private')}
+- Which stings more: ${get('regret_compare')}
+
+WHEN (Time Windows):
+- Age: ${get('age')}
+- Decision deadline: ${get('decision_deadline')}
+- Savings runway: ${get('savings_months')} months
+- Govt exam timeline: ${get('exam_timeline')}
+
+HOW (Execution Paths):
+- Govt skill growth: ${get('govt_skill_path')}
+- Private skill growth: ${get('private_skill_path')}
+- 90-day test: ${get('next_step')}
+
+WHERE (Location & Environment):
+- Current location: ${get('location')}
+- Mobility constraints: ${get('mobility')}
+- Govt location in 5yr: ${get('govt_location_5yr')}
+- Private location in 5yr: ${get('private_location_5yr')}
+- Geographic constraints: ${get('geo_constraints')}
+
+WHO (People & Dependencies):
+- Dependents: ${get('dependents')}
+- Spouse preference: ${get('spouse_opinion')}
+- Debt burden: ${get('debt_monthly')}%
+- Notice period: ${get('notice_period')} months
+- Regret impact on family: ${get('regret_family')}
+
+CONSTRAINTS (Non-negotiables):
+- Hard limits: ${get('hard_constraints')}
+
+USER'S CURRENT LEAN: ${get('user_synthesis')}
 
 ---
 
-PRODUCE A DECISION TREE IN THIS EXACT FORMAT:
+PRODUCE A CLARITY MAP IN THIS EXACT FORMAT:
 
-## DECISION TREE
+## SIX HONEST MEN CLARITY MAP
 
-### BRANCH LOGIC
-IF [condition] THEN [path] BECAUSE [reasoning]
-ELSE IF [condition] THEN [path] BECAUSE [reasoning]
-...
+### WHAT — The Decision Deconstructed
+**Core Decision**: [One sentence: what is actually being decided]
+**Real Options**: [Not "govt vs private" but specific role clusters with data]
+**False Dichotomies**: [What the user thinks is binary but isn't]
 
-### KEY LEVERAGE POINTS (2-3 factors that flip the decision)
-1. [Factor] — [How it changes the calculus]
-2. [Factor] — [How it changes the calculus]
-3. [Factor] — [How it changes the calculus]
+### WHY — The Value Architecture
+**Primary Driver**: [The #1 value and its lived origin]
+**Hidden Drivers**: [Values the user didn't rank but behavior reveals]
+**Value Conflicts**: [Where values contradict each other]
+**Regret Asymmetry**: [Which regret is heavier and why]
 
-### BLIND SPOTS (what user hasn't considered)
-1. [Blind spot] — [Why it matters]
-2. [Blind spot] — [Why it matters]
+### WHEN — The Temporal Reality
+**Decision Window**: [Hard deadline vs soft preference]
+**Compounding Clock**: [What compounds in each path (pension, skills, network, burnout)]
+**Age Leverage**: [How age changes the calculus at 25 vs 35 vs 45]
+**Opportunity Cost of Delay**: [What waiting 6/12/24 months costs]
 
-### UNCOMFORTABLE QUESTION
-[One question the user should sit with for 48 hours]
+### HOW — The Execution Paths
+**Govt Path**: [Concrete steps from today to 5-year outcome]
+**Private Path**: [Concrete steps from today to 5-year outcome]
+**Switching Costs**: [Govt→Private vs Private→Govt at year 3, 5, 10]
+**Skill Half-Life**: [How fast skills decay in each environment]
+**90-Day Test**: [Specific, measurable validation actions]
 
-### 90-DAY TEST
-[Low-risk action to validate before committing. Specific, measurable, time-bound.]
+### WHERE — The Spatial Reality
+**Govt Geography**: [Posting patterns, transfer policies, family impact]
+**Private Geography**: [Office/remote/hybrid, travel, relocation]
+**Constraint Map**: [Where each path is physically impossible]
 
-### FINAL INSIGHT
-[2-3 sentences: the core tension and what clarity looks like]`;
-    }
+### WHO — The Human System
+**Decision Owner**: [Who actually decides? User? Spouse? Parents? Fear?]
+**Affected Parties**: [Who lives with consequences?]
+**Advisors Available**: [Who has walked both paths?]
+**Tribal Forces**: [Social identity, community expectations, status games]
 
-    function parseRanking(val) {
-      try { return JSON.parse(val); } catch { return []; }
+### ROOT CLARITY (The Synthesis)
+**The Real Question**: [Reframe the decision at root level]
+**Leverage Points**: [2-3 factors that flip the decision]
+**Blind Spots**: [What the user hasn't considered]
+**Uncomfortable Question**: [One question to sit with for 48 hours]
+**Recommendation**: [Not "choose X" but "if [condition] → X, else Y"]`;
     }
 
     // ===== DEMO OUTPUT =====
     function generateDemoOutput() {
-      const topValue = parseRanking(answers.values_rank)[0] || 'security';
-      const hasDependents = answers.dependents > 0;
-      const lowRunway = answers.savings_months < 6;
-      const highDebt = answers.debt_monthly > 30;
-      const spouseGovt = ['strongly_govt', 'lean_govt'].includes(answers.spouse_opinion);
-      const spousePrivate = ['strongly_private', 'lean_private'].includes(answers.spouse_opinion);
+      const get = (id) => {
+        const fullId = Object.keys(answers).find(k => k.endsWith('_' + id) || k.includes(id));
+        return answers[fullId] || answers[id] || 'Not provided';
+      };
+
+      const parseRanking = (val) => {
+        try { return JSON.parse(val); } catch { return []; }
+      };
+
+      const topValue = parseRanking(get('values_rank'))[0] || 'security';
+      const hasDependents = get('dependents').toString().includes('1') || get('dependents').toString().includes('2') || get('dependents').toString().includes('3');
+      const lowRunway = parseInt(get('savings_months')) < 6;
+      const highDebt = parseInt(get('debt_monthly')) > 30;
+      const spouseGovt = ['strongly_govt', 'lean_govt'].includes(get('spouse_opinion'));
+      const spousePrivate = ['strongly_private', 'lean_private'].includes(get('spouse_opinion'));
 
       let lean = 'private';
-      let confidence = 'moderate';
-      const reasons = [];
+      if (topValue === 'security' || lowRunway || highDebt || hasDependents || spouseGovt) lean = 'government';
 
-      if (topValue === 'security' || lowRunway || highDebt || hasDependents || spouseGovt) {
-        lean = 'government';
-        confidence = 'high';
-        reasons.push('Financial security is your #1 value');
-        if (lowRunway) reasons.push('Limited runway (<6 months) makes risk costly');
-        if (highDebt) reasons.push('High debt burden reduces risk capacity');
-        if (hasDependents) reasons.push('Dependents increase need for stability');
-        if (spouseGovt) reasons.push('Partner preference aligns with government');
-      } else if (topValue === 'learning' || topValue === 'autonomy' || topValue === 'compensation' || spousePrivate) {
-        lean = 'private';
-        confidence = 'high';
-        reasons.push(`Your top value (${topValue}) favors private sector`);
-        if (spousePrivate) reasons.push('Partner preference aligns with private');
-      } else {
-        reasons.push('Mixed signals — depends on specific role offers');
-      }
+      return `## SIX HONEST MEN CLARITY MAP
 
-      const blindSpots = [
-        'Government roles vary wildly — a central ministry ≠ a field posting',
-        'Private sector "learning" often means "firefighting" — audit the actual work',
-        'Pension value compounds silently; equity value is visible but volatile',
-        'Skill decay in government is real; so is burnout in private'
-      ];
+### WHAT — The Decision Deconstructed
+**Core Decision**: Not "government vs private" but **"which specific role cluster matches my constraint-profile and value-hierarchy?"**
+**Real Options**: 
+- Govt: ${get('govt_roles_known') || 'Not specified — THIS IS A BLIND SPOT'}
+- Private: ${get('private_roles_known') || 'Not specified — THIS IS A BLIND SPOT'}
+**False Dichotomies**: Stability ≠ government (contract roles exist). Growth ≠ private (maintenance roles exist). Pension ≠ only govt (NPS, EPF, private annuities).
 
-      return `## DECISION TREE
+### WHY — The Value Architecture
+**Primary Driver**: ${topValue.toUpperCase()} — ${get('values_explain') || 'No lived origin articulated'}
+**Hidden Drivers**: ${topValue !== 'security' && lowRunway ? 'Financial anxiety masquerading as other values' : topValue !== 'learning' && get('work_meaning')?.includes('learn') ? 'Growth desire masked by security language' : 'Values appear internally consistent'}
+**Value Conflicts**: ${topValue === 'security' && get('work_meaning')?.includes('autonomy') ? 'Security vs Autonomy — the classic trap' : topValue === 'learning' && lowRunway ? 'Learning requires runway you don\'t have' : 'No major conflict detected'}
+**Regret Asymmetry**: ${get('regret_compare') || 'Not articulated'}
 
-### BRANCH LOGIC
-IF financial_security_is_top_value OR runway_lt_6_months OR debt_gt_30pct OR has_dependents THEN government BECAUSE stability compounds when you can't afford volatility
-ELSE IF learning_or_autonomy_is_top_value AND runway_ge_12_months AND debt_lt_20pct THEN private BECAUSE growth compounds when you have buffer to absorb failure
-ELSE IF spouse_strongly_prefers_one_path THEN that_path BECAUSE relationship stability > career optimization
-ELSE private BECAUSE optionality value > pension value at your age
+### WHEN — The Temporal Reality
+**Decision Window**: ${get('decision_deadline') || 'Unknown — dangerous'}
+**Compounding Clock**: 
+- Govt: Pension compounds silently (20+ years). Skills decay visibly.
+- Private: Skills/network compound visibly. Pension must be built intentionally.
+**Age Leverage**: At ${get('age')}, you have ${65 - parseInt(get('age'))} working years. Govt pension vests at ~20 years. Private equity needs ~10 years to compound.
+**Opportunity Cost of Delay**: Each month of indecision = 1 month less pension vesting OR 1 month less skill compounding.
 
-### KEY LEVERAGE POINTS (2-3 factors that flip the decision)
-1. **Actual role specifics** — A policy role in PMO ≠ a clerk role in district office. A founding engineer role ≠ a maintenance engineer role. Get offer details first.
-2. **Spouse alignment** — Misalignment here creates daily friction that no salary delta fixes.
-3. **12-month runway test** — If you can't survive 12 months without income, government wins by default.
+### HOW — The Execution Paths
+**Govt Path**: ${get('govt_skill_path') || 'Not mapped — BLIND SPOT'}
+**Private Path**: ${get('private_skill_path') || 'Not mapped — BLIND SPOT'}
+**Switching Costs**: Govt→Private: Hard after year 3 (skill atrophy, age bias). Private→Govt: Possible via lateral entry, competitions, but narrowing.
+**Skill Half-Life**: Govt technical: 3-5 years without deliberate practice. Private: 2-3 years without job change.
+**90-Day Test**: ${get('next_step') || 'MISSING — define specific validation actions'}
 
-### BLIND SPOTS (what user hasn't considered)
-1. **Skill half-life** — Government technical roles often atrophy; private roles often burn out. Both destroy market value differently.
-2. **Optionality asymmetry** — Private → government is hard later. Government → private is possible but harder each year.
-3. **Identity lock-in** — "I'm a government person" becomes self-fulfilling. Same for "I'm a builder."
+### WHERE — The Spatial Reality
+**Govt Geography**: ${get('govt_location_5yr') || 'Unknown — transfers are mandatory in most services'}
+**Private Geography**: ${get('private_location_5yr') || 'Unknown — depends on company/role'}
+**Constraint Map**: ${get('geo_constraints') || 'None stated'}
 
-### UNCOMFORTABLE QUESTION
-If you knew you'd be laid off in 3 years regardless of path, which 3 years would you rather have lived?
+### WHO — The Human System
+**Decision Owner**: ${get('spouse_opinion') !== 'na' && !['neutral'].includes(get('spouse_opinion')) ? 'Shared with spouse — alignment critical' : 'Primarily you — but dependents inherit consequences'}
+**Affected Parties**: ${get('dependents')} dependents + ${get('regret_family') || 'family system'}
+**Advisors Available**: ${get('hard_constraints').includes('talk') ? 'Some' : 'UNKNOWN — have you spoken to 3 people in each path?'}
+**Tribal Forces**: Community expects govt? Family expects private? Status games driving hidden preference?
 
-### 90-DAY TEST
-Apply to 3 specific government roles AND 3 specific private roles. Interview fully. Compare the *actual* offers, not the abstractions. Decide with data.
-
-### FINAL INSIGHT
-Your top value (${topValue}) points to ${lean}. But the decision isn't binary — it's about which specific role, team, and manager. The sector matters less than the daily reality. Get the offers first.`;
+### ROOT CLARITY
+**The Real Question**: "Given my constraints (${get('hard_constraints') || 'none stated'}), values (${topValue}), and runway (${get('savings_months')} months), which SPECIFIC role can I get in the next 12 months that advances my 10-year position?"
+**Leverage Points**:
+1. **Actual offer data** — Not abstractions. Apply to 3 govt + 3 private roles. Compare REAL offers.
+2. **Spouse alignment** — Misalignment here destroys more value than sector choice.
+3. **Runway extension** — If <12 months, government wins by default unless private offer in hand.
+**Blind Spots**:
+1. You haven't specified EXACT roles you're eligible for — you're deciding on stereotypes.
+2. Skill decay in government is real; so is burnout in private. Both are manageable with intent.
+3. "Stability" in government means "hard to fire" not "easy to thrive."
+**Uncomfortable Question**: If you knew you'd be forcibly exited from BOTH paths in 3 years (layoff / forced transfer), which 3 years would you rather have lived?
+**Recommendation**: 
+- IF runway ≥ 12 months AND top value ∈ {learning, autonomy, compensation} AND spouse ≠ strongly_govt → Private (target high-growth role)
+- IF runway < 6 months OR top value = security OR dependents > 0 OR spouse = strongly_govt → Government (target specific service/role)
+- ELSE → Run the 90-day test. Get offers. Decide with data.`;
     }
 
     // ===== RENDER RESULT =====
     function renderResult(nimOutput) {
       document.getElementById('resultDate').textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-      document.getElementById('resultMode').textContent = mode === 'live' ? 'Live Mode (NIM)' : 'Demo Mode';
+      document.getElementById('resultMode').textContent = mode === 'live' ? 'Live Mode (Nemotron-3-Ultra)' : 'Demo Mode';
 
-      // Convert markdown-like output to HTML
       let html = nimOutput
         .replace(/^## (.+)$/gm, '<h2>$1</h2>')
         .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-        .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
-        .replace(/^- (.+)$/gm, '<li>$1</li>')
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.+?)\*/g, '<em>$1</em>')
         .replace(/`(.+?)`/g, '<code>$1</code>')
         .replace(/\n\n/g, '</p><p>')
         .replace(/\n/g, '<br>');
 
-      // Wrap lists
       html = html.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
-      // Fix nested
       html = html.replace(/<\/ul>\s*<ul>/g, '');
+
+      // Six Men grid styling
+      html = html.replace(/<h3>WHAT/g, '<h3>WHAT');
+      html = html.replace(/<h3>WHY/g, '<h3>WHY');
+      html = html.replace(/<h3>WHEN/g, '<h3>WHEN');
+      html = html.replace(/<h3>HOW/g, '<h3>HOW');
+      html = html.replace(/<h3>WHERE/g, '<h3>WHERE');
+      html = html.replace(/<h3>WHO/g, '<h3>WHO');
 
       document.getElementById('resultContent').innerHTML = `<p>${html}</p>`;
 
-      // Add download/print actions
       const actionRow = document.createElement('div');
       actionRow.className = 'action-row';
       actionRow.innerHTML = `
@@ -748,10 +1014,10 @@ Your top value (${topValue}) points to ${lean}. But the decision isn't binary �
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `decision-govt-vs-private-${new Date().toISOString().slice(0,10)}.md`;
+      a.download = `clarity-map-govt-vs-private-${new Date().toISOString().slice(0,10)}.md`;
       a.click();
       URL.revokeObjectURL(url);
-      showToast('Decision tree downloaded');
+      showToast('Clarity map downloaded');
     }
 
     function generateFullMarkdown() {
@@ -759,49 +1025,28 @@ Your top value (${topValue}) points to ${lean}. But the decision isn't binary �
       const reflection = document.getElementById('reflectionInput').value;
       const timestamp = new Date().toISOString();
 
-      return `# Decision: Govt vs Private Job
+      let answersMd = '';
+      QUESTIONS.forEach(q => {
+        const val = answers[q.id];
+        if (val) {
+          answersMd += `- **${q.man.toUpperCase()} · ${q.id}**: ${typeof val === 'string' ? val : JSON.stringify(val)}\n`;
+        }
+      });
+
+      return `# Six Honest Men Clarity Map: Govt vs Private Job
 *Generated: ${timestamp}*
 *Mode: ${mode === 'live' ? 'Live (NIM)' : 'Demo'}*
-*Interview: Goal Clarity Engine v0.1*
+*Framework: Rudyard Kipling's Six Honest Men — iterative to root clarity*
 
 ---
 
-## YOUR ANSWERS
+## YOUR ANSWERS (Structured by Six Men)
 
-### Context
-- **Current role**: ${answers.current_role}
-- **Age**: ${answers.age}
-- **Location**: ${answers.location}
-- **Financial runway**: ${answers.savings_months} months
-- **Dependents**: ${answers.dependents}
-- **Debt burden**: ${answers.debt_monthly}% of income
-- **Notice period**: ${answers.notice_period} months
-
-### Values (Ranked)
-${parseRanking(answers.values_rank).map((v, i) => `${i+1}. ${v}`).join('\n')}
-> **Why #1**: ${answers.values_explain}
-
-### Scenarios
-**Govt — 5yr Tuesday**: ${answers.govt_day_5yr}
-**Private — 5yr Tuesday**: ${answers.private_day_5yr}
-**Govt — Worst case**: ${answers.govt_worst_5yr}
-**Private — Worst case**: ${answers.private_worst_5yr}
-
-### Regret Minimization
-**If govt, regret**: ${answers.regret_govt}
-**If private, regret**: ${answers.regret_private}
-**Stings more**: ${answers.regret_compare}
-
-### Constraints
-**Hard limits**: ${answers.hard_constraints}
-**Spouse preference**: ${answers.spouse_opinion}
-
-### Your Synthesis
-${answers.user_synthesis}
+${answersMd}
 
 ---
 
-## DECISION TREE OUTPUT
+## CLARITY MAP OUTPUT
 
 ${nimOutput}
 
@@ -812,7 +1057,7 @@ ${nimOutput}
 ${reflection || '*No reflection captured yet. Fill in above and re-download.*'}
 
 ---
-*Save this file. Re-read in 30 days. The tree ages; you grow.`;
+*Save this file. Re-read in 30 days. The map ages; you grow. The Six Men stay honest.*`;
     }
 
     function printArtifact() {
@@ -823,6 +1068,7 @@ ${reflection || '*No reflection captured yet. Fill in above and re-download.*'}
       if (confirm('Start over? All answers will be lost.')) {
         answers = {};
         currentStageIndex = 0;
+        currentManIndex = 0;
         currentQuestionIndex = 0;
         document.getElementById('interviewCard').style.display = 'block';
         document.getElementById('resultSection').classList.remove('visible');
