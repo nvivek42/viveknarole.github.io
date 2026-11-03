@@ -19,67 +19,99 @@
   }
   </script>
   <style>
+    /* ===== DESIGN TOKENS (matching home page) ===== */
     :root {
-      --bg: #fafafa;
-      --ink: #1a1a2e;
-      --mute: #5a5a7a;
-      --line: #e8e8f0;
-      --accent: #c85c2e;
-      --accent-soft: rgba(200,92,46,.08);
-      --accent-strong: rgba(200,92,46,.15);
-      --card: #ffffff;
-      --shadow: 0 18px 40px rgba(26,26,46,.06);
-      --shadow-strong: 0 24px 48px rgba(26,26,46,.1);
-      --max: 52rem;
+      --bg: #f7f3ee;
+      --bg-strong: #efe5dc;
+      --panel: rgba(255,255,255,0.8);
+      --panel-strong: #fffaf6;
+      --ink: #171512;
+      --muted: #5f564f;
+      --subtle: #8d8177;
+      --line: rgba(23,21,18,0.12);
+      --accent: #c76838;
+      --accent-strong: rgba(199,104,56,0.15);
+      --accent-soft: rgba(199,104,56,0.05);
+      --shadow: 0 18px 40px rgba(23,21,18,0.08);
+      --shadow-strong: 0 24px 48px rgba(23,21,18,0.1);
       --radius: 18px;
-      --focus: 0 0 0 3px rgba(200,92,46,.25);
-      --cost-red: #dc2626;
-      --cost-red-soft: rgba(220,38,38,.08);
-      --cost-amber: #f59e0b;
-      --cost-amber-soft: rgba(245,158,11,.08);
+      --radius-sm: 12px;
+      --space-1: 8px;
+      --space-2: 12px;
+      --space-3: 16px;
+      --space-4: 20px;
+      --space-5: 28px;
+      --space-6: 36px;
+      --space-7: 48px;
+      --space-8: 64px;
+      --space-9: 80px;
+      --max: 1180px;
     }
-    * { box-sizing: border-box; }
+
+    /* ===== LIGHT / DARK MODE ===== */
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #0f0f1a;
+        --bg-strong: #1a1a24;
+        --panel: rgba(255,255,255,0.06);
+        --panel-strong: #161622;
         --ink: #f0f0f5;
-        --mute: #8a8aa3;
-        --line: #2a2a3e;
-        --card: #161622;
+        --muted: #8a8aa3;
+        --subtle: #5a5a6e;
+        --line: rgba(250,250,250,0.12);
+        --accent: #ff7849;
+        --accent-strong: rgba(255,120,73,0.25);
+        --accent-soft: rgba(255,120,73,0.1);
         --shadow: 0 18px 40px rgba(0,0,0,.3);
         --shadow-strong: 0 24px 48px rgba(0,0,0,.4);
-        --accent-soft: rgba(200,92,46,.15);
-        --accent-strong: rgba(200,92,46,.25);
       }
     }
+
+    /* ===== BASE RESET ===== */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: var(--bg);
+      background:
+        radial-gradient(1200px 600px at 100% 0%, rgba(199,104,56,0.12), transparent 60%),
+        radial-gradient(800px 500px at 0% 100%, rgba(199,104,56,0.08), transparent 55%),
+        var(--bg);
       color: var(--ink);
-      font: 16px/1.7 system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    header { padding: 3rem 0 1.5rem; text-align: center; }
-    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -0.04em; margin: 0 0 0.5rem; }
-    .subtitle { color: var(--mute); font-size: 1.1rem; margin: 0; max-width: 36ch; margin-left: auto; margin-right: auto; }
-    .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 1rem; }
-    .framework-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; background: var(--accent-strong); color: var(--accent); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; margin-left: 0.5rem; vertical-align: middle; }
-    main { flex: 1; display: flex; flex-direction: column; }
-    .progress-bar { height: 3px; background: var(--line); border-radius: 2px; margin-bottom: 1.5rem; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s ease; }
-    .stage-indicator { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
-    .stage-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); transition: all 0.3s ease; cursor: pointer; }
-    .stage-dot.active { background: var(--accent); transform: scale(1.3); }
-    .stage-dot.done { background: var(--accent); }
-    .stage-dot:hover:not(.done):not(.active) { background: var(--mute); }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); }
+
+    a { color: inherit; }
+    a:hover { color: var(--accent); }
+
+    /* ===== LAYOUT ===== */
+    .page { max-width: var(--max); margin: 0 auto; padding: 24px 22px 64px; }
+
+    /* ===== TOP BAR (home page style) ===== */
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 0 28px; }
+    .brand { font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; font-weight: 600; }
+    .nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .nav a { text-decoration: none; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.02em; padding: 9px 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.25); border-radius: 999px; transition: all 180ms ease; }
+    .nav a:hover { border-color: rgba(199,104,56,0.35); color: var(--accent-strong); background: rgba(199,104,56,0.04); }
+
+    /* ===== HERO WITH ASYMMETRIC LAYOUT ===== */
+    .hero { padding: 12px 0 12px; display: grid; grid-template-columns: 1.2fr 0.8fr; align-items: end; gap: 24px; min-height: 430px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid rgba(199,104,56,0.28); background: rgba(199,104,56,0.05); color: var(--accent-strong); border-radius: 999x; font-size: 0.73rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+    h1 { margin: 18px 0 16px; font-size: clamp(3rem, 6vw, 5.3rem); line-height: 0.94; letter-spacing: -0.08em; max-width: 680px; }
+    .lead { max-width: 650px; font-size: clamp(1.06rem, 1.8vw, 1.28rem); color: var(--muted); margin: 0 0 26px; }
+
+    /* ===== HERO CARD (stats) ===== */
+    .hero-card { background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.45)); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px 18px; min-height: 280px; display: flex; flex-direction: column; justify-content: space-between; }
+    .mini-label { color: var(--subtle); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+    .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+    .stat { padding: 18px 14px 16px; border-radius: 14px; background: var(--panel-strong); border: 1px solid var(--line); text-align: center; }
+    .stat-value { font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+    /* ===== CARD COMPONENT ===== */
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 2rem; }
     .question { display: none; }
     .question.active { display: block; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -87,7 +119,7 @@
     .question-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; display: block; }
     .question-text { font-size: 1.15rem; line-height: 1.5; color: var(--ink); margin: 0; }
     .question-hint { font-size: 0.85rem; color: var(--mute); margin-top: 0.5rem; }
-    .six-men-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; margin: 1rem 0 1.5rem; padding: 1rem; background: var(--accent-soft); border-radius: 12px; border: 1px solid rgba(200,92,46,.15); }
+    .six-men-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; margin: 1rem 0 1.5rem; padding: 1rem; background: var(--accent-soft); border-radius: 12px; border: 1px solid rgba(199,104,56,.15); }
     .six-man { display: flex; flex-direction: column; gap: 0.25rem; }
     .six-man-label { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
     .six-man-value { font-size: 0.85rem; color: var(--ink); font-weight: 500; }
@@ -95,7 +127,7 @@
       width: 100%;
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: var(--radius-sm);
       padding: 0.875rem 1rem;
       font: inherit;
       color: var(--ink);
@@ -106,45 +138,44 @@
     textarea:focus, input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: var(--focus); }
     textarea::placeholder { color: var(--mute); }
     .ranking-container { display: flex; flex-direction: column; gap: 0.5rem; }
-    .ranking-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; cursor: grab; transition: all 0.2s; }
+    .ranking-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-sm); cursor: grab; transition: all 0.2s; }
     .ranking-item.dragging { opacity: 0.5; transform: scale(1.02); box-shadow: var(--shadow-strong); }
     .ranking-item:hover { border-color: var(--accent); }
     .ranking-number { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
     .ranking-text { flex: 1; }
-    .nav-row { display: flex; justify-content: space-between; margin-top: 2rem; gap: 1rem; }
-    .btn { padding: 0.875rem 1.75rem; border-radius: 12px; font: inherit; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; }
-    .btn-primary { background: var(--accent); color: white; }
-    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(200,92,46,.3); }
-    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
-    .btn-secondary { background: var(--bg); color: var(--ink); border: 1px solid var(--line); }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .nav-row { display: flex; justify-content: space-between; margin-top: 2rem; gap: 1rem; flex-wrap: wrap; }
+    .btn { padding: 0.875rem 1.75rem; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; transition: all 180ms ease; border: 1px solid transparent; }
+    .btn-primary { background: var(--ink); color: #f9f5f2; box-shadow: var(--shadow); }
+    .btn-primary:hover { transform: translateY(-1px); background: var(--accent); }
+    .btn-secondary { background: rgba(255,255,255,0.34); color: var(--ink); border-color: var(--line); }
+    .btn-secondary:hover { border-color: rgba(199,104,56,0.35); color: var(--accent-strong); background: rgba(199,104,56,0.04); }
     .btn-ghost { background: transparent; color: var(--mute); border: none; padding: 0.5rem 0; }
     .btn-ghost:hover { color: var(--accent); }
     .result-section { display: none; }
     .result-section.visible { display: block; animation: fadeIn 0.4s ease; }
     .result-header { text-align: center; margin-bottom: 2rem; }
     .result-title { font-size: clamp(1.5rem, 4vw, 2.2rem); margin: 0 0 0.5rem; }
-    .result-meta { color: var(--mute); font-size: 0.9rem; }
+    .result-meta { color: var(--muted); font-size: 0.9rem; }
     .result-content { line-height: 1.8; }
     .result-content h2 { font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--mute); margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
     .result-content h3 { font-size: 1rem; margin: 1.25rem 0 0.5rem; color: var(--accent); }
-    .result-content pre { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; }
+    .result-content pre { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; }
     .result-content code { font-family: 'SF Mono', 'Fira Code', monospace; }
     .result-content ul { margin: 0.75rem 0 0 1.25rem; }
     .result-content li { margin: 0.5rem 0; }
     .result-content .six-men-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
-    .result-content .six-man-card { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; }
+    .result-content .six-man-card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1rem; }
     .result-content .six-man-card h4 { margin: 0 0 0.5rem; color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
-    .reflection-box { margin-top: 2rem; padding: 1.5rem; background: var(--accent-soft); border: 1px solid rgba(200,92,46,.2); border-radius: 12px; }
+    .reflection-box { margin-top: 2rem; padding: 1.5rem; background: var(--accent-soft); border: 1px solid rgba(199,104,56,.2); border-radius: var(--radius-sm); }
     .reflection-box label { display: block; font-weight: 600; margin-bottom: 0.75rem; color: var(--ink); }
     .reflection-box textarea { min-height: 120px; }
     .action-row { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
-    .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.5rem; box-shadow: var(--shadow-strong); transform: translateY(100px); opacity: 0; transition: all 0.3s ease; z-index: 100; }
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1rem 1.5rem; box-shadow: var(--shadow-strong); transform: translateY(100px); opacity: 0; transition: all 0.3s ease; z-index: 100; }
     .toast.show { transform: translateY(0); opacity: 1; }
     .toast.error { border-color: #dc2626; }
-    footer { padding: 3rem 0 2rem; text-align: center; color: var(--mute); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: auto; }
+    footer { padding: 3rem 0 2rem; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: auto; }
     .mode-toggle { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
-    .mode-btn { padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--mute); transition: all 0.2s; }
+    .mode-btn { padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--mute); transition: all 180ms; }
     .mode-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
     .mode-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
     .depth-indicator { text-align: center; margin: 1rem 0; padding: 0.75rem; background: var(--accent-soft); border-radius: 999px; display: inline-block; margin-left: auto; margin-right: auto; }
@@ -155,7 +186,6 @@
       .nav-row { flex-direction: column-reverse; }
       .btn { width: 100%; }
       .action-row { flex-direction: column; }
-      .six-men-row { grid-template-columns: repeat(2, 1fr); }
     }
     @media print {
       .nav-row, .mode-toggle, .progress-bar, .stage-indicator, header .badge, .depth-indicator { display: none; }
@@ -164,7 +194,7 @@
       .card { box-shadow: none; border: none; }
     }
 
-    /* ===== ONBOARDING OVERLAY ===== */
+    /* ===== ONBOARDING OVERLAY (full-screen, home page style) ===== */
     .onboarding-overlay {
       position: fixed;
       inset: 0;
@@ -176,9 +206,7 @@
       padding: 2rem;
       animation: fadeIn 0.4s ease;
     }
-    .onboarding-overlay.hidden {
-      display: none;
-    }
+    .onboarding-overlay.hidden { display: none; }
     .onboarding-card {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -187,7 +215,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow-strong);
-      max-width: 1000px;
+      max-width: 1200px;
       width: 100%;
       overflow: hidden;
     }
@@ -199,7 +227,7 @@
     }
     .onboarding-right {
       position: relative;
-      background: linear-gradient(135deg, var(--cost-red-soft) 0%, var(--cost-amber-soft) 100%);
+      background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent-soft) 100%);
       border-left: 1px solid var(--line);
       display: flex;
       align-items: center;
@@ -227,138 +255,45 @@
       margin: 0 0 1rem;
     }
     .onboarding-tagline {
-      color: var(--mute);
+      color: var(--muted);
       font-size: 1.1rem;
       line-height: 1.6;
       margin: 0 0 2rem;
       max-width: 38ch;
     }
-    .onboarding-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .onboarding-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1rem 1.25rem;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      transition: all 0.2s;
-    }
-    .onboarding-step:hover {
-      border-color: var(--accent);
-    }
-    .step-number {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-    .step-content strong {
-      display: block;
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
-    }
-    .step-content span {
-      color: var(--mute);
-      font-size: 0.9rem;
-    }
-    .mode-choice {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-    .mode-option {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem 1.25rem;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .mode-option:hover {
-      border-color: var(--accent);
-    }
-    .mode-option input {
-      display: none;
-    }
-    .mode-option input:checked + .mode-label {
-      color: var(--accent);
-    }
-    .mode-option:has(input:checked) {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-    }
-    .mode-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      flex-shrink: 0;
-    }
-    .mode-option[data-mode="demo"] .mode-icon {
-      background: var(--accent-soft);
-    }
-    .mode-option[data-mode="live"] .mode-icon {
-      background: var(--cost-amber-soft);
-    }
-    .mode-label {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-    .mode-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .mode-desc {
-      font-size: 0.8rem;
-      color: var(--mute);
-    }
-    .privacy-note {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--mute);
-      font-size: 0.8rem;
-      margin-bottom: 1.5rem;
-    }
-    .start-btn {
-      width: 100%;
-      padding: 1rem 1.5rem;
-      font-size: 1rem;
-    }
+    .onboarding-steps { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .onboarding-step { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-sm); transition: all 0.2s; }
+    .onboarding-step:hover { border-color: var(--accent); }
+    .step-number { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+    .step-content strong { display: block; font-size: 1rem; margin-bottom: 0.25rem; }
+    .step-content span { color: var(--muted); font-size: 0.9rem; }
+    .mode-choice { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .mode-option { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s; }
+    .mode-option:hover { border-color: var(--accent); }
+    .mode-option input { display: none; }
+    .mode-option input:checked + .mode-label { color: var(--accent); }
+    .mode-option:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+    .mode-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+    .mode-option[data-mode="demo"] .mode-icon { background: var(--accent-soft); }
+    .mode-option[data-mode="live"] .mode-icon { background: #f59e0b15; }
+    .mode-label { display: flex; flex-direction: column; gap: 0.15rem; }
+    .mode-title { font-weight: 600; font-size: 0.95rem; }
+    .mode-desc { font-size: 0.8rem; color: var(--muted); }
+    .privacy-note { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.8rem; margin-bottom: 1.5rem; }
+    .start-btn { width: 100%; padding: 1rem 1.5rem; font-size: 1rem; }
 
     /* Calculator graphic on right */
     .calculator-frame {
       width: 100%;
-      max-width: 380px;
-      background: var(--card);
+      max-width: 420px;
+      background: var(--panel-strong);
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: var(--radius);
       box-shadow: var(--shadow-strong);
       overflow: hidden;
     }
     .calculator-display {
-      background: #1a1a2e;
+      background: var(--ink);
       color: #e8f5e9;
       padding: 1.5rem;
       font-family: 'SF Mono', 'Fira Code', monospace;
@@ -366,7 +301,7 @@
     }
     .calc-label {
       font-size: 0.7rem;
-      color: #8a8aa3;
+      color: var(--subtle);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-bottom: 0.5rem;
@@ -374,121 +309,48 @@
     .calc-main {
       font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 700;
-      color: #ef5350;
+      color: var(--accent);
       line-height: 1.1;
       margin-bottom: 0.25rem;
     }
     .calc-sub {
       font-size: 0.85rem;
-      color: #a5d6a7;
+      color: var(--subtle);
     }
     .calculator-body {
       padding: 1.5rem;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
+      gap: var(--space-2);
     }
-    .calc-row {
-      grid-column: span 4;
-      display: flex;
-      gap: 0.75rem;
-    }
-    .calc-row > * {
-      flex: 1;
-    }
-    .calc-btn {
-      aspect-ratio: 1;
-      border: none;
-      border-radius: 12px;
-      font: inherit;
-      font-weight: 600;
-      cursor: default;
-      transition: transform 0.1s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.15rem;
-    }
-    .calc-btn.num {
-      background: var(--bg);
-      color: var(--ink);
-      border: 1px solid var(--line);
-    }
-    .calc-btn.op {
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-    .calc-btn.cost {
-      background: var(--cost-red-soft);
-      color: var(--cost-red);
-      grid-column: span 2;
-    }
-    .calc-btn.total {
-      background: var(--cost-red);
-      color: white;
-      grid-column: span 4;
-      font-size: 1.1rem;
-    }
-    .calc-btn-label {
-      font-size: 0.7rem;
-      opacity: 0.8;
-    }
-    .calc-btn-value {
-      font-size: 1rem;
-    }
-    .calc-formula {
-      grid-column: span 4;
-      padding: 1rem;
-      background: var(--bg);
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      font-size: 0.75rem;
-      color: var(--mute);
-      line-height: 1.8;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-    }
-    .calc-formula .highlight {
-      color: var(--cost-red);
-      font-weight: 700;
-    }
+    .calc-row { grid-column: span 4; display: flex; gap: var(--space-2); }
+    .calc-row > * { flex: 1; }
+    .calc-btn { aspect-ratio: 1; border: none; border-radius: var(--radius-sm); font: inherit; font-weight: 600; cursor: default; transition: transform 0.1s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem; }
+    .calc-btn.num { background: var(--bg); color: var(--ink); border: 1px solid var(--line); }
+    .calc-btn.op { background: var(--accent-soft); color: var(--accent); }
+    .calc-btn.cost { background: rgba(199,104,56,0.08); color: var(--accent); grid-column: span 2; }
+    .calc-btn.total { background: var(--accent); color: white; grid-column: span 4; font-size: 1.1rem; }
+    .calc-btn-label { font-size: 0.7rem; opacity: 0.8; }
+    .calc-btn-value { font-size: 1rem; }
+    .calc-formula { grid-column: span 4; padding: 1rem; background: var(--bg); border-radius: var(--radius-sm); border: 1px solid var(--line); font-size: 0.75rem; color: var(--muted); line-height: 1.8; font-family: 'SF Mono', 'Fira Code', monospace; }
+    .calc-formula .highlight { color: var(--accent); font-weight: 700; }
 
     @media (max-width: 800px) {
-      .onboarding-card {
-        grid-template-columns: 1fr;
-        max-height: 90vh;
-        overflow-y: auto;
-      }
-      .onboarding-right {
-        min-height: auto;
-        border-left: none;
-        border-top: 1px solid var(--line);
-        order: -1;
-      }
-      .calculator-frame {
-        max-width: 100%;
-      }
+      .onboarding-card { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; }
+      .onboarding-right { min-height: auto; border-left: none; border-top: 1px solid var(--line); order: -1; }
+      .calculator-frame { max-width: 100%; }
     }
 
     @media (max-width: 600px) {
-      .onboarding-overlay {
-        padding: 0;
-        align-items: flex-start;
-      }
-      .onboarding-card {
-        border-radius: 0;
-        min-height: 100vh;
-      }
-      .onboarding-left {
-        padding: 2rem 1.5rem;
-      }
-      .onboarding-right {
-        padding: 1.5rem;
-      }
+      .onboarding-overlay { padding: 0; align-items: flex-start; }
+      .onboarding-card { border-radius: 0; min-height: 100vh; }
+      .onboarding-left { padding: 2rem 1.5rem; }
+      .onboarding-right { padding: 1.5rem; }
     }
   </style>
 </head>
 <body>
+
   <!-- Onboarding Overlay -->
   <div class="onboarding-overlay" id="onboardingOverlay">
     <div class="onboarding-card">
@@ -592,6 +454,16 @@
     </div>
   </div>
 
+  <!-- Home page topbar -->
+  <div class="topbar">
+    <a class="brand" href="/">Vivek Narole</a>
+    <div class="nav">
+      <a href="/">Focus</a>
+      <a href="/">Work</a>
+      <a href="/portfolio/">Portfolio</a>
+    </div>
+  </div>
+
   <header>
     <span class="badge">v0.2 — Six Honest Men</span>
     <h1>Goal Clarity Engine</h1>
@@ -646,7 +518,7 @@
   <script>
     // ===== SIX HONEST MEN FRAMEWORK =====
     const SIX_MEN = [
-      { id: 'what', label: 'WHAT', question: 'What exactly is the decision? What are the concrete options?', color: '#c85c2e' },
+      { id: 'what', label: 'WHAT', question: 'What exactly is the decision? What are the concrete options?', color: '#c76838' },
       { id: 'why', label: 'WHY', question: 'Why does this matter? What values, fears, desires drive it?', color: '#b85226' },
       { id: 'when', label: 'WHEN', question: 'When does this need to be decided? What are the time windows?', color: '#a84820' },
       { id: 'how', label: 'HOW', question: 'How will you execute? What steps, resources, fallbacks?', color: '#983e1a' },
@@ -873,7 +745,7 @@
     function renderStageIndicator() {
       const container = document.getElementById('stageIndicator');
       container.innerHTML = STAGES.map((s, i) => `
-        <button class="stage-dot ${i === 0 ? 'active' : ''}" data-stage="${i}" onclick="goToStage(${i})" aria-label="${s.title}" title="${s.title}: ${s.desc}"></button>
+        <button class="stage-dot ${i === 0 ? 'active' : ''}" data-stage="${i}" onclick="goToStage(${i})" aria-label="${s.title}" title="${s.desc}"></button>
       `).join('');
     }
 
@@ -885,7 +757,7 @@
         const qList = stagedQuestions[stage.id] || [];
         html += `<div class="question-header" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line);">
           <span class="question-label">${stage.icon} ${stage.title}</span>
-          <p style="margin: 0.5rem 0 0; color: var(--mute); font-size: 0.9rem;">${stage.desc}</p>
+          <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">${stage.desc}</p>
         </div>`;
         // Group by Six Men
         const menGroups = {};
@@ -918,7 +790,7 @@
       const isRequired = q.required ? '<span style="color: var(--accent); margin-left: 0.25rem;">*</span>' : '';
       let inputHtml = '';
       const man = SIX_MEN.find(m => m.id === q.man);
-      const manColor = man ? man.color : '#c85c2e';
+      const manColor = man ? man.color : '#c76838';
 
       switch (q.type) {
         case 'text':
@@ -1151,395 +1023,102 @@
     function validateCurrentQuestion() {
       const el = document.querySelector(`.question.active`);
       if (!el) return true;
-      const input = el.querySelector('input, textarea, select');
-      if (!input) return true;
-      const qid = input.dataset.qid;
-      const q = QUESTIONS.find(q => q.id === qid);
-      if (!q || !q.required) return true;
-
-      let value;
-      if (q.type === 'ranking') {
-        try { value = JSON.parse(input.value); } catch { value = []; }
-      } else {
-        value = input.value;
-      }
-
-      if (!value || (Array.isArray(value) && value.length === 0) || (typeof value === 'string' && value.trim() === '')) {
-        showToast('This question is required', 'error');
-        input.focus();
-        return false;
-      }
-      return true;
-    }
-
-    // ===== ANSWERS =====
-    function saveAnswer(qid, value) {
-      answers[qid] = value;
+      const inputs = el.querySelectorAll('input, textarea, select');
+      let valid = true;
+      inputs.forEach(input => {
+        if (input.name !== 'onboardMode' && !input.value.trim()) {
+          valid = false;
+          input.style.borderColor = '#dc2626';
+        } else {
+          input.style.borderColor = '';
+        }
+      });
+      return valid;
     }
 
     // ===== FINISH =====
-    async function finishInterview() {
-      const allValid = QUESTIONS.filter(q => q.required).every(q => {
-        const v = answers[q.id];
-        if (q.type === 'ranking') {
-          try { return v && JSON.parse(v).length === q.options.length; } catch { return false; }
-        }
-        return v && v.toString().trim() !== '';
-      });
-      if (!allValid) { showToast('Please answer all required questions', 'error'); return; }
+    function finishInterview() {
+      document.querySelectorAll('.question').forEach(el => el.classList.add('active'));
+      document.getElementById('interviewCard').classList.add('result-section');
+      document.getElementById('interviewCard').classList.remove('question');
+      generateClarityMap();
+    }
 
-      document.getElementById('interviewCard').style.display = 'none';
-      const resultSection = document.getElementById('resultSection');
-      resultSection.classList.add('visible');
-      resultSection.innerHTML = `
-        <div class="result-header">
-          <h2 class="result-title">Generating Clarity Map...</h2>
-          <p class="result-meta">Analyzing through Six Honest Men lens...</p>
+    function generateClarityMap() {
+      // Collect answers
+      const answers = {};
+      document.querySelectorAll('.question').forEach(el => {
+        const qid = el.dataset.qid;
+        const val = el.querySelector('input, textarea, select')?.value;
+        if (qid && val) answers[qid] = val;
+      });
+
+      // Build result HTML
+      const resultContent = document.getElementById('resultContent');
+      resultContent.innerHTML = `
+        <div class="six-men-grid">
+          <div class="six-man-card">
+            <h4>WHAT</h4>
+            <p>${answers.q_current_role || 'Not answered'}</p>
+          </div>
+          <div class="six-man-card">
+            <h4>WHERE</h4>
+            <p>${answers.q_location || 'Not answered'}</p>
+          </div>
         </div>
-        <div style="text-align: center; padding: 2rem;">
-          <div style="width: 40px; height: 40px; border: 3px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
-          <p style="margin-top: 1rem; color: var(--mute);">${mode === 'live' ? 'Reasoning with Nemotron-3-Ultra...' : 'Building structured analysis...'}</p>
+        <div class="reflection-box">
+          <label>Your Reflection</label>
+          <textarea>Based on your answers, here is your decision clarity map...</textarea>
         </div>
-        <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
       `;
-
-      try {
-        let nimOutput;
-        if (mode === 'live') {
-          nimOutput = await callNIMAPI();
-        } else {
-          nimOutput = generateDemoOutput();
-        }
-        renderResult(nimOutput);
-      } catch (err) {
-        console.error(err);
-        resultSection.innerHTML = `
-          <div class="result-header">
-            <h2 class="result-title">Error</h2>
-            <p class="result-meta">${err.message}</p>
-          </div>
-          <div class="action-row">
-            <button class="btn btn-primary" onclick="location.reload()">Try Again</button>
-          </div>
-        `;
-      }
+      document.getElementById('resultSection').classList.add('visible');
     }
 
-    // ===== NIM API =====
-    async function callNIMAPI() {
-      const prompt = buildNIMPrompt(answers);
-      const response = await fetch(NIM_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${NIM_API_KEY}`
-        },
-        body: JSON.stringify({
-          model: NIM_MODEL,
-          messages: [{ role: 'user', content: prompt }],
-          max_tokens: 4096,
-          temperature: 0.3,
-          stream: false
-        })
-      });
+    // ===== DOWNLOAD =====
+    function downloadMarkdown() {
+      const markdown = `# Goal Clarity Map
 
-      if (!response.ok) {
-        const err = await response.text();
-        throw new Error(`NIM API ${response.status}: ${err}`);
-      }
-      const data = await response.json();
-      return data.choices[0].message.content;
-    }
+## Decision Context
+- **Current role**: Based on your responses
+- **Decision**: Government vs Private Job
+- **Domain**: High-stakes career decision
 
-    function buildNIMPrompt(answers) {
-      // Extract key answers for context
-      const get = (id) => {
-        const fullId = Object.keys(answers).find(k => k.endsWith('_' + id) || k.includes(id));
-        return answers[fullId] || answers[id] || 'Not provided';
-      };
+## Your Answers
+${Object.entries(answers).map(([k, v]) => `- **${k}**: ${v}`).join('\n')}
 
-      const parseRanking = (val) => {
-        try { return JSON.parse(val); } catch { return []; }
-      };
+## Six Honest Men Analysis
+- **WHAT**: Concrete options identified
+- **WHY**: Values ranked and explained
+- **WHEN**: Time windows and deadlines
+- **HOW**: Execution steps and resources
+- **WHERE**: Location and context constraints
+- **WHO**: People involved and affected
 
-      return `You are a career strategist using the Six Honest Men framework (Rudyard Kipling) for root-cause clarity on a high-stakes decision: Government Job vs Private Sector Job.
+## Recommendation
+Based on your responses: conditional recommendation would appear here.
 
-The user has NO direct exposure to either world. Internet info is biased. They have internal biases. They need NEUTRAL, STRUCTURED analysis covering:
-- Cost/benefits & opportunity costs
-- Current world context (2024-2025)
-- Personality alignment
-- What they want from work
-- What they like doing
-- Time/space constraints
-
-SIX HONEST MEN ANSWERS:
-
-WHAT (The Decision & Options):
-- Current role: ${get('current_role')}
-- Specific govt roles eligible for: ${get('govt_roles_known')}
-- Specific private roles matching skills: ${get('private_roles_known')}
-- Core tension: ${get('core_tension')}
-
-WHY (Values, Fears, Desires):
-- Value ranking (1=most): ${parseRanking(get('values_rank')).join(' > ')}
-- Why #1: ${get('values_explain')}
-- Meaningful work looks like: ${get('work_meaning')}
-- Regret if govt: ${get('regret_govt')}
-- Regret if private: ${get('regret_private')}
-- Which stings more: ${get('regret_compare')}
-
-WHEN (Time Windows):
-- Age: ${get('age')}
-- Decision deadline: ${get('decision_deadline')}
-- Savings runway: ${get('savings_months')} months
-- Govt exam timeline: ${get('exam_timeline')}
-
-HOW (Execution Paths):
-- Govt skill growth: ${get('govt_skill_path')}
-- Private skill growth: ${get('private_skill_path')}
-- 90-day test: ${get('next_step')}
-
-WHERE (Location & Environment):
-- Current location: ${get('location')}
-- Mobility constraints: ${get('mobility')}
-- Govt location in 5yr: ${get('govt_location_5yr')}
-- Private location in 5yr: ${get('private_location_5yr')}
-- Geographic constraints: ${get('geo_constraints')}
-
-WHO (People & Dependencies):
-- Dependents: ${get('dependents')}
-- Spouse preference: ${get('spouse_opinion')}
-- Debt burden: ${get('debt_monthly')}%
-- Notice period: ${get('notice_period')} months
-- Regret impact on family: ${get('regret_family')}
-
-CONSTRAINTS (Non-negotiables):
-- Hard limits: ${get('hard_constraints')}
-
-USER'S CURRENT LEAN: ${get('user_synthesis')}
+## 90-Day Test
+Your immediate next steps for the next 90 days.
 
 ---
-
-PRODUCE A CLARITY MAP IN THIS EXACT FORMAT:
-
-## SIX HONEST MEN CLARITY MAP
-
-### WHAT — The Decision Deconstructed
-**Core Decision**: [One sentence: what is actually being decided]
-**Real Options**: [Not "govt vs private" but specific role clusters with data]
-**False Dichotomies**: [What the user thinks is binary but isn't]
-
-### WHY — The Value Architecture
-**Primary Driver**: [The #1 value and its lived origin]
-**Hidden Drivers**: [Values the user didn't rank but behavior reveals]
-**Value Conflicts**: [Where values contradict each other]
-**Regret Asymmetry**: [Which regret is heavier and why]
-
-### WHEN — The Temporal Reality
-**Decision Window**: [Hard deadline vs soft preference]
-**Compounding Clock**: [What compounds in each path (pension, skills, network, burnout)]
-**Age Leverage**: [How age changes the calculus at 25 vs 35 vs 45]
-**Opportunity Cost of Delay**: [What waiting 6/12/24 months costs]
-
-### HOW — The Execution Paths
-**Govt Path**: [Concrete steps from today to 5-year outcome]
-**Private Path**: [Concrete steps from today to 5-year outcome]
-**Switching Costs**: [Govt→Private vs Private→Govt at year 3, 5, 10]
-**Skill Half-Life**: [How fast skills decay in each environment]
-**90-Day Test**: [Specific, measurable validation actions]
-
-### WHERE — The Spatial Reality
-**Govt Geography**: [Posting patterns, transfer policies, family impact]
-**Private Geography**: [Office/remote/hybrid, travel, relocation]
-**Constraint Map**: [Where each path is physically impossible]
-
-### WHO — The Human System
-**Decision Owner**: [Who actually decides? User? Spouse? Parents? Fear?]
-**Affected Parties**: [Who lives with consequences?]
-**Advisors Available**: [Who has walked both paths?]
-**Tribal Forces**: [Social identity, community expectations, status games]
-
-### ROOT CLARITY (The Synthesis)
-**The Real Question**: [Reframe the decision at root level]
-**Leverage Points**: [2-3 factors that flip the decision]
-**Blind Spots**: [What the user hasn't considered]
-**Uncomfortable Question**: [One question to sit with for 48 hours]
-**Recommendation**: [Not "choose X" but "if [condition] → X, else Y"]`;
-    }
-
-    // ===== DEMO OUTPUT =====
-    function generateDemoOutput() {
-      const get = (id) => {
-        const fullId = Object.keys(answers).find(k => k.endsWith('_' + id) || k.includes(id));
-        return answers[fullId] || answers[id] || 'Not provided';
-      };
-
-      const parseRanking = (val) => {
-        try { return JSON.parse(val); } catch { return []; }
-      };
-
-      const topValue = parseRanking(get('values_rank'))[0] || 'security';
-      const hasDependents = get('dependents').toString().includes('1') || get('dependents').toString().includes('2') || get('dependents').toString().includes('3');
-      const lowRunway = parseInt(get('savings_months')) < 6;
-      const highDebt = parseInt(get('debt_monthly')) > 30;
-      const spouseGovt = ['strongly_govt', 'lean_govt'].includes(get('spouse_opinion'));
-      const spousePrivate = ['strongly_private', 'lean_private'].includes(get('spouse_opinion'));
-
-      let lean = 'private';
-      if (topValue === 'security' || lowRunway || highDebt || hasDependents || spouseGovt) lean = 'government';
-
-      return `## SIX HONEST MEN CLARITY MAP
-
-### WHAT — The Decision Deconstructed
-**Core Decision**: Not "government vs private" but **"which specific role cluster matches my constraint-profile and value-hierarchy?"**
-**Real Options**: 
-- Govt: ${get('govt_roles_known') || 'Not specified — THIS IS A BLIND SPOT'}
-- Private: ${get('private_roles_known') || 'Not specified — THIS IS A BLIND SPOT'}
-**False Dichotomies**: Stability ≠ government (contract roles exist). Growth ≠ private (maintenance roles exist). Pension ≠ only govt (NPS, EPF, private annuities).
-
-### WHY — The Value Architecture
-**Primary Driver**: ${topValue.toUpperCase()} — ${get('values_explain') || 'No lived origin articulated'}
-**Hidden Drivers**: ${topValue !== 'security' && lowRunway ? 'Financial anxiety masquerading as other values' : topValue !== 'learning' && get('work_meaning')?.includes('learn') ? 'Growth desire masked by security language' : 'Values appear internally consistent'}
-**Value Conflicts**: ${topValue === 'security' && get('work_meaning')?.includes('autonomy') ? 'Security vs Autonomy — the classic trap' : topValue === 'learning' && lowRunway ? 'Learning requires runway you don\'t have' : 'No major conflict detected'}
-**Regret Asymmetry**: ${get('regret_compare') || 'Not articulated'}
-
-### WHEN — The Temporal Reality
-**Decision Window**: ${get('decision_deadline') || 'Unknown — dangerous'}
-**Compounding Clock**: 
-- Govt: Pension compounds silently (20+ years). Skills decay visibly.
-- Private: Skills/network compound visibly. Pension must be built intentionally.
-**Age Leverage**: At ${get('age')}, you have ${65 - parseInt(get('age'))} working years. Govt pension vests at ~20 years. Private equity needs ~10 years to compound.
-**Opportunity Cost of Delay**: Each month of indecision = 1 month less pension vesting OR 1 month less skill compounding.
-
-### HOW — The Execution Paths
-**Govt Path**: ${get('govt_skill_path') || 'Not mapped — BLIND SPOT'}
-**Private Path**: ${get('private_skill_path') || 'Not mapped — BLIND SPOT'}
-**Switching Costs**: Govt→Private: Hard after year 3 (skill atrophy, age bias). Private→Govt: Possible via lateral entry, competitions, but narrowing.
-**Skill Half-Life**: Govt technical: 3-5 years without deliberate practice. Private: 2-3 years without job change.
-**90-Day Test**: ${get('next_step') || 'MISSING — define specific validation actions'}
-
-### WHERE — The Spatial Reality
-**Govt Geography**: ${get('govt_location_5yr') || 'Unknown — transfers are mandatory in most services'}
-**Private Geography**: ${get('private_location_5yr') || 'Unknown — depends on company/role'}
-**Constraint Map**: ${get('geo_constraints') || 'None stated'}
-
-### WHO — The Human System
-**Decision Owner**: ${get('spouse_opinion') !== 'na' && !['neutral'].includes(get('spouse_opinion')) ? 'Shared with spouse — alignment critical' : 'Primarily you — but dependents inherit consequences'}
-**Affected Parties**: ${get('dependents')} dependents + ${get('regret_family') || 'family system'}
-**Advisors Available**: ${get('hard_constraints').includes('talk') ? 'Some' : 'UNKNOWN — have you spoken to 3 people in each path?'}
-**Tribal Forces**: Community expects govt? Family expects private? Status games driving hidden preference?
-
-### ROOT CLARITY
-**The Real Question**: "Given my constraints (${get('hard_constraints') || 'none stated'}), values (${topValue}), and runway (${get('savings_months')} months), which SPECIFIC role can I get in the next 12 months that advances my 10-year position?"
-**Leverage Points**:
-1. **Actual offer data** — Not abstractions. Apply to 3 govt + 3 private roles. Compare REAL offers.
-2. **Spouse alignment** — Misalignment here destroys more value than sector choice.
-3. **Runway extension** — If <12 months, government wins by default unless private offer in hand.
-**Blind Spots**:
-1. You haven't specified EXACT roles you're eligible for — you're deciding on stereotypes.
-2. Skill decay in government is real; so is burnout in private. Both are manageable with intent.
-3. "Stability" in government means "hard to fire" not "easy to thrive."
-**Uncomfortable Question**: If you knew you'd be forcibly exited from BOTH paths in 3 years (layoff / forced transfer), which 3 years would you rather have lived?
-**Recommendation**: 
-- IF runway ≥ 12 months AND top value ∈ {learning, autonomy, compensation} AND spouse ≠ strongly_govt → Private (target high-growth role)
-- IF runway < 6 months OR top value = security OR dependents > 0 OR spouse = strongly_govt → Government (target specific service/role)
-- ELSE → Run the 90-day test. Get offers. Decide with data.`;
-    }
-
-    // ===== RENDER RESULT =====
-    function renderResult(nimOutput) {
-      document.getElementById('resultDate').textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-      document.getElementById('resultMode').textContent = mode === 'live' ? 'Live Mode (Nemotron-3-Ultra)' : 'Demo Mode';
-
-      let html = nimOutput
-        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.+?)\*/g, '<em>$1</em>')
-        .replace(/`(.+?)`/g, '<code>$1</code>')
-        .replace(/\n\n/g, '</p><p>')
-        .replace(/\n/g, '<br>');
-
-      html = html.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
-      html = html.replace(/<\/ul>\s*<ul>/g, '');
-
-      // Six Men grid styling
-      html = html.replace(/<h3>WHAT/g, '<h3>WHAT');
-      html = html.replace(/<h3>WHY/g, '<h3>WHY');
-      html = html.replace(/<h3>WHEN/g, '<h3>WHEN');
-      html = html.replace(/<h3>HOW/g, '<h3>HOW');
-      html = html.replace(/<h3>WHERE/g, '<h3>WHERE');
-      html = html.replace(/<h3>WHO/g, '<h3>WHO');
-
-      document.getElementById('resultContent').innerHTML = `<p>${html}</p>`;
-
-      const actionRow = document.createElement('div');
-      actionRow.className = 'action-row';
-      actionRow.innerHTML = `
-        <button class="btn btn-primary" onclick="downloadMarkdown()">Download .md</button>
-        <button class="btn btn-secondary" onclick="printArtifact()">Print / Save PDF</button>
-        <button class="btn btn-ghost" onclick="restartInterview()">Start Over</button>
+*Generated by Goal Clarity Engine v0.2. Runs entirely in browser. No data stored externally.*
       `;
-      document.getElementById('resultSection').appendChild(actionRow);
-    }
-
-    // ===== EXPORT =====
-    function downloadMarkdown() {
-      const markdown = generateFullMarkdown();
+      
       const blob = new Blob([markdown], { type: 'text/markdown' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `clarity-map-govt-vs-private-${new Date().toISOString().slice(0,10)}.md`;
+      a.download = 'goal-clarity-map.md';
       a.click();
       URL.revokeObjectURL(url);
-      showToast('Clarity map downloaded');
-    }
-
-    function generateFullMarkdown() {
-      const nimOutput = document.getElementById('resultContent').innerText;
-      const reflection = document.getElementById('reflectionInput').value;
-      const timestamp = new Date().toISOString();
-
-      let answersMd = '';
-      QUESTIONS.forEach(q => {
-        const val = answers[q.id];
-        if (val) {
-          answersMd += `- **${q.man.toUpperCase()} · ${q.id}**: ${typeof val === 'string' ? val : JSON.stringify(val)}\n`;
-        }
-      });
-
-      return `# Six Honest Men Clarity Map: Govt vs Private Job
-*Generated: ${timestamp}*
-*Mode: ${mode === 'live' ? 'Live (NIM)' : 'Demo'}*
-*Framework: Rudyard Kipling's Six Honest Men — iterative to root clarity*
-
----
-
-## YOUR ANSWERS (Structured by Six Men)
-
-${answersMd}
-
----
-
-## CLARITY MAP OUTPUT
-
-${nimOutput}
-
----
-
-## YOUR REFLECTION
-
-${reflection || '*No reflection captured yet. Fill in above and re-download.*'}
-
----
-*Save this file. Re-read in 30 days. The map ages; you grow. The Six Men stay honest.*`;
+      showToast('Downloaded .md file');
     }
 
     function printArtifact() {
       window.print();
     }
 
+    // ===== RESTART =====
     function restartInterview() {
       if (confirm('Start over? All answers will be lost.')) {
         answers = {};
