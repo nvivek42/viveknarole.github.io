@@ -33,6 +33,10 @@
       --max: 52rem;
       --radius: 18px;
       --focus: 0 0 0 3px rgba(200,92,46,.25);
+      --cost-red: #dc2626;
+      --cost-red-soft: rgba(220,38,38,.08);
+      --cost-amber: #f59e0b;
+      --cost-amber-soft: rgba(245,158,11,.08);
     }
     * { box-sizing: border-box; }
     @media (prefers-color-scheme: dark) {
@@ -159,9 +163,435 @@
       body { max-width: none; padding: 0; }
       .card { box-shadow: none; border: none; }
     }
+
+    /* ===== ONBOARDING OVERLAY ===== */
+    .onboarding-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      animation: fadeIn 0.4s ease;
+    }
+    .onboarding-overlay.hidden {
+      display: none;
+    }
+    .onboarding-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-strong);
+      max-width: 1000px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .onboarding-left {
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .onboarding-right {
+      position: relative;
+      background: linear-gradient(135deg, var(--cost-red-soft) 0%, var(--cost-amber-soft) 100%);
+      border-left: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      min-height: 500px;
+    }
+    .onboarding-badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+    .onboarding-left h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin: 0 0 1rem;
+    }
+    .onboarding-tagline {
+      color: var(--mute);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 0 0 2rem;
+      max-width: 38ch;
+    }
+    .onboarding-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .onboarding-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    .onboarding-step:hover {
+      border-color: var(--accent);
+    }
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .step-content strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    .step-content span {
+      color: var(--mute);
+      font-size: 0.9rem;
+    }
+    .mode-choice {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .mode-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mode-option:hover {
+      border-color: var(--accent);
+    }
+    .mode-option input {
+      display: none;
+    }
+    .mode-option input:checked + .mode-label {
+      color: var(--accent);
+    }
+    .mode-option:has(input:checked) {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    .mode-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .mode-option[data-mode="demo"] .mode-icon {
+      background: var(--accent-soft);
+    }
+    .mode-option[data-mode="live"] .mode-icon {
+      background: var(--cost-amber-soft);
+    }
+    .mode-label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .mode-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .mode-desc {
+      font-size: 0.8rem;
+      color: var(--mute);
+    }
+    .privacy-note {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--mute);
+      font-size: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+    .start-btn {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+    }
+
+    /* Calculator graphic on right */
+    .calculator-frame {
+      width: 100%;
+      max-width: 380px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow-strong);
+      overflow: hidden;
+    }
+    .calculator-display {
+      background: #1a1a2e;
+      color: #e8f5e9;
+      padding: 1.5rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      text-align: right;
+    }
+    .calc-label {
+      font-size: 0.7rem;
+      color: #8a8aa3;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .calc-main {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: #ef5350;
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    .calc-sub {
+      font-size: 0.85rem;
+      color: #a5d6a7;
+    }
+    .calculator-body {
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+    .calc-row {
+      grid-column: span 4;
+      display: flex;
+      gap: 0.75rem;
+    }
+    .calc-row > * {
+      flex: 1;
+    }
+    .calc-btn {
+      aspect-ratio: 1;
+      border: none;
+      border-radius: 12px;
+      font: inherit;
+      font-weight: 600;
+      cursor: default;
+      transition: transform 0.1s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.15rem;
+    }
+    .calc-btn.num {
+      background: var(--bg);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .calc-btn.op {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .calc-btn.cost {
+      background: var(--cost-red-soft);
+      color: var(--cost-red);
+      grid-column: span 2;
+    }
+    .calc-btn.total {
+      background: var(--cost-red);
+      color: white;
+      grid-column: span 4;
+      font-size: 1.1rem;
+    }
+    .calc-btn-label {
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+    .calc-btn-value {
+      font-size: 1rem;
+    }
+    .calc-formula {
+      grid-column: span 4;
+      padding: 1rem;
+      background: var(--bg);
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-size: 0.75rem;
+      color: var(--mute);
+      line-height: 1.8;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .calc-formula .highlight {
+      color: var(--cost-red);
+      font-weight: 700;
+    }
+
+    @media (max-width: 800px) {
+      .onboarding-card {
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .onboarding-right {
+        min-height: auto;
+        border-left: none;
+        border-top: 1px solid var(--line);
+        order: -1;
+      }
+      .calculator-frame {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .onboarding-overlay {
+        padding: 0;
+        align-items: flex-start;
+      }
+      .onboarding-card {
+        border-radius: 0;
+        min-height: 100vh;
+      }
+      .onboarding-left {
+        padding: 2rem 1.5rem;
+      }
+      .onboarding-right {
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Onboarding Overlay -->
+  <div class="onboarding-overlay" id="onboardingOverlay">
+    <div class="onboarding-card">
+      <div class="onboarding-left">
+        <span class="onboarding-badge">Goal Clarity Engine v0.2</span>
+        <h2>Stop guessing. Start deciding.</h2>
+        <p class="onboarding-tagline">A structured interview for the <strong>Government vs Private Job</strong> decision. Uses the Six Honest Men framework to cut through bias, internet noise, and your own blind spots.</p>
+        
+        <div class="onboarding-steps">
+          <div class="onboarding-step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <strong>15–20 minutes</strong>
+              <span>29 questions across 6 stages — Context, Values, Scenarios, Regret, Constraints, Synthesis</span>
+            </div>
+          </div>
+          <div class="onboarding-step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <strong>Six Honest Men</strong>
+              <span>WHAT · WHY · WHEN · HOW · WHERE · WHO — applied iteratively until root clarity</span>
+            </div>
+          </div>
+          <div class="onboarding-step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <strong>Decision Clarity Map</strong>
+              <span>Leverage points, blind spots, uncomfortable question, conditional recommendation, 90-day test</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mode-choice">
+          <label class="mode-option" data-mode="demo">
+            <input type="radio" name="onboardMode" value="demo" checked onchange="selectOnboardMode('demo')">
+            <span class="mode-icon">⚡</span>
+            <span class="mode-label">
+              <span class="mode-title">Demo Mode</span>
+              <span class="mode-desc">Instant structured analysis, no API key needed</span>
+            </span>
+          </label>
+          <label class="mode-option" data-mode="live">
+            <input type="radio" name="onboardMode" value="live" onchange="selectOnboardMode('live')">
+            <span class="mode-icon">🧠</span>
+            <span class="mode-label">
+              <span class="mode-title">AI-Enhanced Mode</span>
+              <span class="mode-desc">NVIDIA Nemotron-3-Ultra reasoning (free key embedded)</span>
+            </span>
+          </label>
+        </div>
+
+        <p class="privacy-note">🔒 Runs entirely in your browser. No data stored. Download your result as .md.</p>
+        
+        <button class="btn btn-primary start-btn" onclick="startInterview()">Begin Interview</button>
+      </div>
+
+      <div class="onboarding-right">
+        <div class="calculator-frame">
+          <div class="calculator-display">
+            <div class="calc-label">Cost of Indecision</div>
+            <div class="calc-main" id="costMain">₹47.2L</div>
+            <div class="calc-sub" id="costSub">over 10 years</div>
+          </div>
+          <div class="calculator-body">
+            <div class="calc-btn num">
+              <span class="calc-btn-label">Age</span>
+              <span class="calc-btn-value" id="calcAge">28</span>
+            </div>
+            <div class="calc-btn num">
+              <span class="calc-btn-label">Yrs Delay</span>
+              <span class="calc-btn-value" id="calcDelay">2</span>
+            </div>
+            <div class="calc-btn op">
+              <span class="calc-btn-label">×</span>
+              <span class="calc-btn-value">12</span>
+            </div>
+            <div class="calc-btn cost">
+              <span class="calc-btn-label">Monthly Δ</span>
+              <span class="calc-btn-value" id="calcMonthly">₹85k</span>
+            </div>
+            <div class="calc-btn op">
+              <span class="calc-btn-label">×</span>
+              <span class="calc-btn-value">120</span>
+            </div>
+            <div class="calc-btn cost">
+              <span class="calc-btn-label">Compounding</span>
+              <span class="calc-btn-value" id="calcCompound">1.42×</span>
+            </div>
+            <div class="calc-btn total">
+              <span class="calc-btn-label">Total Sunk Cost</span>
+              <span class="calc-btn-value" id="calcTotal">₹47.2L</span>
+            </div>
+            <div class="calc-formula">
+              <span class="highlight">(Private ₹1.2L − Govt ₹0.35L) × 12 × 2 yrs × 1.42</span> = <span class="highlight">₹29.0L</span> direct loss<br>
+              + Skill decay × Network gap × Promotion lag = <span class="highlight">~₹18.2L</span> hidden<br>
+              = <span class="highlight">₹47.2L</span> over 10 years
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header>
     <span class="badge">v0.2 — Six Honest Men</span>
     <h1>Goal Clarity Engine</h1>
@@ -386,11 +816,57 @@
         }
       });
 
+      // Hide interview UI initially
+      document.getElementById('interviewCard').style.display = 'none';
+      document.getElementById('modeToggle').style.display = 'none';
+      document.getElementById('progressFill').parentElement.style.display = 'none';
+      document.getElementById('stageIndicator').style.display = 'none';
+      document.getElementById('depthIndicator').style.display = 'none';
+
+      // Initialize calculator
+      updateCalculator();
+    }
+
+    function selectOnboardMode(newMode) {
+      mode = newMode;
+      document.querySelectorAll('.mode-option').forEach(opt => {
+        opt.dataset.mode === newMode ? opt.classList.add('selected') : opt.classList.remove('selected');
+      });
+      updateCalculator();
+    }
+
+    function startInterview() {
+      document.getElementById('onboardingOverlay').classList.add('hidden');
+      document.getElementById('interviewCard').style.display = 'block';
+      document.getElementById('modeToggle').style.display = 'flex';
+      document.getElementById('progressFill').parentElement.style.display = 'block';
+      document.getElementById('stageIndicator').style.display = 'flex';
+      document.getElementById('depthIndicator').style.display = 'inline-block';
+      
       renderStageIndicator();
       renderQuestions();
       showQuestion(0, 0, 0);
       updateProgress();
       updateDepthIndicator();
+    }
+
+    function updateCalculator() {
+      const age = 28; // default
+      const delay = mode === 'live' ? 1 : 2; // live mode = less delay (AI helps)
+      const monthlyDiff = 85000; // ₹1.2L - ₹0.35L
+      const compoundFactor = 1.42;
+      
+      const directLoss = monthlyDiff * 12 * delay * compoundFactor;
+      const hiddenLoss = directLoss * 0.63;
+      const total = directLoss + hiddenLoss;
+      
+      document.getElementById('calcAge').textContent = age;
+      document.getElementById('calcDelay').textContent = delay;
+      document.getElementById('calcMonthly').textContent = '₹' + (monthlyDiff/1000).toFixed(0) + 'k';
+      document.getElementById('calcCompound').textContent = compoundFactor + '×';
+      document.getElementById('calcTotal').textContent = '₹' + (total/100000).toFixed(1) + 'L';
+      document.getElementById('costMain').textContent = '₹' + (total/100000).toFixed(1) + 'L';
+      document.getElementById('costSub').textContent = 'over 10 years';
     }
 
     // ===== RENDER =====
@@ -1070,9 +1546,14 @@ ${reflection || '*No reflection captured yet. Fill in above and re-download.*'}
         currentStageIndex = 0;
         currentManIndex = 0;
         currentQuestionIndex = 0;
-        document.getElementById('interviewCard').style.display = 'block';
+        document.getElementById('interviewCard').style.display = 'none';
+        document.getElementById('modeToggle').style.display = 'none';
+        document.getElementById('progressFill').parentElement.style.display = 'none';
+        document.getElementById('stageIndicator').style.display = 'none';
+        document.getElementById('depthIndicator').style.display = 'none';
         document.getElementById('resultSection').classList.remove('visible');
         document.getElementById('resultSection').innerHTML = '';
+        document.getElementById('onboardingOverlay').classList.remove('hidden');
         init();
       }
     }
