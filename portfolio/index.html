@@ -1,55 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portfolio - Vivek Narole</title>
-<meta name="description" content="Authentic record of work, learning, and specific knowledge.">
-<link rel="canonical" href="https://viveknarole.com/portfolio/">
-<style>
-:root{--bg:#fafafa;--ink:#1a1a2e;--mute:#5a5a7a;--line:#e8e8f0;--accent:#c85c2e;--max:38rem}
-@media (prefers-color-scheme:dark){:root{--bg:#0a0a10;--ink:#f0f0f5;--mute:#9a9ac0;--line:#222232;--accent:#e87a4a}}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,sans-serif;max-width:var(--max);margin:0 auto;padding:0 1.5rem}
-header{padding:4rem 0 2rem}
-h1{font-size:2rem;margin:0}
-p{color:var(--mute)}
-nav a{display:inline-block;margin:.5rem 1rem .5rem 0;color:var(--ink);text-decoration:none}
-nav a:hover{color:var(--accent)}
-section{padding:2rem 0;border-top:1px solid var(--line)}
-h2{font-size:0.9rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
-ul{list-style:none;padding:0}
-li{margin:.5rem 0}
-a{color:var(--accent)}
-footer{padding:3rem 0;color:var(--mute);font-size:.8rem}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio - Vivek Narole</title>
+  <meta name="description" content="Authentic record of work, learning, and specific knowledge. Built for discovery by humans and agents.">
+  <link rel="canonical" href="https://viveknarole.com/portfolio/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Portfolio - Vivek Narole",
+    "description": "Authentic record of work, learning, and specific knowledge.",
+    "url": "https://viveknarole.com/portfolio/",
+    "author": {
+      "@type": "Person",
+      "name": "Vivek Narole"
+    }
+  }
+  </script>
+  <style>
+    :root{--bg:#fafafa;--ink:#1a1a2e;--mute:#5a5a7a;--line:#e8e8f0;--accent:#c85c2e;--card:#fff;--max:58rem}
+    @media (prefers-color-scheme:dark){:root{--bg:#0f0f1a;--ink:#f0f0f5;--mute:#8a8aa3;--line:#2a2a3e;--card:#161622;--accent:#e87a4a}}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,sans-serif;max-width:var(--max);margin:0 auto;padding:0 1.5rem}
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+    header{padding:4rem 0 2rem} h1{font-size:clamp(2.5rem,5vw,3.5rem);line-height:1.05;letter-spacing:-.06em;margin:0 0 .7rem} p{color:var(--mute)}
+    nav a{display:inline-block;margin:.5rem .9rem .5rem 0;color:var(--ink)} nav a:hover{color:var(--accent)}
+    section{padding:1.5rem 0;border-top:1px solid var(--line)}
+    h2{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:0 0 1rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem 1.1rem;box-shadow:0 18px 40px rgba(26,26,46,.04)}
+    .tag{display:inline-block;padding:.3rem .6rem;border-radius:999px;background:rgba(200,92,46,.08);color:var(--accent);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem}
+    .card h3{margin:.15rem 0 .5rem;font-size:1.1rem;letter-spacing:-.04em}
+    .card p{margin:0;color:var(--mute)}
+    .note{padding:1rem 1.1rem;border-left:3px solid var(--accent);background:rgba(200,92,46,.03);border-radius:0 12px 12px 0;margin-top:1rem}
+    footer{padding:3rem 0 4rem;color:var(--mute);font-size:.85rem}
+    @media (max-width:600px){body{padding:0 1rem}}
+  </style>
 </head>
 <body>
-<header>
-<h1>Portfolio</h1>
-<p>Authentic record of work, learning, and specific knowledge. Built for discovery by humans and agents.</p>
-<nav>
-<a href="/">Home</a>
-<a href="/llms.txt">llms.txt</a>
-</nav>
-</header>
-<main>
-<section>
-<h2>Categories</h2>
-<ul>
-<li><a href="/portfolio/experiences/">Experiences</a> — Personal journeys, career transitions</li>
-<li><a href="/portfolio/projects/">Projects</a> — Systems built, automations created</li>
-<li><a href="/portfolio/lessons/">Lessons</a> — Insights that help others</li>
-</ul>
-<p><em>Content coming soon. Structure ready for your experiences.</em></p>
-</section>
-<section>
-<h2>How to use</h2>
-<p>Wiki source of truth: <code>wiki/portfolio/</code>. Entries follow BMAD principles: Bold, Minimal, Actionable, Durable.</p>
-<p>Searchable via tags, dates, [[wiki links]], llms.txt manifest, and Schema.org.</p>
-</section>
-</main>
-<footer>
-© 2025 Vivek Narole · Built with intention
-</footer>
+  <header>
+    <h1>Portfolio</h1>
+    <p>Authentic record of work, learning, and specific knowledge. Built for discovery by humans and agents.</p>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/llms.txt">llms.txt</a>
+      <a href="/portfolio/experiences/">Experiences</a>
+      <a href="/portfolio/projects/">Projects</a>
+      <a href="/portfolio/lessons/">Lessons</a>
+      <a href="/portfolio/goal-clarity/">Tools</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Featured entries</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="tag">Experience</span>
+          <h3><a href="/portfolio/experiences/manufacturing-org-psychology.html">Manufacturing + organization psychology</a></h3>
+          <p>Studying production constraints and human behavior through the lens of systems, incentives, and emotional load.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Experience</span>
+          <h3><a href="/portfolio/experiences/flow-and-vedanta.html">Flow, family, and Vedanta</a></h3>
+          <p>Examining attention, values, and personal alignment as the foundation for better work and calmer decision-making.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Project</span>
+          <h3><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval wealth framework stress test</a></h3>
+          <p>Testing framework-driven wealth advice against actual tradeoffs, leverage, and lived constraints.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Tool</span>
+          <h3><a href="/portfolio/goal-clarity/">Goal Clarity Engine</a></h3>
+          <p>Structured interview for high-stakes decisions. Forces the questions you're avoiding. Returns a decision tree you can trust.</p>
+        </article>
+      </div>
+      <div class="note">This portfolio preserves source-of-truth content in the wiki while presenting a clean public index that remains searchable, structured, and durable.</div>
+    </section>
+
+    <section>
+      <h2>Categories</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="tag">Experiences</span>
+          <h3><a href="/portfolio/experiences/">Career and life transitions</a></h3>
+          <p>Real situations, turning points, and the patterns that shaped my thinking.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Projects</span>
+          <h3><a href="/portfolio/projects/">Systems and stress tests</a></h3>
+          <p>Concrete work that examined real constraints and tested ideas under friction.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Lessons</span>
+          <h3><a href="/portfolio/lessons/">Reusable patterns</a></h3>
+          <p>Practical insights that help others think more clearly and act with more leverage.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Tools</span>
+          <h3><a href="/portfolio/goal-clarity/">Interactive decision tools</a></h3>
+          <p>Structured interviews that produce decision trees for high-stakes choices. Built with Pi skills + NVIDIA NIM.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>How to use</h2>
+      <p>Wiki source-of-truth: <code>wiki/portfolio/</code>.</p>
+      <p>Entries follow the BMAD pattern: Bold Claim, Pattern Observed, Action Taken, Result, Lesson, and Verification. That keeps the portfolio useful for both people and agents.</p>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Vivek Narole · Built with intention
+  </footer>
 </body>
 </html>
