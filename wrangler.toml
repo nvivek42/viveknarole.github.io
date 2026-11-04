@@ -1,0 +1,14 @@
+name = "goal-clarity-synthesis"
+main = "workers/goal-clarity-synthesis.js"
+compatibility_date = "2026-11-04"
+
+# This route requires viveknarole.com to be an active zone in the Cloudflare
+# account used to deploy this Worker. GitHub Pages continues to serve the site;
+# the Worker handles only this API path.
+routes = [
+  { pattern = "viveknarole.com/api/goal-clarity-synthesis", zone_name = "viveknarole.com" }
+]
+
+[vars]
+ALLOWED_ORIGIN = "https://viveknarole.com"
+NIM_MODEL = "nvidia/nemotron-3-ultra"
