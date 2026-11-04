@@ -248,6 +248,23 @@
       margin-bottom: 1rem;
       width: fit-content;
     }
+
+    .onboarding-skip {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      width: fit-content;
+      z-index: 10;
+    }
+    .onboarding-skip:hover {
+      color: var(--accent);
+    }
     .onboarding-left h2 {
       font-size: clamp(1.8rem, 4vw, 2.5rem);
       line-height: 1.15;
@@ -385,6 +402,7 @@
     <div class="onboarding-card">
       <div class="onboarding-left">
         <span class="onboarding-badge">Goal Clarity Engine v0.2</span>
+      <button class="onboarding-skip" onclick="dismissOnboarding()">Skip</button>
         <h2>Stop guessing. Start deciding.</h2>
         <p class="onboarding-tagline">A structured interview for the <strong>Government vs Private Job</strong> decision. Uses the Six Honest Men framework to cut through bias, internet noise, and your own blind spots.</p>
         
@@ -702,6 +720,24 @@
 
     // ===== INIT =====
     function init() {
+      // Check if onboarding was previously dismissed
+      if (localStorage.getItem('onboardingDismissed') === 'true') {
+        // Skip onboarding, show interview UI directly
+        document.getElementById('onboardingOverlay').classList.add('hidden');
+        document.getElementById('interviewCard').style.display = 'block';
+        document.getElementById('modeToggle').style.display = 'flex';
+        document.getElementById('progressFill').parentElement.style.display = 'block';
+        document.getElementById('stageIndicator').style.display = 'flex';
+        document.getElementById('depthIndicator').style.display = 'inline-block';
+        renderStageIndicator();
+        renderQuestions();
+        showQuestion(0, 0, 0);
+        updateProgress();
+        updateDepthIndicator();
+        updateNavButtons();
+        return;
+      }
+
       // Group questions by stage
       STAGES.forEach(stage => {
         stagedQuestions[stage.id] = [];
@@ -751,16 +787,32 @@
       updateDepthIndicator();
     }
 
+    function dismissOnboarding() {
+      localStorage.setItem('onboardingDismissed', 'true');
+      document.getElementById('onboardingOverlay').classList.add('hidden');
+      document.getElementById('interviewCard').style.display = 'block';
+      document.getElementById('modeToggle').style.display = 'flex';
+      document.getElementById('progressFill').parentElement.style.display = 'block';
+      document.getElementById('stageIndicator').style.display = 'flex';
+      document.getElementById('depthIndicator').style.display = 'inline-block';
+      
+      renderStageIndicator();
+      renderQuestions();
+      showQuestion(0, 0, 0);
+      updateProgress();
+      updateDepthIndicator();
+    }
+
     function updateCalculator() {
       const age = 28; // default
       const delay = mode === 'live' ? 1 : 2; // live mode = less delay (AI helps)
       const monthlyDiff = 85000; // ₹1.2L - ₹0.35L
       const compoundFactor = 1.42;
-      
+
       const directLoss = monthlyDiff * 12 * delay * compoundFactor;
       const hiddenLoss = directLoss * 0.63;
       const total = directLoss + hiddenLoss;
-      
+
       document.getElementById('calcAge').textContent = age;
       document.getElementById('calcDelay').textContent = delay;
       document.getElementById('calcMonthly').textContent = '₹' + (monthlyDiff/1000).toFixed(0) + 'k';
