@@ -1,125 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio - Vivek Narole</title>
-  <meta name="description" content="Authentic record of work, learning, and specific knowledge. Built for discovery by humans and agents.">
+  <meta name="theme-color" content="#fafafa">
+  <title>Portfolio — Vivek Narole</title>
+  <meta name="description" content="Explore Vivek Narole's projects, experiences, lessons, and decision-making tool.">
   <link rel="canonical" href="https://viveknarole.com/portfolio/">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Portfolio - Vivek Narole",
-    "description": "Authentic record of work, learning, and specific knowledge.",
-    "url": "https://viveknarole.com/portfolio/",
-    "author": {
-      "@type": "Person",
-      "name": "Vivek Narole"
-    }
-  }
-  </script>
   <style>
-    :root{--bg:#fafafa;--ink:#1a1a2e;--mute:#5a5a7a;--line:#e8e8f0;--accent:#c85c2e;--card:#fff;--max:58rem}
-    @media (prefers-color-scheme:dark){:root{--bg:#0f0f1a;--ink:#f0f0f5;--mute:#8a8aa3;--line:#2a2a3e;--card:#161622;--accent:#e87a4a}}
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,sans-serif;max-width:var(--max);margin:0 auto;padding:0 1.5rem}
-    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-    header{padding:4rem 0 2rem} h1{font-size:clamp(2.5rem,5vw,3.5rem);line-height:1.05;letter-spacing:-.06em;margin:0 0 .7rem} p{color:var(--mute)}
-    nav a{display:inline-block;margin:.5rem .9rem .5rem 0;color:var(--ink)} nav a:hover{color:var(--accent)}
-    section{padding:1.5rem 0;border-top:1px solid var(--line)}
-    h2{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:0 0 1rem}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem 1.1rem;box-shadow:0 18px 40px rgba(26,26,46,.04)}
-    .tag{display:inline-block;padding:.3rem .6rem;border-radius:999px;background:rgba(200,92,46,.08);color:var(--accent);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem}
-    .card h3{margin:.15rem 0 .5rem;font-size:1.1rem;letter-spacing:-.04em}
-    .card p{margin:0;color:var(--mute)}
-    .note{padding:1rem 1.1rem;border-left:3px solid var(--accent);background:rgba(200,92,46,.03);border-radius:0 12px 12px 0;margin-top:1rem}
-    footer{padding:3rem 0 4rem;color:var(--mute);font-size:.85rem}
-    @media (max-width:600px){body{padding:0 1rem}}
+    :root{color-scheme:light dark;--bg:#fafafa;--ink:#1a1a2e;--muted:#5a5a7a;--line:#e8e8f0;--accent:#a94c25;--card:#fff;--soft:#f4eee9;--max:66rem;--focus:0 0 0 3px #c7683840;--shadow:0 12px 32px rgba(26,26,46,.05)}
+    @media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--ink:#f0f0f5;--muted:#aaa9c0;--line:#2a2a3e;--accent:#ff9b72;--card:#161622;--soft:#211c24;--shadow:0 12px 32px #0003}}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}.shell{max-width:var(--max);margin:auto;padding:20px 24px 52px}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:0;box-shadow:var(--focus)}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 44px}.brand{color:var(--ink);font-size:.84rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase}.home-link{font-size:.9rem}.hero{max-width:700px;padding-bottom:24px}.eyebrow,.tag{color:var(--accent);font-size:.72rem;font-weight:750;letter-spacing:.11em;text-transform:uppercase}.eyebrow{display:inline-block}h1{font-size:clamp(2.7rem,7vw,4.8rem);line-height:1;letter-spacing:-.065em;margin:.75rem 0 1rem}.hero p{color:var(--muted);max-width:60ch;margin:0;font-size:1.08rem}.browse-title{font-size:.78rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin:1.4rem 0 .75rem}.browse{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);color:var(--ink);transition:transform .16s,border-color .16s}.card:hover{transform:translateY(-2px);border-color:var(--accent);text-decoration:none}.card h2{font-size:1.2rem;line-height:1.25;letter-spacing:-.03em;margin:.5rem 0}.card p{color:var(--muted);margin:0;font-size:.95rem}.card .go{display:inline-block;color:var(--accent);font-weight:650;font-size:.9rem;margin-top:14px}.contact{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}.footer{padding-top:20px;color:var(--muted);font-size:.82rem}.featured{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:2rem 0}.featured .card{text-align:left}.tag{display:inline-block;margin-bottom:.5rem}@media(max-width:600px){.shell{padding:14px 16px 36px}.topbar{padding-bottom:32px}.browse{grid-template-columns:1fr}.card{padding:18px}}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Portfolio</h1>
-    <p>Authentic record of work, learning, and specific knowledge. Built for discovery by humans and agents.</p>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/llms.txt">llms.txt</a>
-      <a href="/portfolio/experiences/">Experiences</a>
-      <a href="/portfolio/projects/">Projects</a>
-      <a href="/portfolio/lessons/">Lessons</a>
-      <a href="/portfolio/goal-clarity/">Tools</a>
-    </nav>
-  </header>
-
+<div class="shell">
+  <nav class="topbar" aria-label="Main navigation"><a class="brand" href="/">Vivek Narole</a><a class="home-link" href="/">Home</a></nav>
+  <header class="hero"><span class="eyebrow">A small, curated collection</span><h1>Portfolio</h1><p>Explore a few kinds of work and thinking. Choose a section to get started; each section has a simple path back here.</p></header>
   <main>
-    <section>
-      <h2>Featured entries</h2>
-      <div class="grid">
-        <article class="card">
-          <span class="tag">Experience</span>
-          <h3><a href="/portfolio/experiences/manufacturing-org-psychology.html">Manufacturing + organization psychology</a></h3>
-          <p>Studying production constraints and human behavior through the lens of systems, incentives, and emotional load.</p>
-        </article>
-        <article class="card">
-          <span class="tag">Experience</span>
-          <h3><a href="/portfolio/experiences/flow-and-vedanta.html">Flow, family, and Vedanta</a></h3>
-          <p>Examining attention, values, and personal alignment as the foundation for better work and calmer decision-making.</p>
-        </article>
-        <article class="card">
-          <span class="tag">Project</span>
-          <h3><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval wealth framework stress test</a></h3>
-          <p>Testing framework-driven wealth advice against actual tradeoffs, leverage, and lived constraints.</p>
-        </article>
-        <article class="card">
-          <span class="tag">Tool</span>
-          <h3><a href="/portfolio/goal-clarity/">Goal Clarity Engine</a></h3>
-          <p>Structured interview for high-stakes decisions. Forces the questions you're avoiding. Returns a decision tree you can trust.</p>
-        </article>
-        <article class="card">
-          <span class="tag">Systems</span>
-          <h3><a href="/portfolio/lessons/industrial-hubs-pune.html">Pune Industrial Ecosystem</a></h3>
-          <p>Mapped industrial hubs (Bhosari, Chakan, Talawade), GCC landscape (57 auto GCCs, 74 tech centres), and company clusters. Data from repo source-of-truth. Enables system-level career and investment decisions.</p>
-        </article>
-      </div>
-      <div class="note">This portfolio preserves source-of-truth content in the wiki while presenting a clean public index that remains searchable, structured, and durable.</div>
-    </section>
+    <h2 class="browse-title">Browse the portfolio</h2>
+    <nav class="browse" aria-label="Portfolio sections">
+      <a class="card" href="/portfolio/projects/"><span class="tag">Build</span><h2>Projects</h2><p>Systems, experiments, and practical problem-solving.</p><span class="go">Explore projects →</span></a>
+      <a class="card" href="/portfolio/experiences/"><span class="tag">Learn</span><h2>Experiences</h2><p>Work and life experiences that shaped how I think.</p><span class="go">Explore experiences →</span></a>
+      <a class="card" href="/portfolio/lessons/"><span class="tag">Reflect</span><h2>Lessons</h2><p>Reusable ideas, personal essays, and insights.</p><span class="go">Read lessons →</span></a>
+      <a class="card" href="/portfolio/goal-clarity/"><span class="tag">Try</span><h2>Goal Clarity</h2><p>A guided worksheet for thinking through a career decision.</p><span class="go">Open the tool →</span></a>
+    </nav>
 
-    <section>
-      <h2>Categories</h2>
-      <div class="grid">
-        <article class="card">
-          <span class="tag">Experiences</span>
-          <h3><a href="/portfolio/experiences/">Career and life transitions</a></h3>
-          <p>Real situations, turning points, and the patterns that shaped my thinking.</p>
-        </article>
-        <article class="card">
-          <span class="tag">Projects</span>
-          <h3><a href="/portfolio/projects/">Systems and stress tests</a></h3>
-          <p>Concrete work that examined real constraints and tested ideas under friction.</p>
-        </article>
-        <article class="card">
-          <span class="tag">Lessons</span>
-          <h3><a href="/portfolio/lessons/">Reusable patterns</a></h3>
-          <p>Practical insights that help others think more clearly and act with more leverage.</p>
-        </article>
-        <article class="card">
-          <span class="tag">Tools</span>
-          <h3><a href="/portfolio/goal-clarity/">Interactive decision tools</a></h3>
-          <p>Structured interviews that produce decision trees for high-stakes choices. Built with Pi skills + NVIDIA NIM.</p>
-        </article>
-      </div>
-    </section>
+    <h2 class="browse-title">Featured entries</h2>
+    <div class="featured">
+      <article class="card"><span class="tag">Experience</span><h2><a href="/portfolio/experiences/manufacturing-org-psychology.html">Manufacturing + organization psychology</a></h2><p>Studying production constraints and human behavior through the lens of systems, incentives, and emotional load.</p></article>
+      <article class="card"><span class="tag">Experience</span><h2><a href="/portfolio/experiences/flow-and-vedanta.html">Flow, family, and Vedanta</a></h2><p>Examining attention, values, and personal alignment as the foundation for better work and calmer decision-making.</p></article>
+      <article class="card"><span class="tag">Project</span><h2><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval wealth framework stress test</a></h2><p>Testing framework-driven wealth advice against actual tradeoffs, leverage, and lived constraints.</p></article>
+      <article class="card"><span class="tag">Tool</span><h2><a href="/portfolio/goal-clarity/">Goal Clarity Engine</a></h2><p>Structured interview for high-stakes decisions. Forces the questions you're avoiding. Returns a decision tree you can trust.</p></article>
+      <article class="card"><span class="tag">Systems</span><h2><a href="/portfolio/lessons/industrial-hubs-pune.html">Pune Industrial Ecosystem</a></h2><p>Mapped industrial hubs (Bhosari, Chakan, Talawade), GCC landscape (57 auto GCCs, 74 tech centres), and company clusters. Data from repo source-of-truth. Enables system-level career and investment decisions.</p></article>
+    </div>
 
-    <section>
-      <h2>How to use</h2>
-      <p>Wiki source-of-truth: <code>wiki/portfolio/</code>.</p>
-      <p>Entries follow the BMAD pattern: Bold Claim, Pattern Observed, Action Taken, Result, Lesson, and Verification. That keeps the portfolio useful for both people and agents.</p>
-    </section>
+    <p class="contact">Looking to connect? <a href="mailto:viveknarole100@gmail.com">Email Vivek</a> · <a href="https://github.com/nvivek42" rel="me">GitHub</a> · <a href="/llms.txt">Text version</a></p>
   </main>
-
-  <footer>
-    © 2025 Vivek Narole · Built with intention
-  </footer>
+  <footer class="footer">© 2025 Vivek Narole</footer>
+</div>
 </body>
 </html>
