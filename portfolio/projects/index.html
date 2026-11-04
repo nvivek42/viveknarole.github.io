@@ -1,51 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projects - Vivek Narole</title>
-  <meta name="description" content="Projects, tools, and systems built to solve real constraints with clarity and leverage.">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fafafa">
+  <title>Projects — Vivek Narole</title><meta name="description" content="Projects, tools, and systems built to solve real constraints with clarity and leverage.">
   <link rel="canonical" href="https://viveknarole.com/portfolio/projects/">
   <style>
-    :root{--bg:#fafafa;--ink:#1a1a2e;--mute:#5a5a7a;--line:#e8e8f0;--accent:#c85c2e;--card:#fff;--max:52rem}
-    @media (prefers-color-scheme:dark){:root{--bg:#0f0f1a;--ink:#f0f0f5;--mute:#8a8aa3;--line:#2a2a3e;--card:#161622;--accent:#e87a4a}}
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,sans-serif;max-width:var(--max);margin:0 auto;padding:0 1.5rem}
-    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-    header{padding:3.5rem 0 1.5rem} h1{font-size:clamp(2rem,4vw,2.8rem);margin:0 0 .6rem;letter-spacing:-.06em} p{color:var(--mute)}
-    nav a{display:inline-block;margin:.5rem 1rem .5rem 0;color:var(--ink)}
-    .wrap{display:grid;gap:1rem;padding:1.5rem 0 3rem}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem 1.1rem}
-    .eyebrow{display:inline-block;padding:.3rem .6rem;border-radius:999px;background:rgba(200,92,46,.08);color:var(--accent);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:.7rem}
-    .card h2{margin:.1rem 0 .5rem;font-size:1.2rem;letter-spacing:-.04em}
-    .meta{font-size:.8rem;color:var(--mute);margin-bottom:.6rem}
-    ul{margin:.7rem 0 0 1.1rem;color:var(--mute)}
-    footer{padding:1rem 0 3rem;color:var(--mute);font-size:.85rem}
+    :root{color-scheme:light dark;--bg:#fafafa;--ink:#1a1a2e;--muted:#5a5a7a;--line:#e8e8f0;--accent:#a94c25;--card:#fff;--max:58rem;--focus:0 0 0 3px #c7683840;--shadow:0 12px 32px #1a1a2e0d}
+    @media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--ink:#f0f0f5;--muted:#aaa9c0;--line:#2a2a3e;--accent:#ff9b72;--card:#161622;--shadow:0 12px 32px #0003}}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}.shell{max-width:var(--max);margin:auto;padding:20px 24px 48px}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:0;box-shadow:var(--focus)}.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0 38px}.brand{color:var(--ink);font-size:.84rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase}.crumb{font-size:.9rem}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 24px}.tabs a{border:1px solid var(--line);border-radius:999px;padding:6px 11px;color:var(--muted);font-size:.82rem}.tabs a[aria-current=page]{border-color:var(--accent);background:var(--card);color:var(--ink);font-weight:650}.eyebrow{font-size:.72rem;color:var(--accent);font-weight:750;letter-spacing:.1em;text-transform:uppercase}h1{font-size:clamp(2.4rem,6vw,3.8rem);line-height:1.03;letter-spacing:-.06em;margin:.6rem 0 .7rem}.intro{color:var(--muted);margin:0 0 1.5rem}.list{display:grid;gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow)}.date{font-size:.76rem;color:var(--accent);font-weight:700;letter-spacing:.06em}.card h2{font-size:1.2rem;line-height:1.3;letter-spacing:-.03em;margin:.35rem 0}.meta{font-size:.82rem;color:var(--muted);margin:.1rem 0 .6rem}.card p,.card li{color:var(--muted)}.card p{margin:0}.card ul{margin:.65rem 0 0;padding-left:1.2rem}.card li+li{margin-top:.2rem}.footer{border-top:1px solid var(--line);padding-top:18px;margin-top:28px;color:var(--muted);font-size:.83rem}@media(max-width:560px){.shell{padding:14px 16px 36px}.topbar{padding-bottom:28px}.card{padding:17px}}
   </style>
 </head>
-<body>
-  <header>
-    <h1>Projects</h1>
-    <p>Concrete systems, workflows, and experiments built to solve messy real-world problems with clarity and leverage.</p>
-    <nav>
-      <a href="/portfolio/">Portfolio</a>
-      <a href="/portfolio/experiences/">Experiences</a>
-      <a href="/portfolio/lessons/">Lessons</a>
-      <a href="/portfolio/goal-clarity/">Tools</a>
-    </nav>
-  </header>
-  <main class="wrap">
-    <article class="card">
-      <div class="eyebrow">2025-06-01</div>
-      <h2><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval wealth framework stress test</a></h2>
-      <div class="meta">wealth · leverage · decision quality · systems</div>
-      <p>A structured evaluation of whether the common wealth framework holds up under real life tradeoffs and imperfect information.</p>
-      <ul>
-        <li>Mapped the framework into explicit decision principles.</li>
-        <li>Tested it against realistic constraints, risk, and compounding.</li>
-        <li>Separated durable insight from vague, high-level advice.</li>
-      </ul>
-    </article>
-  </main>
-  <footer>© 2025 Vivek Narole</footer>
-</body>
+<body><div class="shell">
+  <nav class="topbar" aria-label="Main navigation"><a class="brand" href="/">Vivek Narole</a><a class="crumb" href="/portfolio/">← All portfolio</a></nav>
+  <nav class="tabs" aria-label="Portfolio sections"><a href="/portfolio/projects/" aria-current="page">Projects</a><a href="/portfolio/experiences/">Experiences</a><a href="/portfolio/lessons/">Lessons</a><a href="/portfolio/goal-clarity/">Goal Clarity</a></nav>
+  <header><span class="eyebrow">Ideas tested in practice</span><h1>Projects</h1><p class="intro">Concrete systems, workflows, and experiments built to solve messy real-world problems with clarity and leverage.</p></header>
+  <main class="list"><article class="card"><span class="date">2025-06-01</span><h2><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval wealth framework stress test</a></h2><div class="meta">wealth · leverage · decision quality · systems</div><p>A structured evaluation of whether the common wealth framework holds up under real-life trade-offs and imperfect information.</p><ul><li>Mapped core ideas into explicit decision principles.</li><li>Tested them against realistic constraints and scenarios.</li><li>Separated durable insight from vague advice and false certainty.</li></ul></article></main>
+  <footer class="footer"><a href="/portfolio/">← Back to portfolio</a> · © 2025 Vivek Narole</footer>
+</div></body>
 </html>
