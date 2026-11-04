@@ -335,17 +335,46 @@
     .calc-formula { grid-column: span 4; padding: 1rem; background: var(--bg); border-radius: var(--radius-sm); border: 1px solid var(--line); font-size: 0.75rem; color: var(--muted); line-height: 1.8; font-family: 'SF Mono', 'Fira Code', monospace; }
     .calc-formula .highlight { color: var(--accent); font-weight: 700; }
 
+    @media (max-width: 1200px) {
+      /* PC responsive: two-column with fluid gutters
+         - Calculator gets more space on wider screens
+         - Layout stacks naturally as window narrows */
+      .onboarding-card { grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1100px; margin: 0 auto; }
+      .onboarding-left { padding: 3rem 2rem; }
+      .onboarding-right { padding: 2rem; min-height: 400px; }
+      .calculator-frame { max-width: 400px; }
+    }
+
+    @media (max-width: 1200px) {
+      /* PC: fluid two-column layout with reasonable max width
+         - Two columns side-by-side with gap
+         - Calculator gets proportional space
+         - Layout stays horizontal until 1200px */
+      .onboarding-card { grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1100px; margin: 0 auto; }
+      .onboarding-left { padding: 3rem 2rem; }
+      .onboarding-right { padding: 2rem; min-height: 400px; }
+      .calculator-frame { max-width: 420px; }
+    }
+
     @media (max-width: 800px) {
-      .onboarding-card { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; }
-      .onboarding-right { min-height: auto; border-left: none; border-top: 1px solid var(--line); order: -1; }
-      .calculator-frame { max-width: 100%; }
+      /* Tablet: switch to single column, calculator on top
+         - Layout stacks vertically for better readability */
+      .onboarding-card { grid-template-columns: 1fr; max-height: none; height: auto; }
+      .onboarding-right { min-height: auto; border-left: none; border-top: 1px solid var(--line); order: -1; padding: 1.5rem; }
+      .calculator-frame { max-width: 100%; height: 300px; }
     }
 
     @media (max-width: 600px) {
+      /* Mobile: compact layout
+         - Full-width elements, touch-friendly */
       .onboarding-overlay { padding: 0; align-items: flex-start; }
-      .onboarding-card { border-radius: 0; min-height: 100vh; }
-      .onboarding-left { padding: 2rem 1.5rem; }
-      .onboarding-right { padding: 1.5rem; }
+      .onboarding-card { border-radius: 0; }
+      .onboarding-left { padding: 1.5rem; }
+      .onboarding-right { padding: 1rem; }
+      .calculator-frame { max-width: 100%; height: 250px; }
+      .onboarding-badge { font-size: 0.55rem; }
+      .onboarding-left h2 { font-size: 1.5rem; }
+      .onboarding-tagline { font-size: 0.9rem; }
     }
   </style>
 </head>
