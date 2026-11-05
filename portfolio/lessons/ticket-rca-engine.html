@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The ticket that writes its own resolution - Vivek Narole</title>
+  <meta name="description" content="Building an AI RCA engine for IT ticketing: how UPSC reasoning, engineering discipline, and the six honest men framework shaped a deterministic diagnosis system.">
+  <link rel="canonical" href="https://viveknarole.com/portfolio/lessons/ticket-rca-engine.html">
+  <style>
+    :root{--bg:#fafafa;--ink:#1a1a2e;--mute:#5a5a7a;--line:#e8e8f0;--accent:#c85c2e;--card:#fff;--max:52rem}
+    @media (prefers-color-scheme:dark){:root{--bg:#0f0f1a;--ink:#f0f0f5;--mute:#8a8aa3;--line:#2a2a3e;--card:#161622;--accent:#e87a4a}}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,sans-serif;max-width:var(--max);margin:0 auto;padding:0 1.5rem}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}header{padding:3.5rem 0 1.5rem}h1{font-size:clamp(2rem,4vw,2.8rem);margin:0 0 .6rem;letter-spacing:-.06em}p,li{color:var(--mute)}nav a{display:inline-block;margin:.5rem 1rem .5rem 0;color:var(--ink)}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem 1.1rem;margin:1rem 0 2rem}h2{margin:0 0 .6rem;font-size:1.1rem;letter-spacing:-.04em;color:var(--ink)}ul{margin:.7rem 0 0 1.25rem}footer{padding:1rem 0 3rem;color:var(--mute);font-size:.85rem}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The ticket that writes its own resolution</h1>
+    <p>2025 · building · knowledge transfer · IT systems</p>
+    <nav>
+      <a href="/portfolio/">Portfolio</a>
+      <a href="/portfolio/lessons/">Lessons</a>
+    </nav>
+  </header>
+  <main>
+    <article class="card">
+      <h2>Core Idea</h2>
+      <p>Manual triage of IT slowness tickets is fragmented, repetitive, and forgetful. The solution isn't more documentation — it's a deterministic RCA engine that captures patterns, ranks by evidence, and prescribes safe, gated fixes.</p>
+
+      <h2>Situation</h2>
+      <p>Three years ago, I watched an L1 engineer manually correlate CPU spikes, DNS failures, and bloated roaming profiles for the fiftieth time that week. "There has to be a pattern," he said. There was. My background in UPSC preparation taught me to decompose any problem into atoms, rank by evidence, and conclude without flinch. That mental model became the spine of OfficeTicketingTool's RCA engine.</p>
+
+      <h2>What I Built</h2>
+      <p>OfficeTicketingTool is a WPF/.NET 8 desktop ticketing system with an embedded AI RCA engine. Twelve signal collectors — CPU, RAM, disk, AD, DNS, WiFi, VPN, Outlook, printers, licensing, peripherals — feed a deterministic rule chain: DNS/auth → DC overload → profile bloat → HDD+RAM bottleneck → disk health → space → WiFi → background processes → aging hardware → startup bloat. First rule that fires wins. Confidence from data completeness. No hallucination.</p>
+      <ul>
+        <li><strong>Engineering discipline:</strong> `net8.0-windows` TFM dropped 24 MB by ditching WinRT projections. OxyPlot replaced SkiaSharp — 33 MB vs 224 MB, zero native deps. EF Core's default `NoTracking` cut dashboard memory 40%. Workstation GC for single-user desktop. Tiered PGO for hot paths. Soft deletes everywhere. BCrypt with adaptive cost. Full audit trail. CERT-In/SEBI runbooks. India IT auditor dossiers ready day one.</li>
+        <li><strong>Auto-fix policy-as-code:</strong> Executors (spooler restart, DNS flush, `klist purge`, temp cleanup) sit behind three gates: global kill-switch, `RiskTier.Low` only, curated allowlist. L1 gets startup cleanup. L2 gets GPO redirection. L3 gets WiFi channels. IT Manager gets hardware approvals. Escalation isn't failure — it's policy.</li>
+      </ul>
+
+      <h2>Knowledge Transfer</h2>
+      <p>The six honest men — Who, What, When, Where, Why, How — didn't just frame this article. They framed the architecture.</p>
+      <ul>
+        <li><strong>Who</strong> — Systems engineer applying UPSC's analytical rigor (decompose → prioritize → evidence → conclude) to enterprise IT.</li>
+        <li><strong>What</strong> — WPF/.NET 8 ticketing with embedded AI RCA engine, 12 collectors, 10 ordered rules, confidence-scored RCA, dual-audience remediation, gated auto-fix.</li>
+        <li><strong>When</strong> — Iteratively hardened; now net8.0-windows with OxyPlot (zero native deps).</li>
+        <li><strong>Where</strong> — On-premise AD: mixed LAN/WiFi, domain-joined endpoints, physical DCs.</li>
+        <li><strong>Why</strong> — Manual slowness/hang triage burned L1 hours; escalations lacked evidence. Goal: machine-first diagnostics — auto-create tickets, run scoped collection, correlate incidents, generate remediation plans with rollback, escalate only when risk-tier/allowlist demands.</li>
+        <li><strong>How</strong> — MVVM + DI + Repository + EF Core 8 + ML.NET. Knowledge transfer: UPSC's structured reasoning maps 1:1 to RCA rule ordering, confidence thresholds, escalation logic. Engineering gave: net8.0-windows (–24 MB), OxyPlot over SkiaSharp (33 MB vs 224 MB), `NoTracking` default (–40% memory), Workstation GC, tiered PGO.</li>
+      </ul>
+
+      <h2>Why It Matters</h2>
+      <p>Most IT tools log tickets. This one diagnoses, prescribes, and safely executes. The shift is from reactive firefighting to proactive reliability. From tribal knowledge to executable logic. When a user reports slowness today, the ticket creates itself, diagnostics run scoped collection, incidents correlate, a remediation plan generates with rollback metadata, and the engineer reads an RCA summary — specific numbers, not generalities — and knows exactly what to do. Or the machine fixes it overnight and closes the ticket with evidence.</p>
+
+      <h2>How to Apply</h2>
+      <ul>
+        <li>Audit your triage process: where are the repetitive manual walks? Those are candidates for deterministic rule chains.</li>
+        <li>Decompose your domain problems into atoms — not vague categories, but measurable signals with thresholds.</li>
+        <li>Rank rules by evidence, not convenience. The first rule that fires is your primary root cause.</li>
+        <li>Gate auto-fixes behind policy, not enthusiasm. Kill-switch + risk tier + allowlist = safety by design.</li>
+        <li>Document knowledge transfer explicitly. What from your past (psychology, engineering, exams, failed interviews) unexpectedly became valuable? That's Range — use it.</li>
+      </ul>
+    </article>
+  </main>
+  <footer>© 2025 Vivek Narole</footer>
+</body>
+</html>
