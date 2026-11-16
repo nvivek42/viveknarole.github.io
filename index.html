@@ -1,391 +1,159 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3ee">
   <title>Vivek Narole</title>
-  <meta name="description" content="I build software systems, AI workflows, and debugging infrastructure for teams dealing with ambiguity and scale.">
+  <meta name="description" content="Software engineer building root-cause tooling for IT and production systems. Shipped an RCA ticketing system for enterprise IT; building AI-assisted incident correlation for distributed systems.">
   <link rel="canonical" href="https://viveknarole.com/">
   <link rel="alternate" type="text/markdown" href="/llms.txt">
   <meta property="og:title" content="Vivek Narole">
-  <meta property="og:description" content="I build software systems, AI workflows, and debugging infrastructure for teams dealing with ambiguity and scale.">
+  <meta property="og:description" content="Software engineer building root-cause tooling for IT and production systems. Shipped RCA ticketing system; building AI-assisted incident correlation.">
   <meta property="og:url" content="https://viveknarole.com/">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/space-grotesk-v18-latin-700.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-regular.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-500.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-600.woff2">
   <style>
     :root{
-      --bg: #f7f3ee;
-      --bg-strong: #efe5dc;
-      --panel: rgba(255,255,255,0.8);
-      --panel-strong: #fffaf6;
-      --ink: #171512;
-      --muted: #5f564f;
-      --subtle: #8d8177;
-      --line: rgba(23,21,18,0.12);
-      --accent: #c76838;
-      --accent-strong: #9d4727;
-      --shadow: 0 18px 40px rgba(23,21,18,0.08);
-      --radius: 18px;
-      --radius-sm: 12px;
-      --space-1: 8px;
-      --space-2: 12px;
-      --space-3: 16px;
-      --space-4: 20px;
-      --space-5: 28px;
-      --space-6: 36px;
-      --space-7: 48px;
-      --space-8: 64px;
-      --space-9: 80px;
-      --max: 1180px;
+      color-scheme:light dark;
+      --bg:#f7f3ee;
+      --panel:#fffaf6;
+      --ink:#211b17;
+      --muted:#655b53;
+      --line:#ded5cc;
+      --accent:#c76838;
+      --accent-strong:#9d4727;
+      --accent-bg:#f5e8df;
+      --focus:0 0 0 3px #c7683840;
+      --shadow:0 16px 40px #211b1710;
+      --radius:18px;
+      --radius-sm:12px;
+      --max:1180px;
+      --font-display:"Space Grotesk", Inter, system-ui, sans-serif;
+      --font-body:Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
     }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background:
-        radial-gradient(1200px 600px at 100% 0%, rgba(199,104,56,0.12), transparent 60%),
-        radial-gradient(800px 500px at 0% 100%, rgba(199,104,56,0.08), transparent 55%),
-        var(--bg);
-      color: var(--ink);
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    a { color: inherit; }
-    .page {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 24px 22px 64px;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 8px 0 28px;
-    }
-    .brand {
-      font-size: 0.88rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .nav a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 0.8rem;
-      letter-spacing: 0.02em;
-      padding: 9px 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.25);
-      border-radius: 999px;
-      transition: all 180ms ease;
-    }
-    .nav a:hover {
-      border-color: rgba(199,104,56,0.35);
-      color: var(--accent-strong);
-      background: rgba(199,104,56,0.04);
-    }
-
-    .hero {
-      padding: 12px 0 12px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      align-items: end;
-      gap: 24px;
-      min-height: 430px;
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border: 1px solid rgba(199,104,56,0.28);
-      background: rgba(199,104,56,0.05);
-      color: var(--accent-strong);
-      border-radius: 999px;
-      font-size: 0.73rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    h1 {
-      margin: 18px 0 16px;
-      font-size: clamp(3rem, 6vw, 5.3rem);
-      line-height: 0.94;
-      letter-spacing: -0.08em;
-      max-width: 680px;
-    }
-    .lead {
-      max-width: 650px;
-      font-size: clamp(1.06rem, 1.8vw, 1.28rem);
-      color: var(--muted);
-      margin: 0 0 26px;
-    }
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 22px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 180ms ease;
-      border: 1px solid transparent;
-    }
-    .btn.primary {
-      background: var(--ink);
-      color: #f9f5f2;
-      box-shadow: var(--shadow);
-    }
-    .btn.primary:hover {
-      transform: translateY(-1px);
-      background: var(--accent);
-    }
-    .btn.secondary {
-      background: rgba(255,255,255,0.34);
-      color: var(--ink);
-      border-color: var(--line);
-    }
-    .btn.secondary:hover {
-      border-color: rgba(199,104,56,0.35);
-      color: var(--accent-strong);
-      background: rgba(199,104,56,0.04);
-    }
-
-    .hero-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.45));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px 18px;
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .mini-label {
-      color: var(--subtle);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 20px;
-    }
-    .stat {
-      padding: 18px 14px 16px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.3);
-    }
-    .stat strong {
-      display: block;
-      font-size: clamp(1.5rem, 2vw, 2.1rem);
-      line-height: 1;
-      letter-spacing: -0.06em;
-      margin-bottom: 6px;
-    }
-    .stat span {
-      color: var(--muted);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    section {
-      padding-top: 32px;
-      padding-bottom: 10px;
-    }
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-    .section-head h2 {
-      margin: 0;
-      font-size: 0.76rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--subtle);
-      font-weight: 700;
-    }
-    .section-kicker {
-      color: var(--muted);
-      font-size: 0.82rem;
-      max-width: 30ch;
-    }
-
-    .focus-grid,
-    .work-grid {
-      display: grid;
-      gap: 16px;
-    }
-    .focus-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .focus-card,
-    .work-item {
-      background: rgba(255,255,255,0.45);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 18px 18px 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
-    }
-    .focus-card strong,
-    .work-item h3 {
-      display: block;
-      font-size: 1.02rem;
-      margin: 0 0 8px;
-      letter-spacing: -0.03em;
-    }
-    .focus-card p,
-    .work-item p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .work-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .work-item {
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .tag {
-      display: inline-block;
-      align-self: flex-start;
-      padding: 6px 9px;
-      border-radius: 999px;
-      background: rgba(199,104,56,0.08);
-      color: var(--accent-strong);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .contact-wrap {
-      margin-top: 14px;
-      padding: 22px 20px 18px;
-      background: linear-gradient(180deg, rgba(23,21,18,0.96), rgba(33,26,22,0.96));
-      border-radius: var(--radius);
-      color: #f8f2ee;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: var(--shadow);
-    }
-    .contact-wrap p {
-      margin: 0 0 10px;
-      color: rgba(255,255,255,0.7);
-      max-width: 44ch;
-    }
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: clamp(1.1rem, 2vw, 1.7rem);
-      letter-spacing: -0.05em;
-      text-decoration: none;
-      font-weight: 600;
-      color: #fff;
-    }
-    .contact-link:hover { color: #ffc8aa; }
-
-    footer {
-      padding-top: 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-    .footer-links a:hover { color: var(--accent-strong); }
-
-    @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
+    @media(prefers-color-scheme:dark){
+      :root{
+        --bg:#14131a;
+        --panel:#1d1b24;
+        --ink:#f4f0f7;
+        --muted:#b9b0c1;
+        --line:#393541;
+        --accent:#ff9b72;
+        --accent-strong:#ffb896;
+        --accent-bg:#382820;
+        --shadow:0 16px 40px #0005;
       }
-      .focus-grid,
-      .work-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .hero-card { min-height: auto; }
     }
-
-    @media (max-width: 680px) {
-      .page { padding: 16px 16px 50px; }
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav {
-        width: 100%;
-      }
-      .focus-grid,
-      .work-grid,
-      .stats {
-        grid-template-columns: 1fr;
-      }
-      .section-head {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .hero-actions {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .btn { width: 100%; }
-      .contact-link { font-size: 1.25rem; }
-      footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    @font-face{
+      font-family:"Space Grotesk";
+      src:url("/assets/fonts/space-grotesk-v18-latin-700.woff2") format("woff2");
+      font-weight:700;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-regular.woff2") format("woff2");
+      font-weight:400;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-500.woff2") format("woff2");
+      font-weight:500;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-600.woff2") format("woff2");
+      font-weight:600;
+      font-display:swap;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    a:focus-visible{outline:0;box-shadow:var(--focus)}
+    .page{max-width:var(--max);margin:auto;padding:20px 24px 60px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0 32px;flex-wrap:wrap}
+    .brand{color:var(--ink);font-size:.84rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-family:var(--font-display);text-decoration:none}
+    .nav{display:flex;gap:8px;flex-wrap:wrap}
+    .nav a{padding:8px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.82rem;background:var(--panel);transition:all 150ms ease}
+    .nav a:hover{border-color:var(--accent);color:var(--accent-strong);background:var(--accent-bg);text-decoration:none}
+    .hero{display:grid;grid-template-columns:1.2fr 0.8fr;gap:24px;align-items:start;padding:12px 0 24px}
+    .eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+    h1{font-family:var(--font-display);font-size:clamp(3rem,6vw,5.3rem);line-height:1.05;letter-spacing:-.04em;margin:.6rem 0 .4rem;font-weight:700}
+    .lead{color:var(--muted);margin:0 0 1.5rem;max-width:60ch;font-size:1.05rem}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:.5rem}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:var(--radius-sm);text-decoration:none;font-weight:600;font-size:.88rem;border:1px solid transparent;transition:all 150ms ease}
+    .btn.primary{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+    .btn.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none}
+    .btn.secondary{background:transparent;color:var(--ink);border-color:var(--line)}
+    .btn.secondary:hover{border-color:var(--accent);color:var(--accent-strong);background:var(--accent-bg);text-decoration:none}
+    .hero-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:280px}
+    .mini-label{color:var(--muted);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:1.5rem}
+    .stat{padding:16px;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm)}
+    .stat strong{display:block;font-family:var(--font-display);font-size:clamp(1.5rem,2vw,2.1rem);line-height:1;color:var(--ink);margin-bottom:.25rem}
+    .stat span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+    .section{padding-top:2rem;padding-bottom:1rem}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:1.5rem;flex-wrap:wrap}
+    .section-head h2{margin:0;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+    .section-kicker{color:var(--muted);font-size:.9rem;max-width:35ch}
+    .grid{display:grid;gap:16px}
+    .focus-grid{grid-template-columns:repeat(3,1fr)}
+    .work-grid{grid-template-columns:repeat(3,1fr)}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:22px;box-shadow:var(--shadow);transition:transform 150ms ease, border-color 150ms ease}
+    .card:hover{transform:translateY(-2px);border-color:var(--accent)}
+    .card strong,.card h3{display:block;font-family:var(--font-display);font-size:1.1rem;margin:0 0 .5rem}
+    .card p{color:var(--muted);margin:0;font-size:.95rem}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--accent-bg);color:var(--accent-strong);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-bottom:.75rem}
+    .metric-row{display:flex;gap:12px;margin:1rem 0;flex-wrap:wrap}
+    .metric{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 14px;min-width:100px}
+    .metric strong{display:block;font-family:var(--font-display);font-size:1.4rem;line-height:1;color:var(--ink)}
+    .metric span{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+    .metric.measured strong{color:var(--accent-strong)}
+    .metric.target strong{color:var(--muted)}
+    .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+    .stack span{display:inline-block;padding:3px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:.7rem;color:var(--muted);font-weight:500}
+    .contact-wrap{margin-top:1rem;padding:24px;background:var(--ink);border-radius:var(--radius);color:#f4f0f7;border:1px solid var(--line)}
+    .contact-wrap p{margin:0 0 1rem;color:#b9b0c1;max-width:44ch}
+    .contact-link{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:clamp(1.1rem,2vw,1.7rem);letter-spacing:-.05em;text-decoration:none;font-weight:600;color:#fff}
+    .contact-link:hover{color:#ffc8aa;text-decoration:none}
+    .note-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+    .note-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px}
+    .note-card h3{margin:0 0 .5rem;font-size:1rem;font-family:var(--font-display)}
+    .note-card p{margin:0;font-size:.85rem;color:var(--muted)}
+    footer{padding-top:2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+    footer a{color:var(--muted)}
+    footer a:hover{color:var(--accent)}
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .focus-grid,.work-grid{grid-template-columns:1fr 1fr}
+      .hero-card{min-height:auto}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .note-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:600px){
+      .page{padding:14px 16px 40px}
+      .topbar{flex-direction:column;align-items:flex-start;padding-bottom:24px}
+      .nav{width:100%}
+      .focus-grid,.work-grid,.stats{grid-template-columns:1fr}
+      .section-head{flex-direction:column;align-items:flex-start}
+      .hero-actions{flex-direction:column}
+      .btn{width:100%;justify-content:center}
+      .contact-link{font-size:1.25rem}
+      footer{flex-direction:column;align-items:flex-start}
+    }
+    @media print{
+      body{background:white;color:black}
+      .page{max-width:none;padding:0}
+      .topbar,.card,.hero-card{border:none!important;box-shadow:none!important}
     }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="page">
@@ -393,125 +161,166 @@
       <a class="brand" href="#top">Vivek Narole</a>
       <nav class="nav">
         <a href="#focus">Focus</a>
-        <a href="#work">Work</a>
+        <a href="#featured">Featured</a>
+        <a href="#notes">Notes & Frameworks</a>
+        <a href="#experience">Experience</a>
         <a href="#contact">Contact</a>
-        <a href="/portfolio/">Portfolio</a>
       </nav>
     </header>
 
     <main id="top">
       <section class="hero">
         <div>
-          <div class="eyebrow">Available for systems, AI, and product work</div>
-          <h1>I build systems that make complexity legible.</h1>
-          <p class="lead">I’m Vivek Narole — a software engineer focused on roots, patterns, and leverage. I work with teams that need clarity under pressure: AI workflows, debugging infrastructure, and product systems built to hold under ambiguity.</p>
+          <span class="eyebrow">Backend · Platform · Reliability Engineering</span>
+          <h1>Software engineer building root-cause tooling for IT and production systems.</h1>
+          <p class="lead">I turn repeated incidents into searchable, reusable knowledge so the same failure doesn't get diagnosed from scratch fifty times. I built and shipped an RCA ticketing system for a large enterprise IT team, and I'm now building AI-assisted incident correlation for distributed systems.</p>
           <div class="hero-actions">
-            <a class="btn primary" href="mailto:viveknarole100@gmail.com">Email me</a>
-            <a class="btn secondary" href="/portfolio/">View portfolio</a>
-            <a class="btn secondary" href="#work">See selected work</a>
+            <a class="btn primary" href="mailto:viveknarole100@gmail.com">Email</a>
+            <a class="btn secondary" href="/resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+            <a class="btn secondary" href="https://github.com/nvivek42" rel="me" target="_blank">GitHub</a>
           </div>
         </div>
 
-        <aside class="hero-card" aria-label="Quick profile summary">
+        <aside class="hero-card" aria-label="Role focus">
           <div>
-            <div class="mini-label">Profile</div>
-            <div class="stats">
-              <div class="stat">
-                <strong>Systems</strong>
-                <span>thinking</span>
-              </div>
-              <div class="stat">
-                <strong>AI</strong>
-                <span>delivery</span>
-              </div>
-              <div class="stat">
-                <strong>RCA</strong>
-                <span>debugging</span>
-              </div>
-              <div class="stat">
-                <strong>Clarity</strong>
-                <span>design</span>
-              </div>
-            </div>
+            <div class="mini-label">Looking for</div>
+            <p style="margin:0;color:var(--ink);font-weight:600">Backend / Platform / Reliability engineering roles with an AI-tooling angle</p>
+            <div class="mini-label" style="margin-top:1.5rem">Shipped</div>
+            <p style="margin:.5rem 0 0;color:var(--muted);font-size:.9rem">RCA ticketing system in production at a large enterprise IT org (~200 engineers, 50 services)</p>
+            <p style="margin:.5rem 0 0;color:var(--muted);font-size:.9rem">AI debugging infrastructure prototype — 78% top-3 match on held-out incidents</p>
           </div>
-          <div class="mini-label">Open to collaborations, product work, and AI systems</div>
         </aside>
       </section>
 
-      <section id="focus">
+      <section id="focus" class="section">
         <div class="section-head">
           <h2>Focus</h2>
           <div class="section-kicker">I help teams see the real problem before it becomes expensive.</div>
         </div>
-
-        <div class="focus-grid">
-          <article class="focus-card">
+        <div class="grid focus-grid">
+          <article class="card">
             <strong>Systems thinking</strong>
             <p>I trace the pattern behind the noise so the real issue becomes visible before it compounds.</p>
           </article>
-          <article class="focus-card">
+          <article class="card">
             <strong>AI-assisted engineering</strong>
             <p>I build software that pairs human judgment with automation — faster iteration, cleaner decisions, less drag.</p>
           </article>
-          <article class="focus-card">
+          <article class="card">
             <strong>Root-cause clarity</strong>
             <p>I debug ambiguity, untangle failure loops, and design systems that are easier to reason about.</p>
           </article>
         </div>
       </section>
 
-      <section id="work">
+      <section id="featured" class="section">
         <div class="section-head">
-          <h2>Selected work</h2>
-          <div class="section-kicker">Mostly focused on systems, signals, and software that needs to hold under complexity.</div>
+          <h2>Featured Projects</h2>
+          <div class="section-kicker">Three projects that represent the work I want to keep doing. Two shipped, one live.</div>
         </div>
-
-        <div class="work-grid">
-          <article class="work-item">
-            <div>
-              <span class="tag">Systems</span>
-              <h3>Systemic debugging</h3>
+        <div class="grid work-grid">
+          <article class="card">
+            <span class="tag">System · Shipped</span>
+            <h3><a href="/portfolio/projects/rca-ticketing-system.html">RCA Ticketing System</a></h3>
+            <p>Diagnostic memory layer for enterprise IT ticketing. Automatic symptom extraction, historical pattern matching, inline context in tickets, feedback loop. 68% repeat-ticket reduction, 12→3 min first-query time.</p>
+            <div class="metric-row">
+              <div class="metric measured"><strong>68%</strong><span>Repeat-ticket reduction</span></div>
+              <div class="metric measured"><strong>12→3 min</strong><span>First-query time</span></div>
+              <div class="metric measured"><strong>~200</strong><span>Engineers daily</span></div>
             </div>
-            <p>Building RCA systems that connect failure signals across distributed environments and surface the pattern before it cascades.</p>
+            <div class="stack"><span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>Elasticsearch</span><span>React</span><span>Docker</span></div>
           </article>
 
-          <article class="work-item">
-            <div>
-              <span class="tag">AI</span>
-              <h3>AI-assisted delivery</h3>
+          <article class="card">
+            <span class="tag">System · Prototype</span>
+            <h3><a href="/portfolio/projects/ai-debugging-infrastructure.html">AI-Assisted Debugging Infrastructure</a></h3>
+            <p>RCA pattern library, signal correlation engine, runbook generator for distributed systems. Prototype validated on 3 months of historical incidents from a 50-service system: 78% top-3 root-cause match (held-out test), 15→2 min first-query in walkthroughs.</p>
+            <div class="metric-row">
+              <div class="metric measured"><strong>78%</strong><span>Top-3 match (held-out)</span></div>
+              <div class="metric measured"><strong>15→2 min</strong><span>First-query (walkthrough)</span></div>
+              <div class="metric target"><strong>40%</strong><span>Target MTTR Δ</span></div>
+              <div class="metric target"><strong><5%</strong><span>Target FPR</span></div>
             </div>
-            <p>Designing software workflows that let teams move faster without sacrificing judgment, quality, or context.</p>
+            <div class="stack"><span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Celery + Redis</span><span>OpenTelemetry</span><span>LLM</span></div>
           </article>
 
-          <article class="work-item">
-            <div>
-              <span class="tag">Pattern</span>
-              <h3>Signal analysis</h3>
+          <article class="card">
+            <span class="tag">Tool · Live</span>
+            <h3><a href="/portfolio/projects/goal-clarity-engine.html">Goal Clarity Engine</a></h3>
+            <p>Interactive 6-stage decision worksheet for high-stakes career choices (government vs private sector). Local-first, optional AI synthesis via Cloudflare Worker + NVIDIA NIM. No frontend framework deps, ~45KB total. 17 completed sessions.</p>
+            <div class="metric-row">
+              <div class="metric"><strong>6</strong><span>Stages</span></div>
+              <div class="metric"><strong>18</strong><span>Prompts</span></div>
+              <div class="metric"><strong><50KB</strong><span>Total Weight</span></div>
+              <div class="metric"><strong>17</strong><span>Sessions</span></div>
             </div>
-            <p>Applying system-level thinking to technical and financial signals — turning noise into insight and action.</p>
+            <div class="stack"><span>Vanilla JS</span><span>Cloudflare Workers</span><span>NVIDIA NIM</span><span>localStorage</span></div>
           </article>
         </div>
       </section>
 
-      <section id="contact">
+      <section id="notes" class="section">
         <div class="section-head">
-          <h2>Contact</h2>
+          <h2>Notes & Frameworks</h2>
+          <div class="section-kicker">Structured thinking tools and research. Not production systems — no metrics boxes, no live demos.</div>
         </div>
+        <div class="grid note-grid">
+          <article class="note-card">
+            <h3><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval Wealth Framework Stress Test</a></h3>
+            <p>12 principles, 8 scenarios, 4 failure modes, 15-item checklist. Stress-testing popular advice against real constraints.</p>
+          </article>
+          <article class="note-card">
+            <h3><a href="/portfolio/projects/career-decision-framework.html">Career Decision Framework: Govt vs Private</a></h3>
+            <p>MCDA with 15 criteria, 8 paths, sensitivity analysis, 3 scenarios. Beyond binary framing.</p>
+          </article>
+          <article class="note-card">
+            <h3><a href="/portfolio/projects/odyssey-plans.html">Odyssey Plans</a></h3>
+            <p>Life design framework: 3 divergent 5-year plans, constraint heatmap, 20+ experiments, quarterly checkpoints.</p>
+          </article>
+          <article class="note-card">
+            <h3><a href="/portfolio/projects/pune-industrial-hubs.html">Pune Industrial Hubs Analysis</a></h3>
+            <p>Primary research: 8 hubs, 50+ companies, 12 constraint categories, decision matrix for career/location choices.</p>
+          </article>
+        </div>
+      </section>
 
+      <section id="experience" class="section">
+        <div class="section-head">
+          <h2>Experience</h2>
+          <div class="section-kicker">Where the work happened.</div>
+        </div>
+        <div class="grid work-grid">
+          <article class="card">
+            <span class="tag">Software Engineer</span>
+            <h3>Large enterprise IT organization <span style="font-weight:400;color:var(--muted);font-size:.9rem">(confidential)</span></h3>
+            <p style="margin-top:.5rem"><strong>2023–present</strong></p>
+            <ul style="margin:.75rem 0 0;padding-left:1.2rem;color:var(--muted)">
+              <li>Designed and shipped an RCA ticketing system used by ~200 engineers; reduced repeat-ticket rate by 68%, first-actionable-query time from 12 min to 3 min.</li>
+              <li>Built AI-assisted debugging infrastructure prototype: pattern library (200+ incidents), vector correlation engine, runbook generator. Validated 78% top-3 root-cause match on held-out incidents from a 50-service system.</li>
+              <li>Scope: L1/L2/L3 support tiers, 50+ services, ~200 engineers, integrated with ServiceNow, Prometheus, Grafana, Loki, Elasticsearch.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="section-head"><h2>Contact</h2></div>
         <div class="contact-wrap">
-          <p>I’m open to product, AI, and systems engineering conversations — especially the kind where the problem is messy, important, and worth solving properly.</p>
+          <p>I'm open to backend, platform, and reliability engineering conversations — especially where the problem is messy, important, and worth solving properly.</p>
           <a class="contact-link" href="mailto:viveknarole100@gmail.com">viveknarole100@gmail.com</a>
         </div>
       </section>
     </main>
 
     <footer>
-      <div class="footer-links">
-        <a href="/llms.txt" rel="alternate">llms.txt</a>
-        <a href="https://github.com/nvivek42" rel="me">GitHub</a>
-        <a href="https://topmate.io/vivek_narole" rel="me">Topmate</a>
+      <div>
+        <a href="/llms.txt" rel="alternate">llms.txt</a> ·
+        <a href="https://github.com/nvivek42" rel="me">GitHub</a> ·
+        <a href="https://topmate.io/vivek_narole" rel="me">Topmate</a> ·
+        <a href="mailto:viveknarole100@gmail.com">Email</a> ·
+        <a href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
       </div>
-      <div>© 2025 Vivek Narole</div>
+      <div>© 2026 Vivek Narole</div>
     </footer>
   </div>
 </body>

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3ee">
+  <title>Career Decision Framework: Government vs Private — Vivek Narole</title>
+  <meta name="description" content="Multi-criteria decision analysis framework for government vs private sector career choices. 15 criteria, 5 constraint categories, sensitivity testing, 3 scenario outputs. Moves beyond binary framing.">
+  <link rel="canonical" href="https://viveknarole.com/portfolio/projects/career-decision-framework.html">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/space-grotesk-v18-latin-700.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-regular.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-500.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-600.woff2">
+  <style>
+    :root{
+      color-scheme:light dark;
+      --bg:#f7f3ee;
+      --panel:#fffaf6;
+      --ink:#211b17;
+      --muted:#655b53;
+      --line:#ded5cc;
+      --accent:#c76838;
+      --accent-strong:#9d4727;
+      --accent-bg:#f5e8df;
+      --focus:0 0 0 3px #c7683840;
+      --shadow:0 16px 40px #211b1710;
+      --radius:16px;
+      --radius-sm:12px;
+      --max:42rem;
+      --font-display:"Space Grotesk", Inter, system-ui, sans-serif;
+      --font-body:Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    @media(prefers-color-scheme:dark){
+      :root{
+        --bg:#14131a;
+        --panel:#1d1b24;
+        --ink:#f4f0f7;
+        --muted:#b9b0c1;
+        --line:#393541;
+        --accent:#ff9b72;
+        --accent-strong:#ffb896;
+        --accent-bg:#382820;
+        --shadow:0 16px 40px #0005;
+      }
+    }
+    @font-face{
+      font-family:"Space Grotesk";
+      src:url("/assets/fonts/space-grotesk-v18-latin-700.woff2") format("woff2");
+      font-weight:700;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-regular.woff2") format("woff2");
+      font-weight:400;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-500.woff2") format("woff2");
+      font-weight:500;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-600.woff2") format("woff2");
+      font-weight:600;
+      font-display:swap;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    a:focus-visible{outline:0;box-shadow:var(--focus)}
+    .shell{max-width:var(--max);margin:auto;padding:20px 24px 60px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0 32px}
+    .brand{color:var(--ink);font-size:.84rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-family:var(--font-display);text-decoration:none}
+    .crumb{font-size:.9rem;color:var(--muted)}
+    .crumb:hover{color:var(--accent)}
+    .eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+    h1{font-family:var(--font-display);font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.05;letter-spacing:-.04em;margin:.6rem 0 .4rem;font-weight:700}
+    .project-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:1.5rem;font-size:.9rem;color:var(--muted)}
+    .project-meta time{font-variant-numeric:tabular-nums}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--accent-bg);color:var(--accent-strong);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:var(--radius-sm);text-decoration:none;font-weight:600;font-size:.88rem;border:1px solid transparent;transition:all 150ms ease}
+    .btn.primary{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+    .btn.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none}
+    .btn.secondary{background:transparent;color:var(--ink);border-color:var(--line)}
+    .btn.secondary:hover{border-color:var(--accent);color:var(--accent-strong);background:var(--accent-bg);text-decoration:none}
+    .btn.small{padding:6px 12px;font-size:.8rem}
+    .stack{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0}
+    .stack span{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--panel);border:1px solid var(--line);font-size:.78rem;color:var(--muted);font-weight:500}
+    .section{margin:3rem 0;padding-top:1.5rem;border-top:1px solid var(--line)}
+    .section:first-of-type{border-top:none;padding-top:0}
+    .section h2{font-family:var(--font-display);font-size:clamp(1.4rem,3vw,1.8rem);line-height:1.2;letter-spacing:-.02em;margin:0 0 1rem;color:var(--ink)}
+    .section h3{font-family:var(--font-display);font-size:1.1rem;margin:1.5rem 0 .5rem;color:var(--accent)}
+    .section p,.section li{color:var(--muted);margin:.5rem 0}
+    .section ul{padding-left:1.2rem}
+    .section li+li{margin-top:.3rem}
+    .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:1.5rem 0}
+    .metric{padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm)}
+    .metric strong{display:block;font-family:var(--font-display);font-size:1.8rem;line-height:1;color:var(--ink);margin-bottom:.25rem}
+    .metric span{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+    .figure{margin:2rem 0}
+    .figure img{max-width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line);background:var(--panel)}
+    .figure figcaption{margin-top:.75rem;font-size:.85rem;color:var(--muted);text-align:center}
+    .callout{padding:1rem 1.25rem;background:var(--accent-bg);border:1px solid rgba(199,104,56,0.2);border-radius:var(--radius-sm);margin:1.5rem 0}
+    .callout strong{color:var(--accent-strong)}
+    footer{padding-top:2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+    footer a{color:var(--muted)}
+    footer a:hover{color:var(--accent)}
+    @media(max-width:600px){
+      .shell{padding:14px 16px 40px}
+      .topbar{padding-bottom:24px}
+      .project-meta{flex-direction:column;align-items:flex-start}
+      .metrics{grid-template-columns:1fr 1fr}
+      .btn{width:100%;justify-content:center}
+    }
+    @media print{
+      body{background:white;color:black}
+      .shell{max-width:none;padding:0}
+      .topbar,.btn,.figure img{border:none!important;box-shadow:none!important}
+      .section{border-top-color:#ccc}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <nav class="topbar" aria-label="Main navigation">
+      <a class="brand" href="/">Vivek Narole</a>
+      <a class="crumb" href="/portfolio/projects/">← All projects</a>
+    </nav>
+
+    <header>
+      <span class="eyebrow">Analysis</span>
+      <h1>Career Decision Framework: Government vs Private</h1>
+      <div class="project-meta">
+        <time datetime="2025-06-10">June 2025</time>
+        <span class="tag">2 weeks</span>
+        <a class="btn primary small" href="https://github.com/nvivek42/career-decision-framework" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a class="btn secondary small" href="/analysis/career_decision_framework_govt_vs_private.html" rel="noopener noreferrer" target="_blank">Live Demo</a>
+      </div>
+      <div class="stack">
+        <span>MCDA</span>
+        <span>Sensitivity Analysis</span>
+        <span>Scenario Planning</span>
+        <span>Markdown</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="section" id="problem">
+        <h2>The Problem</h2>
+        <p>The "government vs. private" career debate in India is stuck in binary framing: security vs. growth, pension vs. salary, stability vs. learning. This ignores the reality that most people face a spectrum of options (PSU, state govt, central govt, contract roles, startup, MNC, mid-size product, services) and a complex constraint space (age limits, exam cycles, family location, debt, caregiving, health, risk tolerance).</p>
+        <p>Existing advice is either ideological ("govt is safe"), anecdotal ("my cousin cracked UPSC"), or generic ("follow your passion"). No structured method exists to map your specific situation to a ranked set of options with quantified trade-offs.</p>
+      </section>
+
+      <section class="section" id="approach">
+        <h2>Approach</h2>
+        <p>Applied Multi-Criteria Decision Analysis (MCDA) to the career choice problem:</p>
+        <ol>
+          <li><strong>Criteria definition:</strong> 15 decision criteria across 5 categories — Financial (base pay, upside, pension, benefits), Career (learning rate, autonomy, brand, specialization), Lifestyle (location control, hours, commute, transfer risk), Security (tenure, layoff risk, income volatility), Meaning (impact, alignment, status)</li>
+          <li><strong>Weight elicitation:</strong> Pairwise comparison + swing weighting to extract user-specific weights (not assumed)</li>
+          <li><strong>Option scoring:</strong> Each path (Central Govt Group A, State PSC, PSU, MNC, Mid-size Product, Startup, Services, Contract) scored 1–5 on each criterion with justification</li>
+          <li><strong>Sensitivity testing:</strong> Monte Carlo simulation on weights (±20%) and scores (±1) to find robust vs. fragile recommendations</li>
+          <li><strong>Scenario outputs:</strong> Three views — Base case (current weights), Risk-averse (security ×2), Growth-seeking (upside/learning ×2)</li>
+          <li><strong>Constraint gating:</strong> Hard filters (age limit, exam eligibility, location lock-in) applied before scoring</li>
+        </ol>
+        <div class="callout">
+          <strong>Key insight:</strong> For most profiles, the "optimal" path is a portfolio — e.g., prepare for UPSC while working in a mid-size product company (option value + income + learning), not a binary choice.
+        </div>
+      </section>
+
+      <section class="section" id="solution">
+        <h2>Solution</h2>
+        <p>A structured analysis document with:</p>
+        <ul>
+          <li><strong>Criteria catalog</strong> — 15 criteria, definitions, measurement notes, data sources</li>
+          <li><strong>Option profiles</strong> — 8 paths × 15 criteria with evidence-backed scores</li>
+          <li><strong>Weight templates</strong> — 5 archetypes (Security-first, Growth-first, Balance, Location-locked, Family-caregiver) + custom</li>
+          <li><strong>Sensitivity dashboard</strong> — Which criteria swing the decision? Where to gather more info?</li>
+          <li><strong>Scenario narratives</strong> — What each output means in practice (not just numbers)</li>
+          <li><strong>Uncertainty register</strong> — What we don't know, confidence levels, verification steps</li>
+        </ul>
+        <p>Rendered as static Markdown/HTML. The framework is a thinking tool, not a calculator — it structures the conversation you have with yourself (and mentors).</p>
+      </section>
+
+      <section class="section" id="impact">
+        <h2>Impact & Metrics</h2>
+        <div class="metrics">
+          <div class="metric">
+            <strong>15</strong>
+            <span>Criteria</span>
+          </div>
+          <div class="metric">
+            <strong>8</strong>
+            <span>Option Paths</span>
+          </div>
+          <div class="metric">
+            <strong>5</strong>
+            <span>Constraint Categories</span>
+          </div>
+          <div class="metric">
+            <strong>3</strong>
+            <span>Scenario Outputs</span>
+          </div>
+        </div>
+        <p>Framework used by 4 people for real decisions (2 chose PSU + prep, 1 chose MNC + upskill, 1 chose state govt). The sensitivity analysis consistently reveals that "learning rate" and "location control" are the highest-swing criteria — where 10 hours of research changes the outcome.</p>
+      </section>
+
+      <section class="section" id="reflection">
+        <h2>What Went Wrong</h2>
+        <ul>
+          <li><strong>Static document, not an interactive tool.</strong> Users must manually copy weights into a spreadsheet. A tiny web app with sliders for weights and instant re-ranking would lower the barrier significantly.</li>
+          <li><strong>Point estimates instead of progression curves.</strong> Salary scoring uses single numbers. Year-by-year curves (with promotion probabilities) would capture the time-value of money and long-term trajectory better.</li>
+          <li><strong>Option value not modeled.</strong> "Preparing while working" has real option value that static MCDA misses. Real options analysis would quantify the value of keeping paths open.</li>
+          <li><strong>Single-player model.</strong> Career decisions often involve a partner/spouse with shared constraints (location, income floor). A two-player version with joint utility would be more realistic.</li>
+          <li><strong>Scores unvalidated.</strong> All 15×8 = 120 scores are expert judgment, not calibrated data. Tracking actual outcomes for 50+ people over 3–5 years would ground the model.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer><a href="/llms.txt" rel="alternate">llms.txt</a> · <a href="https://github.com/nvivek42" rel="me">GitHub</a> · <a href="https://topmate.io/vivek_narole" rel="me">Topmate</a> · <a href="mailto:viveknarole100@gmail.com">Email</a> · 
+      <a href="/portfolio/projects/">← Back to projects</a>
+      <span>© 2026 Vivek Narole</span>
+    </footer>
+  </div>
+</body>
+</html>

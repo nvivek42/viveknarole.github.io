@@ -3,40 +3,223 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fafafa">
+  <meta name="theme-color" content="#f7f3ee">
   <title>Portfolio — Vivek Narole</title>
-  <meta name="description" content="Explore Vivek Narole's projects, experiences, lessons, and decision-making tool.">
+  <meta name="description" content="3 featured projects (shipped RCA ticketing system, AI debugging prototype, live Goal Clarity tool), plus notes & frameworks. Systems, tools, analysis, and research.">
   <link rel="canonical" href="https://viveknarole.com/portfolio/">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/space-grotesk-v18-latin-700.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-regular.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-500.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-600.woff2">
   <style>
-    :root{color-scheme:light dark;--bg:#fafafa;--ink:#1a1a2e;--muted:#5a5a7a;--line:#e8e8f0;--accent:#a94c25;--card:#fff;--soft:#f4eee9;--max:66rem;--focus:0 0 0 3px #c7683840;--shadow:0 12px 32px rgba(26,26,46,.05)}
-    @media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--ink:#f0f0f5;--muted:#aaa9c0;--line:#2a2a3e;--accent:#ff9b72;--card:#161622;--soft:#211c24;--shadow:0 12px 32px #0003}}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}.shell{max-width:var(--max);margin:auto;padding:20px 24px 52px}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:0;box-shadow:var(--focus)}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 44px}.brand{color:var(--ink);font-size:.84rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase}.home-link{font-size:.9rem}.hero{max-width:700px;padding-bottom:24px}.eyebrow,.tag{color:var(--accent);font-size:.72rem;font-weight:750;letter-spacing:.11em;text-transform:uppercase}.eyebrow{display:inline-block}h1{font-size:clamp(2.7rem,7vw,4.8rem);line-height:1;letter-spacing:-.065em;margin:.75rem 0 1rem}.hero p{color:var(--muted);max-width:60ch;margin:0;font-size:1.08rem}.browse-title{font-size:.78rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin:1.4rem 0 .75rem}.browse{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);color:var(--ink);transition:transform .16s,border-color .16s}.card:hover{transform:translateY(-2px);border-color:var(--accent);text-decoration:none}.card h2{font-size:1.2rem;line-height:1.25;letter-spacing:-.03em;margin:.5rem 0}.card p{color:var(--muted);margin:0;font-size:.95rem}.card .go{display:inline-block;color:var(--accent);font-weight:650;font-size:.9rem;margin-top:14px}.contact{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}.footer{padding-top:20px;color:var(--muted);font-size:.82rem}.featured{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:2rem 0}.featured .card{text-align:left}.tag{display:inline-block;margin-bottom:.5rem}@media(max-width:600px){.shell{padding:14px 16px 36px}.topbar{padding-bottom:32px}.browse{grid-template-columns:1fr}.card{padding:18px}}
+    :root{
+      color-scheme:light dark;
+      --bg:#f7f3ee;
+      --panel:#fffaf6;
+      --ink:#211b17;
+      --muted:#655b53;
+      --line:#ded5cc;
+      --accent:#c76838;
+      --accent-strong:#9d4727;
+      --accent-bg:#f5e8df;
+      --focus:0 0 0 3px #c7683840;
+      --shadow:0 16px 40px #211b1710;
+      --radius:16px;
+      --radius-sm:12px;
+      --max:66rem;
+      --font-display:"Space Grotesk", Inter, system-ui, sans-serif;
+      --font-body:Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    @media(prefers-color-scheme:dark){
+      :root{
+        --bg:#14131a;
+        --panel:#1d1b24;
+        --ink:#f4f0f7;
+        --muted:#b9b0c1;
+        --line:#393541;
+        --accent:#ff9b72;
+        --accent-strong:#ffb896;
+        --accent-bg:#382820;
+        --shadow:0 16px 40px #0005;
+      }
+    }
+    @font-face{
+      font-family:"Space Grotesk";
+      src:url("/assets/fonts/space-grotesk-v18-latin-700.woff2") format("woff2");
+      font-weight:700;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-regular.woff2") format("woff2");
+      font-weight:400;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-500.woff2") format("woff2");
+      font-weight:500;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-600.woff2") format("woff2");
+      font-weight:600;
+      font-display:swap;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    a:focus-visible{outline:0;box-shadow:var(--focus)}
+    .shell{max-width:var(--max);margin:auto;padding:20px 24px 60px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 40px}
+    .brand{color:var(--ink);font-size:.84rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-family:var(--font-display);text-decoration:none}
+    .home-link{font-size:.9rem;color:var(--muted)}
+    .home-link:hover{color:var(--accent)}
+    .hero{max-width:700px;padding-bottom:24px}
+    .eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+    h1{font-family:var(--font-display);font-size:clamp(2.7rem,7vw,4.8rem);line-height:1;letter-spacing:-.065em;margin:.75rem 0 1rem;font-weight:700}
+    .hero p{color:var(--muted);max-width:60ch;margin:0;font-size:1.08rem}
+    .browse-title{font-size:.78rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin:2rem 0 1rem}
+    .browse{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);color:var(--ink);transition:transform 160ms ease, border-color 160ms ease}
+    .card:hover{transform:translateY(-2px);border-color:var(--accent);text-decoration:none}
+    .card h2{font-family:var(--font-display);font-size:1.2rem;line-height:1.25;letter-spacing:-.03em;margin:.5rem 0}
+    .card p{color:var(--muted);margin:0;font-size:.95rem}
+    .card .go{display:inline-block;color:var(--accent);font-weight:650;font-size:.9rem;margin-top:14px}
+    .featured{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:2.5rem 0}
+    .featured .card{text-align:left}
+    .featured .metric-row{display:flex;gap:12px;margin:1rem 0;flex-wrap:wrap}
+    .featured .metric{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 14px;min-width:100px}
+    .featured .metric strong{display:block;font-family:var(--font-display);font-size:1.4rem;line-height:1;color:var(--ink)}
+    .featured .metric span{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+    .featured .metric.measured strong{color:var(--accent-strong)}
+    .featured .metric.target strong{color:var(--muted)}
+    .featured .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+    .featured .stack span{display:inline-block;padding:3px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:.7rem;color:var(--muted);font-weight:500}
+    .notes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:1rem}
+    .note-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px}
+    .note-card h3{margin:0 0 .5rem;font-size:1rem;font-family:var(--font-display)}
+    .note-card p{margin:0;font-size:.85rem;color:var(--muted)}
+    .contact{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+    .footer{padding-top:2rem;color:var(--muted);font-size:.82rem}
+    @media(max-width:600px){
+      .shell{padding:14px 16px 40px}
+      .topbar{padding-bottom:32px}
+      .browse{grid-template-columns:1fr}
+      .card{padding:18px}
+      .featured{grid-template-columns:1fr}
+    }
+    @media print{
+      body{background:white;color:black}
+      .shell{max-width:none;padding:0}
+      .topbar,.card,.featured .card{border:none!important;box-shadow:none!important}
+    }
   </style>
 </head>
 <body>
 <div class="shell">
-  <nav class="topbar" aria-label="Main navigation"><a class="brand" href="/">Vivek Narole</a><a class="home-link" href="/">Home</a></nav>
-  <header class="hero"><span class="eyebrow">A small, curated collection</span><h1>Portfolio</h1><p>Explore a few kinds of work and thinking. Choose a section to get started; each section has a simple path back here.</p></header>
+  <nav class="topbar" aria-label="Main navigation">
+    <a class="brand" href="/">Vivek Narole</a>
+    <a class="home-link" href="/">Home</a>
+  </nav>
+  <header class="hero">
+    <span class="eyebrow">Systems · Tools · Frameworks</span>
+    <h1>Portfolio</h1>
+    <p>Three featured projects — two shipped, one live — plus structured notes and frameworks. Each documents problem, approach, measured impact, and what went wrong.</p>
+  </header>
   <main>
-    <h2 class="browse-title">Browse the portfolio</h2>
+    <h2 class="browse-title">Browse by section</h2>
     <nav class="browse" aria-label="Portfolio sections">
-      <a class="card" href="/portfolio/projects/"><span class="tag">Build</span><h2>Projects</h2><p>Systems, experiments, and practical problem-solving.</p><span class="go">Explore projects →</span></a>
-      <a class="card" href="/portfolio/experiences/"><span class="tag">Learn</span><h2>Experiences</h2><p>Work and life experiences that shaped how I think.</p><span class="go">Explore experiences →</span></a>
-      <a class="card" href="/portfolio/lessons/"><span class="tag">Reflect</span><h2>Lessons</h2><p>Reusable ideas, personal essays, and insights.</p><span class="go">Read lessons →</span></a>
-      <a class="card" href="/portfolio/goal-clarity/"><span class="tag">Try</span><h2>Goal Clarity</h2><p>A guided worksheet for thinking through a career decision.</p><span class="go">Open the tool →</span></a>
+      <a class="card" href="/portfolio/projects/">
+        <span class="tag">Build</span>
+        <h2>Projects</h2>
+        <p>3 featured projects + 4 notes & frameworks. Filter by type. Each documents problem → approach → solution → metrics → reflection.</p>
+        <span class="go">Explore projects →</span>
+      </a>
+      <a class="card" href="/portfolio/experiences/">
+        <span class="tag">Learn</span>
+        <h2>Experiences</h2>
+        <p>Where the work happened: enterprise IT, 50-service production environment, 200-engineer support org.</p>
+        <span class="go">Explore experience →</span>
+      </a>
+      <a class="card" href="/portfolio/lessons/">
+        <span class="tag">Reflect</span>
+        <h2>Lessons</h2>
+        <p>Reusable ideas and personal essays. Flow as a system, the ticket that kept coming back, never lost, Pune industrial hubs.</p>
+        <span class="go">Read lessons →</span>
+      </a>
+      <a class="card" href="/portfolio/goal-clarity/">
+        <span class="tag">Try</span>
+        <h2>Goal Clarity Engine</h2>
+        <p>Interactive 6-stage decision worksheet for government vs private sector choices. Local-first, optional AI synthesis.</p>
+        <span class="go">Open the tool →</span>
+      </a>
     </nav>
 
-    <h2 class="browse-title">Featured entries</h2>
+    <h2 class="browse-title">Featured Projects</h2>
     <div class="featured">
-      <article class="card"><span class="tag">Experience</span><h2><a href="/portfolio/experiences/manufacturing-org-psychology.html">Manufacturing + organization psychology</a></h2><p>Studying production constraints and human behavior through the lens of systems, incentives, and emotional load.</p></article>
-      <article class="card"><span class="tag">Experience</span><h2><a href="/portfolio/experiences/flow-and-vedanta.html">Flow, family, and Vedanta</a></h2><p>Examining attention, values, and personal alignment as the foundation for better work and calmer decision-making.</p></article>
-      <article class="card"><span class="tag">Project</span><h2><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval wealth framework stress test</a></h2><p>Testing framework-driven wealth advice against actual tradeoffs, leverage, and lived constraints.</p></article>
-      <article class="card"><span class="tag">Tool</span><h2><a href="/portfolio/goal-clarity/">Goal Clarity Engine</a></h2><p>Structured interview for high-stakes decisions. Forces the questions you're avoiding. Returns a decision tree you can trust.</p></article>
+      <article class="card">
+        <span class="tag">System · Shipped</span>
+        <h2><a href="/portfolio/projects/rca-ticketing-system.html">RCA Ticketing System</a></h2>
+        <p>Diagnostic memory layer for enterprise IT ticketing. Automatic symptom extraction, historical pattern matching, inline context, feedback loop. In production use.</p>
+        <div class="metric-row">
+          <div class="metric measured"><strong>68%</strong><span>Repeat-ticket reduction</span></div>
+          <div class="metric measured"><strong>12→3 min</strong><span>First-query time</span></div>
+          <div class="metric measured"><strong>~200</strong><span>Engineers daily</span></div>
+        </div>
+        <div class="stack"><span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>Elasticsearch</span><span>React</span><span>Docker</span></div>
+      </article>
+      <article class="card">
+        <span class="tag">System · Prototype</span>
+        <h2><a href="/portfolio/projects/ai-debugging-infrastructure.html">AI-Assisted Debugging Infrastructure</a></h2>
+        <p>RCA pattern library, signal correlation engine, runbook generator for distributed systems. 78% top-3 match on held-out incidents (50-service system), 15→2 min first-query in walkthroughs.</p>
+        <div class="metric-row">
+          <div class="metric measured"><strong>78%</strong><span>Top-3 match (held-out)</span></div>
+          <div class="metric measured"><strong>15→2 min</strong><span>First-query (walkthrough)</span></div>
+          <div class="metric target"><strong>40%</strong><span>Target MTTR Δ</span></div>
+          <div class="metric target"><strong><5%</strong><span>Target FPR</span></div>
+        </div>
+        <div class="stack"><span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Celery + Redis</span><span>OpenTelemetry</span><span>LLM</span></div>
+      </article>
+      <article class="card">
+        <span class="tag">Tool · Live</span>
+        <h2><a href="/portfolio/projects/goal-clarity-engine.html">Goal Clarity Engine</a></h2>
+        <p>Interactive 6-stage decision worksheet for high-stakes career choices. Local-first, optional AI synthesis via Cloudflare Worker + NVIDIA NIM. No frontend framework deps, ~45KB total.</p>
+        <div class="metric-row">
+          <div class="metric"><strong>6</strong><span>Stages</span></div>
+          <div class="metric"><strong>18</strong><span>Prompts</span></div>
+          <div class="metric"><strong><50KB</strong><span>Total Weight</span></div>
+          <div class="metric"><strong>17</strong><span>Sessions</span></div>
+        </div>
+        <div class="stack"><span>Vanilla JS</span><span>Cloudflare Workers</span><span>NVIDIA NIM</span><span>localStorage</span></div>
+      </article>
+    </div>
+
+    <h2 class="browse-title">Notes & Frameworks</h2>
+    <div class="notes-grid">
+      <article class="note-card">
+        <h3><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval Wealth Framework Stress Test</a></h3>
+        <p>12 principles, 8 scenarios, 4 failure modes, 15-item checklist. Stress-testing popular advice against real constraints.</p>
+      </article>
+      <article class="note-card">
+        <h3><a href="/portfolio/projects/career-decision-framework.html">Career Decision Framework: Govt vs Private</a></h3>
+        <p>MCDA with 15 criteria, 8 paths, sensitivity analysis, 3 scenarios. Beyond binary framing.</p>
+      </article>
+      <article class="note-card">
+        <h3><a href="/portfolio/projects/odyssey-plans.html">Odyssey Plans</a></h3>
+        <p>Life design framework: 3 divergent 5-year plans, constraint heatmap, 20+ experiments, quarterly checkpoints.</p>
+      </article>
+      <article class="note-card">
+        <h3><a href="/portfolio/projects/pune-industrial-hubs.html">Pune Industrial Hubs Analysis</a></h3>
+        <p>Research: 8 hubs, 50+ companies, 12 constraint categories, decision matrix for career/location choices.</p>
+      </article>
     </div>
 
     <p class="contact">Looking to connect? <a href="mailto:viveknarole100@gmail.com">Email Vivek</a> · <a href="https://github.com/nvivek42" rel="me">GitHub</a> · <a href="/llms.txt">Text version</a></p>
   </main>
-  <footer class="footer">© 2025 Vivek Narole</footer>
+  <footer class="footer"><a href="/llms.txt" rel="alternate">llms.txt</a> · <a href="https://github.com/nvivek42" rel="me">GitHub</a> · <a href="https://topmate.io/vivek_narole" rel="me">Topmate</a> · <a href="mailto:viveknarole100@gmail.com">Email</a> · © 2026 Vivek Narole</footer>
 </div>
 </body>
 </html>

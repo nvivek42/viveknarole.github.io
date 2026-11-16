@@ -1,20 +1,233 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fafafa">
-  <title>Projects — Vivek Narole</title><meta name="description" content="Projects, tools, and systems built to solve real constraints with clarity and leverage.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3ee">
+  <title>Projects — Vivek Narole</title>
+  <meta name="description" content="3 featured projects (shipped RCA ticketing system, AI debugging prototype, live Goal Clarity tool) plus 4 notes & frameworks. Each documents problem, approach, solution, metrics, and what went wrong.">
   <link rel="canonical" href="https://viveknarole.com/portfolio/projects/">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/space-grotesk-v18-latin-700.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-regular.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-500.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-600.woff2">
   <style>
-    :root{color-scheme:light dark;--bg:#fafafa;--ink:#1a1a2e;--muted:#5a5a7a;--line:#e8e8f0;--accent:#a94c25;--card:#fff;--max:58rem;--focus:0 0 0 3px #c7683840;--shadow:0 12px 32px #1a1a2e0d}
-    @media(prefers-color-scheme:dark){:root{--bg:#0f0f1a;--ink:#f0f0f5;--muted:#aaa9c0;--line:#2a2a3e;--accent:#ff9b72;--card:#161622;--shadow:0 12px 32px #0003}}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}.shell{max-width:var(--max);margin:auto;padding:20px 24px 48px}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:0;box-shadow:var(--focus)}.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0 38px}.brand{color:var(--ink);font-size:.84rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase}.crumb{font-size:.9rem}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 24px}.tabs a{border:1px solid var(--line);border-radius:999px;padding:6px 11px;color:var(--muted);font-size:.82rem}.tabs a[aria-current=page]{border-color:var(--accent);background:var(--card);color:var(--ink);font-weight:650}.eyebrow{font-size:.72rem;color:var(--accent);font-weight:750;letter-spacing:.1em;text-transform:uppercase}h1{font-size:clamp(2.4rem,6vw,3.8rem);line-height:1.03;letter-spacing:-.06em;margin:.6rem 0 .7rem}.intro{color:var(--muted);margin:0 0 1.5rem}.list{display:grid;gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow)}.date{font-size:.76rem;color:var(--accent);font-weight:700;letter-spacing:.06em}.card h2{font-size:1.2rem;line-height:1.3;letter-spacing:-.03em;margin:.35rem 0}.meta{font-size:.82rem;color:var(--muted);margin:.1rem 0 .6rem}.card p,.card li{color:var(--muted)}.card p{margin:0}.card ul{margin:.65rem 0 0;padding-left:1.2rem}.card li+li{margin-top:.2rem}.footer{border-top:1px solid var(--line);padding-top:18px;margin-top:28px;color:var(--muted);font-size:.83rem}@media(max-width:560px){.shell{padding:14px 16px 36px}.topbar{padding-bottom:28px}.card{padding:17px}}
+    :root{
+      color-scheme:light dark;
+      --bg:#f7f3ee;
+      --panel:#fffaf6;
+      --ink:#211b17;
+      --muted:#655b53;
+      --line:#ded5cc;
+      --accent:#c76838;
+      --accent-strong:#9d4727;
+      --accent-bg:#f5e8df;
+      --focus:0 0 0 3px #c7683840;
+      --shadow:0 16px 40px #211b1710;
+      --radius:16px;
+      --radius-sm:12px;
+      --max:58rem;
+      --font-display:"Space Grotesk", Inter, system-ui, sans-serif;
+      --font-body:Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    @media(prefers-color-scheme:dark){
+      :root{
+        --bg:#14131a;
+        --panel:#1d1b24;
+        --ink:#f4f0f7;
+        --muted:#b9b0c1;
+        --line:#393541;
+        --accent:#ff9b72;
+        --accent-strong:#ffb896;
+        --accent-bg:#382820;
+        --shadow:0 16px 40px #0005;
+      }
+    }
+    @font-face{
+      font-family:"Space Grotesk";
+      src:url("/assets/fonts/space-grotesk-v18-latin-700.woff2") format("woff2");
+      font-weight:700;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-regular.woff2") format("woff2");
+      font-weight:400;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-500.woff2") format("woff2");
+      font-weight:500;
+      font-display:swap;
+    }
+    @font-face{
+      font-family:"Inter";
+      src:url("/assets/fonts/inter-v19-latin-600.woff2") format("woff2");
+      font-weight:600;
+      font-display:swap.
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    a:focus-visible{outline:0;box-shadow:var(--focus)}
+    .shell{max-width:var(--max);margin:auto;padding:20px 24px 60px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0 32px}
+    .brand{color:var(--ink);font-size:.84rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-family:var(--font-display);text-decoration:none}
+    .crumb{font-size:.9rem;color:var(--muted)}
+    .crumb:hover{color:var(--accent)}
+    .eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+    h1{font-family:var(--font-display);font-size:clamp(2.4rem,6vw,3.8rem);line-height:1.05;letter-spacing:-.04em;margin:.6rem 0 .7rem;font-weight:700}
+    .intro{color:var(--muted);margin:0 0 2rem;max-width:55ch}
+    .section{margin:3rem 0}
+    .section:first-of-type{margin-top:0}
+    .section h2{font-family:var(--font-display);font-size:clamp(1.3rem,3vw,1.6rem);line-height:1.2;letter-spacing:-.02em;margin:0 0 1rem;color:var(--ink)}
+    .list{display:grid;gap:16px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);transition:transform 150ms ease, border-color 150ms ease}
+    .card:hover{transform:translateY(-2px);border-color:var(--accent)}
+    .card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:.75rem;flex-wrap:wrap}
+    .date{font-size:.76rem;color:var(--accent);font-weight:700;letter-spacing:.06em;white-space:nowrap}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--accent-bg);color:var(--accent-strong);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+    .metric-tag{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--bg);color:var(--muted);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+    .metric-tag.measured{background:var(--accent-bg);color:var(--accent-strong)}
+    .metric-tag.target{background:var(--muted);color:var(--panel)}
+    .card h2{font-family:var(--font-display);font-size:1.25rem;line-height:1.3;letter-spacing:-.03em;margin:.35rem 0}
+    .card h2 a{color:var(--ink);text-decoration:none}
+    .card h2 a:hover{color:var(--accent)}
+    .meta{font-size:.85rem;color:var(--muted);margin:.25rem 0 .75rem;line-height:1.6}
+    .metric-row{display:flex;gap:12px;margin:.75rem 0;flex-wrap:wrap}
+    .metric{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:8px 12px;min-width:80px}
+    .metric strong{display:block;font-family:var(--font-display);font-size:1.2rem;line-height:1;color:var(--ink)}
+    .metric span{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+    .metric.measured strong{color:var(--accent-strong)}
+    .metric.target strong{color:var(--muted)}
+    .card p{color:var(--muted);margin:0 0 .75rem}
+    .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--line)}
+    .stack span{display:inline-block;padding:3px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:.72rem;color:var(--muted);font-weight:500}
+    .notes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+    .note-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px}
+    .note-card h3{margin:0 0 .5rem;font-size:1rem;font-family:var(--font-display)}
+    .note-card p{margin:0;font-size:.85rem;color:var(--muted)}
+    .footer{padding-top:2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+    .footer a{color:var(--muted)}
+    .footer a:hover{color:var(--accent)}
+    @media(max-width:600px){
+      .shell{padding:14px 16px 40px}
+      .topbar{padding-bottom:24px}
+      .card{padding:18px}
+      .metric-row{flex-direction:column}
+      .metric{width:100%}
+    }
+    @media print{
+      body{background:white;color:black}
+      .shell{max-width:none;padding:0}
+      .topbar,.card{border:none!important;box-shadow:none!important}
+    }
   </style>
 </head>
-<body><div class="shell">
-  <nav class="topbar" aria-label="Main navigation"><a class="brand" href="/">Vivek Narole</a><a class="crumb" href="/portfolio/">← All portfolio</a></nav>
-  <nav class="tabs" aria-label="Portfolio sections"><a href="/portfolio/projects/" aria-current="page">Projects</a><a href="/portfolio/experiences/">Experiences</a><a href="/portfolio/lessons/">Lessons</a><a href="/portfolio/goal-clarity/">Goal Clarity</a></nav>
-  <header><span class="eyebrow">Ideas tested in practice</span><h1>Projects</h1><p class="intro">Concrete systems, workflows, and experiments built to solve messy real-world problems with clarity and leverage.</p></header>
-  <main class="list"><article class="card"><span class="date">2025-06-01</span><h2><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval wealth framework stress test</a></h2><div class="meta">wealth · leverage · decision quality · systems</div><p>A structured evaluation of whether the common wealth framework holds up under real-life trade-offs and imperfect information.</p><ul><li>Mapped core ideas into explicit decision principles.</li><li>Tested them against realistic constraints and scenarios.</li><li>Separated durable insight from vague advice and false certainty.</li></ul></article></main>
-  <footer class="footer"><a href="/portfolio/">← Back to portfolio</a> · © 2025 Vivek Narole</footer>
-</div></body>
+<body>
+  <div class="shell">
+    <nav class="topbar" aria-label="Main navigation">
+      <a class="brand" href="/">Vivek Narole</a>
+      <a class="crumb" href="/portfolio/">← All portfolio</a>
+    </nav>
+
+    <header>
+      <span class="eyebrow">Systems · Tools · Frameworks</span>
+      <h1>Projects</h1>
+      <p class="intro">Three featured projects — two shipped, one live — plus four structured notes and frameworks. Each documents problem, approach, solution, metrics, and what went wrong.</p>
+    </header>
+
+    <main id="projectList">
+      <section class="section" aria-labelledby="featured-heading">
+        <h2 id="featured-heading">Featured Projects</h2>
+
+        <div class="list">
+          <article class="card">
+            <div class="card-header">
+              <span class="date">2024-01 – 2025-06</span>
+              <span class="tag">System</span>
+              <span class="metric-tag measured">Shipped</span>
+            </div>
+            <h2><a href="/portfolio/projects/rca-ticketing-system.html">RCA Ticketing System</a></h2>
+            <div class="meta">Enterprise IT · ~200 engineers · 50 services · ServiceNow + Prometheus + Grafana + Elasticsearch</div>
+            <p>Diagnostic memory layer for ticketing: automatic symptom extraction, historical pattern matching, inline context in tickets, feedback loop. In production use at a large enterprise IT organization.</p>
+            <div class="metric-row">
+              <div class="metric measured"><strong>68%</strong><span>Repeat-ticket reduction</span></div>
+              <div class="metric measured"><strong>12→3 min</strong><span>First-query time</span></div>
+              <div class="metric measured"><strong>~200</strong><span>Engineers daily</span></div>
+              <div class="metric measured"><strong>4.2/5</strong><span>Satisfaction</span></div>
+            </div>
+            <div class="stack"><span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>Elasticsearch</span><span>React</span><span>Docker</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <span class="date">2025-01 – 2025-08</span>
+              <span class="tag">System</span>
+              <span class="metric-tag target">Prototype</span>
+            </div>
+            <h2><a href="/portfolio/projects/ai-debugging-infrastructure.html">AI-Assisted Debugging Infrastructure</a></h2>
+            <div class="meta">Distributed systems · 50-service system · 200+ incidents · RCA pattern library · Signal correlation</div>
+            <p>Pattern library, signal correlation engine, runbook generator. Validated on 3 months of incidents from a 50-service production system: 78% top-3 root-cause match on held-out test set, 15→2 min first-query in walkthroughs.</p>
+            <div class="metric-row">
+              <div class="metric measured"><strong>78%</strong><span>Top-3 match (held-out)</span></div>
+              <div class="metric measured"><strong>15→2 min</strong><span>First-query (walkthrough)</span></div>
+              <div class="metric target"><strong>40%</strong><span>Target MTTR Δ</span></div>
+              <div class="metric target"><strong><5%</strong><span>Target FPR</span></div>
+            </div>
+            <div class="stack"><span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Celery + Redis</span><span>OpenTelemetry</span><span>LLM</span></div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <span class="date">2025-07</span>
+              <span class="tag">Tool</span>
+              <span class="metric-tag measured">Live</span>
+            </div>
+            <h2><a href="/portfolio/projects/goal-clarity-engine.html">Goal Clarity Engine</a></h2>
+            <div class="meta">Career decisions · 6 stages · 18 prompts · Optional AI synthesis · Cloudflare Worker + NVIDIA NIM</div>
+            <p>Interactive 6-stage decision worksheet for high-stakes choices (government vs private sector). Local-first, optional AI synthesis via Cloudflare Worker + NVIDIA NIM. No frontend framework dependencies, ~45KB total.</p>
+            <div class="metric-row">
+              <div class="metric"><strong>6</strong><span>Stages</span></div>
+              <div class="metric"><strong>18</strong><span>Prompts</span></div>
+              <div class="metric"><strong><50KB</strong><span>Total Weight</span></div>
+              <div class="metric"><strong>17</strong><span>Sessions</span></div>
+            </div>
+            <div class="stack"><span>Vanilla JS</span><span>Cloudflare Workers</span><span>NVIDIA NIM</span><span>localStorage</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="notes-heading">
+        <h2 id="notes-heading">Notes & Frameworks</h2>
+        <p style="color:var(--muted);margin-bottom:1.5rem">Structured thinking tools and research. Not production systems — no metrics boxes, no live demos.</p>
+        <div class="notes-grid">
+          <article class="note-card">
+            <h3><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval Wealth Framework Stress Test</a></h3>
+            <p>12 principles, 8 scenarios, 4 failure modes, 15-item checklist. Stress-testing popular advice against real constraints.</p>
+          </article>
+          <article class="note-card">
+            <h3><a href="/portfolio/projects/career-decision-framework.html">Career Decision Framework: Govt vs Private</a></h3>
+            <p>MCDA with 15 criteria, 8 paths, sensitivity analysis, 3 scenarios. Beyond binary framing.</p>
+          </article>
+          <article class="note-card">
+            <h3><a href="/portfolio/projects/odyssey-plans.html">Odyssey Plans</a></h3>
+            <p>Life design framework: 3 divergent 5-year plans, constraint heatmap, 20+ experiments, quarterly checkpoints.</p>
+          </article>
+          <article class="note-card">
+            <h3><a href="/portfolio/projects/pune-industrial-hubs.html">Pune Industrial Hubs Analysis</a></h3>
+            <p>Primary research: 8 hubs, 50+ companies, 12 constraint categories, decision matrix for career/location choices.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a href="/portfolio/">← Back to portfolio</a>
+      <span>© 2026 Vivek Narole</span>
+    </footer>
+  </div>
+</body>
 </html>
