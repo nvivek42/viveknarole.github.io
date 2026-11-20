@@ -1,27 +1,15 @@
 # Vivek Narole
 
-> I build tools that turn expert know-how into safe, auditable automation.
-> Open to internal tools, process automation and BizOps-tech roles.
+> Software builder who creates tools that turn expert know-how into safe, auditable automation. Background in psychology, plus three years of self-study for India's civil services exam (UPSC CSE, Psychology optional). Open to internal tools, process automation and BizOps-tech roles.
 
-Website: https://viveknarole.com/
-Email: viveknarole100@gmail.com
-GitHub: https://github.com/nvivek42
+## Work
+- [IT support diagnostics](https://viveknarole.com/#it-diagnostics): A ticketing system with a rule-based diagnostic engine that reads signals from a PC, finds likely root causes and runs seven low-risk fixes automatically behind safety checks and rollback. C#, .NET 8, WPF, MySQL.
+- [Inventory valuation](https://viveknarole.com/#inventory-valuation): A pipeline that automates a manufacturer's inventory valuation to IAS 2 and produces an audit-ready Excel file. Python, MySQL.
 
-## What I've Built
+## About
+- [Story](https://viveknarole.com/#story): Three years of UPSC preparation, psychology, and how that shaped the way I build.
+- [What I bring](https://viveknarole.com/#bring): Skills learned through experience and how I can contribute.
 
-### IT Support Diagnostics
-- System: Ticketing system with an automated diagnostic engine.
-- Purpose: Reads signals from PCs, determines likely root causes across 28+ categories, and safely resolves low-risk issues with rollback capability.
-- Stack: C#, .NET 8, WPF, Entity Framework Core, MySQL, YAML rules, MSIX.
-- Status: In use today.
-
-### Inventory Valuation
-- System: Month-end accounting automation for a manufacturer.
-- Purpose: Calculates inventory valuation according to the IAS 2 international accounting standard and generates audit-ready Excel workbooks.
-- Stack: Python, MySQL, openpyxl, Streamlit, Tkinter.
-- Status: In use today.
-
-## Background & Story
-- 3 years of rigorous civil services preparation with a focus on humanities and psychology.
-- Engineering approach: Observe how people work, find the root cause slowing them down, and build software that makes the right way the easy way.
-- AI workflow: Human-in-the-loop engineering with AI coding agents (Antigravity, pi, Ollama), setting rules, architecture, and verification.
+## Contact
+- Email: viveknarole100@gmail.com
+- GitHub: https://github.com/nvivek42
