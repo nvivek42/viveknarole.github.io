@@ -40,12 +40,132 @@ nav{display:flex;gap:1.5rem;font-family:var(--head);font-weight:500;font-size:1r
 nav a{text-decoration:none}
 nav a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
 
-.hero{padding:clamp(3rem,9vw,7rem) 0 clamp(3rem,7vw,5rem)}
+.hero{padding:clamp(2rem,5vw,3.5rem) 0 clamp(2.5rem,6vw,4rem)}
+.hero-box{
+  background:rgba(255,255,255,0.7);
+  border:1px solid var(--rule);
+  border-radius:12px;
+  padding:clamp(2rem,5vw,3.5rem) clamp(1.5rem,5vw,3rem);
+  position:relative;
+  box-shadow:0 8px 32px -8px rgba(20,33,43,0.06);
+  overflow:hidden;
+}
+@media (prefers-color-scheme:dark){
+  .hero-box{
+    background:rgba(255,255,255,0.025);
+    box-shadow:0 8px 32px -8px rgba(0,0,0,0.5);
+  }
+}
+.hero-box::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:3px;
+  background:linear-gradient(90deg, var(--accent) 0%, rgba(179,38,30,0.2) 60%, transparent 100%);
+}
+@media (prefers-color-scheme:dark){
+  .hero-box::before{
+    background:linear-gradient(90deg, var(--accent) 0%, rgba(239,122,112,0.2) 60%, transparent 100%);
+  }
+}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  padding:.35rem .85rem;
+  border-radius:999px;
+  background:rgba(179,38,30,.07);
+  color:var(--accent);
+  font-family:var(--head);
+  font-size:.85rem;
+  font-weight:700;
+  letter-spacing:.02em;
+  margin-bottom:1.5rem;
+  border:1px solid rgba(179,38,30,.2);
+}
+@media (prefers-color-scheme:dark){
+  .hero-badge{
+    background:rgba(239,122,112,.12);
+    border-color:rgba(239,122,112,.3);
+  }
+}
+.status-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--accent);
+  display:inline-block;
+  box-shadow:0 0 0 3px rgba(179,38,30,.2);
+}
+@media (prefers-color-scheme:dark){
+  .status-dot{
+    box-shadow:0 0 0 3px rgba(239,122,112,.3);
+  }
+}
+.highlight{
+  background:linear-gradient(180deg, transparent 65%, rgba(179,38,30,0.14) 65%);
+  padding:0 .15em;
+  border-bottom:2px solid var(--accent);
+}
+@media (prefers-color-scheme:dark){
+  .highlight{
+    background:linear-gradient(180deg, transparent 65%, rgba(239,122,112,0.22) 65%);
+  }
+}
+.role-pill{
+  display:inline-block;
+  font-family:var(--head);
+  font-size:.95rem;
+  font-weight:700;
+  color:var(--ink);
+  background:rgba(20,33,43,0.05);
+  padding:.1rem .5rem;
+  border-radius:4px;
+  border:1px solid var(--rule);
+  white-space:nowrap;
+  vertical-align:baseline;
+}
+@media (prefers-color-scheme:dark){
+  .role-pill{
+    background:rgba(232,237,240,0.08);
+  }
+}
 h1{font-family:var(--head);font-weight:700;font-size:clamp(2.25rem,6.2vw,4.25rem);line-height:1.04;letter-spacing:-.025em;margin:0 0 1.75rem;max-width:20ch}
 .lede{font-size:clamp(1.2rem,2.2vw,1.45rem);line-height:1.55;color:var(--muted);max-width:40rem;margin:0 0 2.25rem}
-.actions{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;font-family:var(--head);font-weight:500}
-.btn{display:inline-block;background:var(--btn-bg);color:var(--btn-ink);padding:.8rem 1.4rem;border-radius:4px;text-decoration:none;font-weight:700}
-.btn:hover{background:var(--accent);color:#fff}
+.actions{display:flex;flex-wrap:wrap;gap:1rem 1.25rem;align-items:center;font-family:var(--head);font-weight:500}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  background:var(--btn-bg);
+  color:var(--btn-ink);
+  padding:.75rem 1.35rem;
+  border-radius:4px;
+  text-decoration:none;
+  font-weight:700;
+  font-family:var(--head);
+  font-size:1rem;
+  border:1px solid transparent;
+  transition:background .15s ease, color .15s ease, transform .15s ease, border-color .15s ease;
+}
+.btn:hover{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+  transform:translateY(-1px);
+}
+.btn-secondary{
+  background:transparent;
+  color:var(--ink);
+  border-color:var(--rule);
+}
+.btn-secondary:hover{
+  background:var(--btn-bg);
+  color:var(--btn-ink);
+  border-color:var(--btn-bg);
+}
 
 section{padding:clamp(3rem,7vw,5rem) 0;border-top:1px solid var(--rule)}
 h2{font-family:var(--head);font-weight:700;font-size:clamp(1.6rem,3.4vw,2.1rem);letter-spacing:-.015em;line-height:1.15;margin:0 0 2rem}
@@ -99,12 +219,19 @@ footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);f
 
 <main id="top">
   <div class="wrap hero">
-    <h1>I build tools that turn expert know-how into safe, auditable automation.</h1>
-    <p class="lede">I’m a software builder with a psychology background and three years of intense self-study. I’m looking for internal tools, process automation and BizOps-tech roles, where operations and software meet.</p>
-    <div class="actions">
-      <a class="btn" href="#story">Read my story</a>
-      <!-- <a href="resume.pdf">Resume (PDF)</a> -->
-      <a href="mailto:viveknarole100@gmail.com">Email me</a>
+    <div class="hero-box">
+      <div class="hero-badge">
+        <span class="status-dot"></span>
+        <span>Open to roles &bull; Operations &amp; Software</span>
+      </div>
+      <h1>I build tools that turn expert know-how into <span class="highlight">safe, auditable automation</span>.</h1>
+      <p class="lede">I’m a software builder with a psychology background and three years of intense self-study. I’m looking for <span class="role-pill">internal tools</span>, <span class="role-pill">process automation</span> and <span class="role-pill">BizOps-tech</span> roles, where operations and software meet.</p>
+      <div class="actions">
+        <a class="btn" href="#story">Read my story &rarr;</a>
+        <a class="btn btn-secondary" href="#work">Explore my work</a>
+        <a class="btn btn-secondary" href="mailto:viveknarole100@gmail.com">Email me</a>
+        <!-- <a href="resume.pdf">Resume (PDF)</a> -->
+      </div>
     </div>
   </div>
 
