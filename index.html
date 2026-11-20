@@ -1,327 +1,256 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f3ee">
-  <title>Vivek Narole</title>
-  <meta name="description" content="Software engineer building root-cause tooling for IT and production systems. Shipped an RCA ticketing system for enterprise IT; building AI-assisted incident correlation for distributed systems.">
-  <link rel="canonical" href="https://viveknarole.com/">
-  <link rel="alternate" type="text/markdown" href="/llms.txt">
-  <meta property="og:title" content="Vivek Narole">
-  <meta property="og:description" content="Software engineer building root-cause tooling for IT and production systems. Shipped RCA ticketing system; building AI-assisted incident correlation.">
-  <meta property="og:url" content="https://viveknarole.com/">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/space-grotesk-v18-latin-700.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-regular.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-500.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-v19-latin-600.woff2">
-  <style>
-    :root{
-      color-scheme:light dark;
-      --bg:#f7f3ee;
-      --panel:#fffaf6;
-      --ink:#211b17;
-      --muted:#655b53;
-      --line:#ded5cc;
-      --accent:#c76838;
-      --accent-strong:#9d4727;
-      --accent-bg:#f5e8df;
-      --focus:0 0 0 3px #c7683840;
-      --shadow:0 16px 40px #211b1710;
-      --radius:18px;
-      --radius-sm:12px;
-      --max:1180px;
-      --font-display:"Space Grotesk", Inter, system-ui, sans-serif;
-      --font-body:Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-    }
-    @media(prefers-color-scheme:dark){
-      :root{
-        --bg:#14131a;
-        --panel:#1d1b24;
-        --ink:#f4f0f7;
-        --muted:#b9b0c1;
-        --line:#393541;
-        --accent:#ff9b72;
-        --accent-strong:#ffb896;
-        --accent-bg:#382820;
-        --shadow:0 16px 40px #0005;
-      }
-    }
-    @font-face{
-      font-family:"Space Grotesk";
-      src:url("/assets/fonts/space-grotesk-v18-latin-700.woff2") format("woff2");
-      font-weight:700;
-      font-display:swap;
-    }
-    @font-face{
-      font-family:"Inter";
-      src:url("/assets/fonts/inter-v19-latin-regular.woff2") format("woff2");
-      font-weight:400;
-      font-display:swap;
-    }
-    @font-face{
-      font-family:"Inter";
-      src:url("/assets/fonts/inter-v19-latin-500.woff2") format("woff2");
-      font-weight:500;
-      font-display:swap;
-    }
-    @font-face{
-      font-family:"Inter";
-      src:url("/assets/fonts/inter-v19-latin-600.woff2") format("woff2");
-      font-weight:600;
-      font-display:swap;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
-    a:focus-visible{outline:0;box-shadow:var(--focus)}
-    .page{max-width:var(--max);margin:auto;padding:20px 24px 60px}
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 0 32px;flex-wrap:wrap}
-    .brand{color:var(--ink);font-size:.84rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-family:var(--font-display);text-decoration:none}
-    .nav{display:flex;gap:8px;flex-wrap:wrap}
-    .nav a{padding:8px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.82rem;background:var(--panel);transition:all 150ms ease}
-    .nav a:hover{border-color:var(--accent);color:var(--accent-strong);background:var(--accent-bg);text-decoration:none}
-    .hero{display:grid;grid-template-columns:1.2fr 0.8fr;gap:24px;align-items:start;padding:12px 0 24px}
-    .eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
-    h1{font-family:var(--font-display);font-size:clamp(3rem,6vw,5.3rem);line-height:1.05;letter-spacing:-.04em;margin:.6rem 0 .4rem;font-weight:700}
-    .lead{color:var(--muted);margin:0 0 1.5rem;max-width:60ch;font-size:1.05rem}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:.5rem}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:var(--radius-sm);text-decoration:none;font-weight:600;font-size:.88rem;border:1px solid transparent;transition:all 150ms ease}
-    .btn.primary{background:var(--ink);color:var(--panel);border-color:var(--ink)}
-    .btn.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none}
-    .btn.secondary{background:transparent;color:var(--ink);border-color:var(--line)}
-    .btn.secondary:hover{border-color:var(--accent);color:var(--accent-strong);background:var(--accent-bg);text-decoration:none}
-    .hero-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:280px}
-    .mini-label{color:var(--muted);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
-    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:1.5rem}
-    .stat{padding:16px;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm)}
-    .stat strong{display:block;font-family:var(--font-display);font-size:clamp(1.5rem,2vw,2.1rem);line-height:1;color:var(--ink);margin-bottom:.25rem}
-    .stat span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-    .section{padding-top:2rem;padding-bottom:1rem}
-    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:1.5rem;flex-wrap:wrap}
-    .section-head h2{margin:0;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
-    .section-kicker{color:var(--muted);font-size:.9rem;max-width:35ch}
-    .grid{display:grid;gap:16px}
-    .focus-grid{grid-template-columns:repeat(3,1fr)}
-    .work-grid{grid-template-columns:repeat(3,1fr)}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:22px;box-shadow:var(--shadow);transition:transform 150ms ease, border-color 150ms ease}
-    .card:hover{transform:translateY(-2px);border-color:var(--accent)}
-    .card strong,.card h3{display:block;font-family:var(--font-display);font-size:1.1rem;margin:0 0 .5rem}
-    .card p{color:var(--muted);margin:0;font-size:.95rem}
-    .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--accent-bg);color:var(--accent-strong);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-bottom:.75rem}
-    .metric-row{display:flex;gap:12px;margin:1rem 0;flex-wrap:wrap}
-    .metric{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 14px;min-width:100px}
-    .metric strong{display:block;font-family:var(--font-display);font-size:1.4rem;line-height:1;color:var(--ink)}
-    .metric span{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-    .metric.measured strong{color:var(--accent-strong)}
-    .metric.target strong{color:var(--muted)}
-    .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
-    .stack span{display:inline-block;padding:3px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:.7rem;color:var(--muted);font-weight:500}
-    .contact-wrap{margin-top:1rem;padding:24px;background:var(--ink);border-radius:var(--radius);color:#f4f0f7;border:1px solid var(--line)}
-    .contact-wrap p{margin:0 0 1rem;color:#b9b0c1;max-width:44ch}
-    .contact-link{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:clamp(1.1rem,2vw,1.7rem);letter-spacing:-.05em;text-decoration:none;font-weight:600;color:#fff}
-    .contact-link:hover{color:#ffc8aa;text-decoration:none}
-    .note-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-    .note-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px}
-    .note-card h3{margin:0 0 .5rem;font-size:1rem;font-family:var(--font-display)}
-    .note-card p{margin:0;font-size:.85rem;color:var(--muted)}
-    footer{padding-top:2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-    footer a{color:var(--muted)}
-    footer a:hover{color:var(--accent)}
-    @media(max-width:980px){
-      .hero{grid-template-columns:1fr}
-      .focus-grid,.work-grid{grid-template-columns:1fr 1fr}
-      .hero-card{min-height:auto}
-      .stats{grid-template-columns:repeat(2,1fr)}
-      .note-grid{grid-template-columns:1fr}
-    }
-    @media(max-width:600px){
-      .page{padding:14px 16px 40px}
-      .topbar{flex-direction:column;align-items:flex-start;padding-bottom:24px}
-      .nav{width:100%}
-      .focus-grid,.work-grid,.stats{grid-template-columns:1fr}
-      .section-head{flex-direction:column;align-items:flex-start}
-      .hero-actions{flex-direction:column}
-      .btn{width:100%;justify-content:center}
-      .contact-link{font-size:1.25rem}
-      footer{flex-direction:column;align-items:flex-start}
-    }
-    @media print{
-      body{background:white;color:black}
-      .page{max-width:none;padding:0}
-      .topbar,.card,.hero-card{border:none!important;box-shadow:none!important}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vivek Narole | Tools that turn expert know-how into safe automation</title>
+<meta name="description" content="Vivek Narole builds tools that turn expert know-how into safe, auditable automation: an IT diagnostics system and an inventory valuation pipeline. Open to internal tools, process automation and BizOps-tech roles.">
+<meta property="og:title" content="Vivek Narole">
+<meta property="og:description" content="I build tools that turn expert know-how into safe, auditable automation.">
+<meta property="og:url" content="https://viveknarole.com/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%BE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Schibsted+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f5f6; --ink:#14212b; --muted:#4a5963; --rule:#ccd5da; --accent:#b3261e; --btn-bg:#14212b; --btn-ink:#f3f5f6;
+  --head:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --body:"Newsreader",Georgia,"Times New Roman",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#10161b; --ink:#e8edf0; --muted:#9fb0bb; --rule:#2a363f; --accent:#ef7a70; --btn-bg:#e8edf0; --btn-ink:#10161b; color-scheme:dark;}
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.1875rem;line-height:1.65}
+a{color:inherit;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.5rem}
+.skip{position:absolute;left:-999px;top:0;background:var(--btn-bg);color:var(--btn-ink);padding:.5rem 1rem}
+.skip:focus{left:1rem;top:1rem;z-index:10}
+
+header .wrap{display:flex;justify-content:space-between;align-items:baseline;padding-top:1.5rem;padding-bottom:1.5rem;gap:1rem;flex-wrap:wrap}
+.name{font-family:var(--head);font-weight:700;font-size:1.05rem;text-decoration:none}
+nav{display:flex;gap:1.5rem;font-family:var(--head);font-weight:500;font-size:1rem}
+nav a{text-decoration:none}
+nav a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
+
+.hero{padding:clamp(3rem,9vw,7rem) 0 clamp(3rem,7vw,5rem)}
+h1{font-family:var(--head);font-weight:700;font-size:clamp(2.25rem,6.2vw,4.25rem);line-height:1.04;letter-spacing:-.025em;margin:0 0 1.75rem;max-width:20ch}
+.lede{font-size:clamp(1.2rem,2.2vw,1.45rem);line-height:1.55;color:var(--muted);max-width:40rem;margin:0 0 2.25rem}
+.actions{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;font-family:var(--head);font-weight:500}
+.btn{display:inline-block;background:var(--btn-bg);color:var(--btn-ink);padding:.8rem 1.4rem;border-radius:4px;text-decoration:none;font-weight:700}
+.btn:hover{background:var(--accent);color:#fff}
+
+section{padding:clamp(3rem,7vw,5rem) 0;border-top:1px solid var(--rule)}
+h2{font-family:var(--head);font-weight:700;font-size:clamp(1.6rem,3.4vw,2.1rem);letter-spacing:-.015em;line-height:1.15;margin:0 0 2rem}
+h3{font-family:var(--head);font-weight:700;font-size:1.4rem;line-height:1.2;margin:0 0 .75rem}
+
+.story{max-width:40rem;border-left:2px dashed var(--accent);padding-left:clamp(1.25rem,3vw,2rem);margin-left:.25rem}
+.story p{margin:0 0 1.35rem}
+.story p:last-child{margin-bottom:0}
+
+.work{display:grid;gap:0}
+.project{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem 3rem;padding:2.25rem 0;border-top:1px solid var(--rule)}
+.project:first-of-type{border-top:0;padding-top:0}
+@media (min-width:52rem){.project{grid-template-columns:15rem minmax(0,1fr)}}
+.project h3{margin:0}
+.tag{display:block;font-family:var(--head);font-weight:500;font-size:.95rem;color:var(--muted);margin-top:.4rem}
+.project p{margin:0 0 1rem;max-width:40rem}
+.result{font-weight:600}
+details{max-width:40rem;border-top:1px dashed var(--rule);padding-top:.9rem}
+summary{cursor:pointer;font-family:var(--head);font-weight:700;font-size:1rem;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";display:inline-block;width:1.2rem;color:var(--accent);font-weight:700}
+details[open] summary::before{content:"\2212"}
+details ul{margin:1rem 0 0;padding-left:1.2rem}
+details li{margin-bottom:.6rem}
+.stack{font-family:var(--head);font-size:.95rem;color:var(--muted);margin-top:1rem}
+
+.bring ul{margin:0;padding-left:1.2rem;max-width:40rem}
+.bring li{margin-bottom:.7rem}
+.ai{max-width:40rem}
+.ai p{margin:0 0 1.2rem}
+
+.contact p{max-width:40rem;margin:0 0 1.75rem}
+.links{display:flex;flex-wrap:wrap;gap:1rem 2rem;font-family:var(--head);font-weight:500}
+footer{border-top:1px solid var(--rule);padding:2rem 0 3rem;color:var(--muted);font-family:var(--head);font-size:.95rem}
+</style>
 </head>
 <body>
-  <div class="page">
-    <header class="topbar" aria-label="Main navigation">
-      <a class="brand" href="#top">Vivek Narole</a>
-      <nav class="nav">
-        <a href="#focus">Focus</a>
-        <a href="#featured">Featured</a>
-        <a href="#notes">Notes & Frameworks</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+<a class="skip" href="#story">Skip to content</a>
 
-    <main id="top">
-      <section class="hero">
-        <div>
-          <span class="eyebrow">Backend · Platform · Reliability Engineering</span>
-          <h1>Software engineer building root-cause tooling for IT and production systems.</h1>
-          <p class="lead">I turn repeated incidents into searchable, reusable knowledge so the same failure doesn't get diagnosed from scratch fifty times. I built and shipped an RCA ticketing system for a large enterprise IT team, and I'm now building AI-assisted incident correlation for distributed systems.</p>
-          <div class="hero-actions">
-            <a class="btn primary" href="mailto:viveknarole100@gmail.com">Email</a>
-            <a class="btn secondary" href="/resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
-            <a class="btn secondary" href="https://github.com/nvivek42" rel="me" target="_blank">GitHub</a>
-          </div>
-        </div>
-
-        <aside class="hero-card" aria-label="Role focus">
-          <div>
-            <div class="mini-label">Looking for</div>
-            <p style="margin:0;color:var(--ink);font-weight:600">Backend / Platform / Reliability engineering roles with an AI-tooling angle</p>
-            <div class="mini-label" style="margin-top:1.5rem">Shipped</div>
-            <p style="margin:.5rem 0 0;color:var(--muted);font-size:.9rem">RCA ticketing system in production at a large enterprise IT org (~200 engineers, 50 services)</p>
-            <p style="margin:.5rem 0 0;color:var(--muted);font-size:.9rem">AI debugging infrastructure prototype — 78% top-3 match on held-out incidents</p>
-          </div>
-        </aside>
-      </section>
-
-      <section id="focus" class="section">
-        <div class="section-head">
-          <h2>Focus</h2>
-          <div class="section-kicker">I help teams see the real problem before it becomes expensive.</div>
-        </div>
-        <div class="grid focus-grid">
-          <article class="card">
-            <strong>Systems thinking</strong>
-            <p>I trace the pattern behind the noise so the real issue becomes visible before it compounds.</p>
-          </article>
-          <article class="card">
-            <strong>AI-assisted engineering</strong>
-            <p>I build software that pairs human judgment with automation — faster iteration, cleaner decisions, less drag.</p>
-          </article>
-          <article class="card">
-            <strong>Root-cause clarity</strong>
-            <p>I debug ambiguity, untangle failure loops, and design systems that are easier to reason about.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="featured" class="section">
-        <div class="section-head">
-          <h2>Featured Projects</h2>
-          <div class="section-kicker">Three projects that represent the work I want to keep doing. Two shipped, one live.</div>
-        </div>
-        <div class="grid work-grid">
-          <article class="card">
-            <span class="tag">System · Shipped</span>
-            <h3><a href="/portfolio/projects/rca-ticketing-system.html">RCA Ticketing System</a></h3>
-            <p>Diagnostic memory layer for enterprise IT ticketing. Automatic symptom extraction, historical pattern matching, inline context in tickets, feedback loop. 68% repeat-ticket reduction, 12→3 min first-query time.</p>
-            <div class="metric-row">
-              <div class="metric measured"><strong>68%</strong><span>Repeat-ticket reduction</span></div>
-              <div class="metric measured"><strong>12→3 min</strong><span>First-query time</span></div>
-              <div class="metric measured"><strong>~200</strong><span>Engineers daily</span></div>
-            </div>
-            <div class="stack"><span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>Elasticsearch</span><span>React</span><span>Docker</span></div>
-          </article>
-
-          <article class="card">
-            <span class="tag">System · Prototype</span>
-            <h3><a href="/portfolio/projects/ai-debugging-infrastructure.html">AI-Assisted Debugging Infrastructure</a></h3>
-            <p>RCA pattern library, signal correlation engine, runbook generator for distributed systems. Prototype validated on 3 months of historical incidents from a 50-service system: 78% top-3 root-cause match (held-out test), 15→2 min first-query in walkthroughs.</p>
-            <div class="metric-row">
-              <div class="metric measured"><strong>78%</strong><span>Top-3 match (held-out)</span></div>
-              <div class="metric measured"><strong>15→2 min</strong><span>First-query (walkthrough)</span></div>
-              <div class="metric target"><strong>40%</strong><span>Target MTTR Δ</span></div>
-              <div class="metric target"><strong><5%</strong><span>Target FPR</span></div>
-            </div>
-            <div class="stack"><span>Python</span><span>FastAPI</span><span>ChromaDB</span><span>Celery + Redis</span><span>OpenTelemetry</span><span>LLM</span></div>
-          </article>
-
-          <article class="card">
-            <span class="tag">Tool · Live</span>
-            <h3><a href="/portfolio/projects/goal-clarity-engine.html">Goal Clarity Engine</a></h3>
-            <p>Interactive 6-stage decision worksheet for high-stakes career choices (government vs private sector). Local-first, optional AI synthesis via Cloudflare Worker + NVIDIA NIM. No frontend framework deps, ~45KB total. 17 completed sessions.</p>
-            <div class="metric-row">
-              <div class="metric"><strong>6</strong><span>Stages</span></div>
-              <div class="metric"><strong>18</strong><span>Prompts</span></div>
-              <div class="metric"><strong><50KB</strong><span>Total Weight</span></div>
-              <div class="metric"><strong>17</strong><span>Sessions</span></div>
-            </div>
-            <div class="stack"><span>Vanilla JS</span><span>Cloudflare Workers</span><span>NVIDIA NIM</span><span>localStorage</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section id="notes" class="section">
-        <div class="section-head">
-          <h2>Notes & Frameworks</h2>
-          <div class="section-kicker">Structured thinking tools and research. Not production systems — no metrics boxes, no live demos.</div>
-        </div>
-        <div class="grid note-grid">
-          <article class="note-card">
-            <h3><a href="/portfolio/projects/naval-wealth-framework-stress-test.html">Naval Wealth Framework Stress Test</a></h3>
-            <p>12 principles, 8 scenarios, 4 failure modes, 15-item checklist. Stress-testing popular advice against real constraints.</p>
-          </article>
-          <article class="note-card">
-            <h3><a href="/portfolio/projects/career-decision-framework.html">Career Decision Framework: Govt vs Private</a></h3>
-            <p>MCDA with 15 criteria, 8 paths, sensitivity analysis, 3 scenarios. Beyond binary framing.</p>
-          </article>
-          <article class="note-card">
-            <h3><a href="/portfolio/projects/odyssey-plans.html">Odyssey Plans</a></h3>
-            <p>Life design framework: 3 divergent 5-year plans, constraint heatmap, 20+ experiments, quarterly checkpoints.</p>
-          </article>
-          <article class="note-card">
-            <h3><a href="/portfolio/projects/pune-industrial-hubs.html">Pune Industrial Hubs Analysis</a></h3>
-            <p>Primary research: 8 hubs, 50+ companies, 12 constraint categories, decision matrix for career/location choices.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="experience" class="section">
-        <div class="section-head">
-          <h2>Experience</h2>
-          <div class="section-kicker">Where the work happened.</div>
-        </div>
-        <div class="grid work-grid">
-          <article class="card">
-            <span class="tag">Software Engineer</span>
-            <h3>Large enterprise IT organization <span style="font-weight:400;color:var(--muted);font-size:.9rem">(confidential)</span></h3>
-            <p style="margin-top:.5rem"><strong>2023–present</strong></p>
-            <ul style="margin:.75rem 0 0;padding-left:1.2rem;color:var(--muted)">
-              <li>Designed and shipped an RCA ticketing system used by ~200 engineers; reduced repeat-ticket rate by 68%, first-actionable-query time from 12 min to 3 min.</li>
-              <li>Built AI-assisted debugging infrastructure prototype: pattern library (200+ incidents), vector correlation engine, runbook generator. Validated 78% top-3 root-cause match on held-out incidents from a 50-service system.</li>
-              <li>Scope: L1/L2/L3 support tiers, 50+ services, ~200 engineers, integrated with ServiceNow, Prometheus, Grafana, Loki, Elasticsearch.</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="contact" class="section">
-        <div class="section-head"><h2>Contact</h2></div>
-        <div class="contact-wrap">
-          <p>I'm open to backend, platform, and reliability engineering conversations — especially where the problem is messy, important, and worth solving properly.</p>
-          <a class="contact-link" href="mailto:viveknarole100@gmail.com">viveknarole100@gmail.com</a>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div>
-        <a href="/llms.txt" rel="alternate">llms.txt</a> ·
-        <a href="https://github.com/nvivek42" rel="me">GitHub</a> ·
-        <a href="https://topmate.io/vivek_narole" rel="me">Topmate</a> ·
-        <a href="mailto:viveknarole100@gmail.com">Email</a> ·
-        <a href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
-      </div>
-      <div>© 2026 Vivek Narole</div>
-    </footer>
+<header>
+  <div class="wrap">
+    <a class="name" href="#top">Vivek Narole</a>
+    <nav aria-label="Main">
+      <a href="#story">Story</a>
+      <a href="#work">Work</a>
+      <a href="#bring">What I bring</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <h1>I build tools that turn expert know-how into safe, auditable automation.</h1>
+    <p class="lede">I’m a software builder with a psychology background and three years of intense self-study. I’m looking for internal tools, process automation and BizOps-tech roles, where operations and software meet.</p>
+    <div class="actions">
+      <a class="btn" href="#story">Read my story</a>
+      <!-- <a href="resume.pdf">Resume (PDF)</a> -->
+      <a href="mailto:viveknarole100@gmail.com">Email me</a>
+    </div>
+  </div>
+
+  <section id="story">
+    <div class="wrap">
+      <h2>My story</h2>
+      <div class="story">
+        <p>I spent three years preparing for India’s civil services exam. I took it up because I wanted to study the humanities, and I chose psychology as my optional subject. After each failed attempt I went back, worked out what I was missing and rebuilt my method. It was hard, and often lonely, and it taught me two things: how to keep going when the odds are long, and how to look at a problem from several angles before taking a side.</p>
+        <p>Psychology stayed with me. I like working out why people do what they do, and I notice quickly when something is off in a team, a tool or a screen.</p>
+        <p>Engineering is how I act on that. My best work follows one pattern: watch how people actually do a job, find the root cause of what slows them down, then build something that makes the right way the easy way.</p>
+        <p>Before all of this, I played baseball in college. It was play for me, not work. I cared less about the result than about getting a little better every game, and I still work that way.</p>
+      </div>
+      <!-- When ready, link the full UPSC and baseball essays here. -->
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <h2>What I’ve built</h2>
+      <div class="work">
+
+        <article class="project">
+          <div>
+            <h3>IT support diagnostics</h3>
+            <span class="tag">Ticketing and automated root-cause analysis</span>
+          </div>
+          <div>
+            <p>IT support depended on engineers diagnosing each problem from memory and typing fixes by hand, machine by machine. I built a ticketing system with a diagnostic engine. It reads signals from the user’s PC, works out the likely root cause, and fixes the low-risk problems by itself, behind safety checks and with the ability to undo.</p>
+            <p class="result">In use today.<!-- ADD when measured: number of users, tickets per month, time saved. --></p>
+            <details>
+              <summary>How it works and what it’s built with</summary>
+              <ul>
+                <li>Twelve collectors read signals from the PC: processor, memory, disk, network, printers, sign-in, Outlook, VPN, display, licensing and peripherals.</li>
+                <li>A rule engine turns those signals into findings across 28+ root-cause categories, each with a confidence score. The rules live in an editable file, so the logic can change without rewriting the software.</li>
+                <li>Seven low-risk fixes, such as restarting the print spooler or flushing the DNS cache, run on their own only when three checks pass: a master switch is on, the fix is low risk, and it is on an approved list. The previous state is saved so a failed fix can be rolled back.</li>
+                <li>End users get plain-English steps. IT agents get the technical detail and commands.</li>
+                <li>Includes the ticket lifecycle, SLA tracking, role-based access, an audit trail and reporting. The installer was cut from about 224 MB to about 33 MB.</li>
+                <li>I built it with AI coding agents. I made the design decisions, including the safety rules, and reviewed the output.</li>
+              </ul>
+              <p class="stack">C#, .NET 8, WPF, Entity Framework Core, MySQL, YAML rules, MSIX packaging</p>
+            </details>
+          </div>
+        </article>
+
+        <article class="project">
+          <div>
+            <h3>Inventory valuation</h3>
+            <span class="tag">Month-end accounting automation for a manufacturer</span>
+          </div>
+          <div>
+            <p>A manufacturer valued its inventory across about 184 products using spreadsheets and a long manual checklist. I built a pipeline that calculates the valuation to the international inventory standard (IAS 2) and produces an audit-ready Excel file. A finance team member can trace any number back to its source.</p>
+            <p class="result">In use today.<!-- ADD when known: how long the old process took vs. the pipeline, and how it was checked against the old method. --></p>
+            <details>
+              <summary>How it works and what it’s built with</summary>
+              <ul>
+                <li>For every product it calculates production cost, landed cost and net realisable value, then applies the lower-of-cost-or-NRV rule to work in progress, finished goods and goods in transit.</li>
+                <li>The cost build-up covers raw material rates averaged from the purchase ledger, bills of materials, wastage and rejection allowances, melting loss, seven overhead pools split by quantity, weight and net output, plus subcontract, freight and commission costs.</li>
+                <li>Money is calculated with exact decimal arithmetic instead of floating-point numbers. The Excel output keeps the original column letters, so auditors can compare it with the old workbook.</li>
+                <li>A formula-by-formula guide maps every calculation to its source data and code, so someone other than me can maintain it.</li>
+                <li>It has a desktop interface because the web version could not be installed on the finance team’s machines.</li>
+                <li>I built it with AI coding agents. I set the rules and checked the results.</li>
+              </ul>
+              <p class="stack">Python, MySQL, openpyxl, Streamlit, Tkinter</p>
+            </details>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDIT FREELY: the three blocks below are first drafts. Rewrite them in your own voice. To add a block, copy one <article class="project"> and change the text. -->
+  <section id="bring" class="bring">
+    <div class="wrap">
+      <h2>What I bring</h2>
+      <div class="work">
+
+        <article class="project">
+          <div>
+            <h3>What play means to me</h3>
+          </div>
+          <div>
+            <p>Play is when the work is its own reward. In college baseball I wasn’t worried about results. I was absorbed in the game and tried to get a little better each time. I look for the same thing at work: problems I’m curious enough about to keep going without being pushed.</p>
+          </div>
+        </article>
+
+        <article class="project">
+          <div>
+            <h3>What experience taught me</h3>
+          </div>
+          <div>
+            <ul>
+              <li><strong>Finding root causes.</strong> I trace a symptom back to what is really behind it, in code, in tools and in how people work.</li>
+              <li><strong>Making sense of a lot of information.</strong> Three years of exam preparation taught me to take a huge, messy body of material and give it a clear structure.</li>
+              <li><strong>Weighing a problem from several sides.</strong> I try to stay neutral and look at the evidence before choosing a position.</li>
+              <li><strong>Reading people.</strong> Studying psychology made me better at noticing when someone is struggling or a process isn’t working for them.</li>
+              <li><strong>Teaching myself.</strong> I learned governance, psychology and now building with AI agents without a classroom.</li>
+              <li><strong>Explaining things plainly.</strong> I write documentation and guides so that the knowledge doesn’t live in one person’s head.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project">
+          <div>
+            <h3>How I can contribute</h3>
+          </div>
+          <div>
+            <ul>
+              <li>I work between the people who do the job and the people who build the tools, and I help each side understand the other.</li>
+              <li>I turn a vague problem into a clear statement of what needs fixing, then build a first working version myself.</li>
+              <li>I’m comfortable across areas, such as IT, finance and operations, and I learn a new area quickly.</li>
+              <li>I write things down, so the team can keep using and improving what I build after I’ve moved on.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="ai">
+    <div class="wrap">
+      <h2>How I work with AI</h2>
+      <div class="ai">
+        <p>I build with AI coding agents, including Antigravity, the open-source pi agent, and local models through Ollama. The agents write code. I define the problem, choose the architecture, set the rules and safety limits, and check the results against what I know should be true.</p>
+        <p>Running models locally means company data can stay on the machine it belongs to.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Let’s talk</h2>
+      <p>I’m open to internal tools, process automation and BizOps-tech roles, especially where the problem is messy, important and worth solving properly.</p>
+      <div class="links">
+        <a href="mailto:viveknarole100@gmail.com">viveknarole100@gmail.com</a>
+        <a href="https://github.com/nvivek42">GitHub</a>
+        <!-- <a href="resume.pdf">Resume (PDF)</a> -->
+        <!-- Add LinkedIn here. -->
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Vivek Narole</div>
+</footer>
 </body>
 </html>
