@@ -42,6 +42,8 @@
       "url": "https://viveknarole.com/",
       "description": "Software builder who creates tools that turn expert know-how into safe, auditable automation, with a psychology background and three years of self-study for India's civil services exam.",
       "knowsAbout": ["Root-cause analysis", "IT support automation", "Inventory valuation (IAS 2)", "Process automation", "Psychology", "AI-assisted software development", "C#", "Python"],
+      "knowsLanguage": ["en", "hi", "mr", "kn"],
+      "homeLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressCountry": "IN" } },
       "sameAs": [
         "https://github.com/nvivek42",
         "https://www.linkedin.com/in/vivek-narole-5294a7148/"
@@ -447,6 +449,34 @@ details li:last-child{margin-bottom:0}
 .ai-box p{margin:0 0 1rem}
 .ai-box p:last-child{margin-bottom:0;color:var(--muted);font-style:italic}
 
+/* Quick facts */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.25rem 2rem;margin:2.5rem 0 0;padding:1.5rem 0 0;border-top:1px solid var(--rule)}
+.facts div{min-width:0}
+.facts dt{font-family:var(--head);font-weight:700;font-size:.88rem;color:var(--muted);margin:0 0 .25rem}
+.facts dd{margin:0;font-size:1.02rem;line-height:1.45}
+
+/* FAQ */
+.faq-content{display:grid;gap:1rem;max-width:44rem}
+.faq-content details{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);padding:1.2rem 1.5rem;transition:border-color .2s ease}
+.faq-content details:hover{border-color:color-mix(in srgb,var(--ink) 25%,var(--rule))}
+.faq-content summary{cursor:pointer;font-family:var(--head);font-weight:600;font-size:1.05rem;list-style:none;display:flex;align-items:center;justify-content:space-between;color:var(--ink);user-select:none}
+.faq-content details p{margin:.85rem 0 0;font-size:1.04rem;line-height:1.6}
+
+.stack{font-family:var(--mono);font-size:.85rem;color:var(--muted);margin-top:1rem}
+
+/* Ask form */
+.ask-box{max-width:40rem}
+.ask-box p{margin:0 0 1.5rem}
+form{max-width:40rem}
+label{display:block;font-family:var(--head);font-weight:600;font-size:.95rem;margin:0 0 .4rem}
+textarea,input[type=text]{width:100%;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:.75rem}
+textarea:focus,input[type=text]:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+textarea{min-height:7rem;resize:vertical}
+.field{margin-bottom:1.25rem}
+button.btn{border:0;cursor:pointer;font-family:var(--head);font-size:1rem}
+.hp{position:absolute;left:-999px}
+.status{margin-top:1rem;font-family:var(--head);min-height:1.5rem}
+
 /* Contact */
 .contact-box{max-width:42rem}
 .contact-box p{margin:0 0 1.75rem;font-size:1.18rem}
@@ -500,6 +530,7 @@ footer .wrap{
         <a href="#work">Work</a>
         <a href="#bring">What I bring</a>
         <a href="#ai">AI</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
       <button class="theme-btn" id="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle light/dark mode">◐</button>
@@ -522,6 +553,12 @@ footer .wrap{
         <a class="btn btn-secondary" href="mailto:viveknarole100@gmail.com">Email me</a>
         <!-- <a href="resume.pdf">Resume (PDF)</a> -->
       </div>
+      <dl class="facts">
+        <div><dt>Open to</dt><dd>Internal tools, process automation and BizOps-tech roles</dd></div>
+        <div><dt>Based in</dt><dd>India, open to relocating</dd></div>
+        <div><dt>Work mode</dt><dd>Remote, hybrid or on-site</dd></div>
+        <div><dt>Languages</dt><dd>English, Hindi and Marathi (speak and write). Kannada (speak).</dd></div>
+      </dl>
     </div>
   </div>
 
@@ -566,21 +603,21 @@ footer .wrap{
             <span class="pill">C#</span>
             <span class="pill">.NET 8</span>
             <span class="pill">WPF</span>
-            <span class="pill">EF Core</span>
             <span class="pill">MySQL</span>
             <span class="pill">YAML rules</span>
-            <span class="pill">MSIX</span>
           </div>
           <details>
-            <summary>How it works and what it’s built with</summary>
+            <summary>The approach and what it’s built with</summary>
             <ul>
-              <li>Twelve collectors read signals from the PC: processor, memory, disk, network, printers, sign-in, Outlook, VPN, display, licensing and peripherals.</li>
-              <li>A rule engine turns those signals into findings across 28+ root-cause categories, each with a confidence score. The rules live in an editable file, so the logic can change without rewriting the software.</li>
-              <li>Seven low-risk fixes, such as restarting the print spooler or flushing the DNS cache, run on their own only when three checks pass: a master switch is on, the fix is low risk, and it is on an approved list. The previous state is saved so a failed fix can be rolled back.</li>
-              <li>End users get plain-English steps. IT agents get the technical detail and commands.</li>
-              <li>Includes the ticket lifecycle, SLA tracking, role-based access, an audit trail and reporting. The installer was cut from about 224 MB to about 33 MB.</li>
+              <li>Collectors read common health signals from a PC, such as processor, memory, disk, network, printing and sign-in.</li>
+              <li>A rule engine turns those signals into findings across a few dozen root-cause categories, each with a confidence score. The rules live in an editable file, so the logic can change without rewriting the software.</li>
+              <li>A small set of low-risk fixes can run on their own, but only when three checks pass: a master switch is on, the fix is classed as low risk, and it is on an approved list. The previous state is saved so a failed fix can be rolled back.</li>
+              <li>End users get plain-English steps. IT agents get the technical detail.</li>
+              <li>Includes SLA tracking, role-based access and an audit trail. The installer was cut from about 224 MB to about 33 MB.</li>
               <li>I built it with AI coding agents. I made the design decisions, including the safety rules, and reviewed the output.</li>
             </ul>
+            <p class="stack">C#, .NET 8, WPF, MySQL, YAML rules</p>
+            <p>I keep company-specific details private. I’m happy to talk through the design in a conversation.</p>
           </details>
         </article>
 
@@ -592,25 +629,26 @@ footer .wrap{
             </div>
             <span class="badge-live">In use today</span>
           </div>
-          <p>A manufacturer valued its inventory across about 184 products using spreadsheets and a long manual checklist. I built a pipeline that calculates the valuation to the international inventory standard (IAS 2) and produces an audit-ready Excel file. A finance team member can trace any number back to its source.</p>
+          <p>A manufacturer valued its inventory using many spreadsheets and a long manual checklist. I built a pipeline that calculates the valuation to the international inventory standard (IAS 2) and produces an audit-ready Excel file. A finance team member can trace any number back to its source.</p>
           <!-- ADD when known: how long the old process took vs. the pipeline, and how it was checked against the old method. -->
           <div class="pills" aria-label="Technology stack">
             <span class="pill">Python</span>
             <span class="pill">MySQL</span>
             <span class="pill">openpyxl</span>
-            <span class="pill">Streamlit</span>
             <span class="pill">Tkinter</span>
           </div>
           <details>
-            <summary>How it works and what it’s built with</summary>
+            <summary>The approach and what it’s built with</summary>
             <ul>
-              <li>For every product it calculates production cost, landed cost and net realisable value, then applies the lower-of-cost-or-NRV rule to work in progress, finished goods and goods in transit.</li>
-              <li>The cost build-up covers raw material rates averaged from the purchase ledger, bills of materials, wastage and rejection allowances, melting loss, seven overhead pools split by quantity, weight and net output, plus subcontract, freight and commission costs.</li>
-              <li>Money is calculated with exact decimal arithmetic instead of floating-point numbers. The Excel output keeps the original column letters, so auditors can compare it with the old workbook.</li>
+              <li>For each product it works out the cost and the net realisable value, then applies the lower-of-the-two rule that the standard requires.</li>
+              <li>The cost build-up combines material rates, production costs and allocated overheads.</li>
+              <li>Money is calculated with exact decimal arithmetic instead of floating-point numbers. The Excel output keeps the original column references, so auditors can compare it with the old workbook.</li>
               <li>A formula-by-formula guide maps every calculation to its source data and code, so someone other than me can maintain it.</li>
-              <li>It has a desktop interface because the web version could not be installed on the finance team’s machines.</li>
+              <li>It has a desktop interface because the web version could not be installed on the users’ machines.</li>
               <li>I built it with AI coding agents. I set the rules and checked the results.</li>
             </ul>
+            <p class="stack">Python, MySQL, openpyxl, Tkinter</p>
+            <p>I keep company-specific details private. I’m happy to talk through the design in a conversation.</p>
           </details>
         </article>
 
@@ -673,10 +711,69 @@ footer .wrap{
     </div>
   </section>
 
+  <section id="faq" class="reveal">
+    <div class="wrap section-grid">
+      <div class="section-head">
+        <span class="section-num">05 / FAQ</span>
+        <h2>Quick answers</h2>
+      </div>
+      <div class="faq-content">
+        <details>
+          <summary>What do you build?</summary>
+          <p>I build tools that take what an expert knows and turn it into software that is safe and easy to check. Two examples are a tool that finds the cause of IT problems on a PC, and a tool that does a company’s inventory valuation.</p>
+        </details>
+        <details>
+          <summary>Does AI write your code?</summary>
+          <p>Yes, AI coding agents write much of the code. I decide what problem to solve, how the system is structured, and what rules and safety limits it has. Then I review and test the result myself.</p>
+        </details>
+        <details>
+          <summary>Why can’t you share more about your projects?</summary>
+          <p>I built them for an employer, so I keep company details, data and exact rules private. I can explain the design approach and the decisions I made, and I’m happy to talk about them in a conversation.</p>
+        </details>
+        <details>
+          <summary>Why did you spend three years on UPSC?</summary>
+          <p>I wanted to study the humanities. Preparing taught me to keep going through failure, to read a lot and organise it, and to look at a problem from many sides. Now I want to use those skills in business and technology.</p>
+        </details>
+        <details>
+          <summary>What does psychology add to your engineering work?</summary>
+          <p>It helps me notice how people really do their work and where they get stuck. I start there, then build something that makes the right way the easy way.</p>
+        </details>
+        <details>
+          <summary>What kind of work are you looking for?</summary>
+          <p>Internal tools, process automation and BizOps-tech roles, where operations and software meet. I enjoy problems that are messy, important and worth solving well. I would also like to meet people who share a similar way of working and learning, and who want to collaborate.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="ask" class="reveal" hidden>
+    <div class="wrap section-grid">
+      <div class="section-head">
+        <h2>Ask me something</h2>
+      </div>
+      <div class="ask-box">
+        <p>Not sure what to ask? Write whatever you are curious about, in whatever language is easiest for you. A question is enough, and leaving contact details is optional.</p>
+        <form id="askform">
+          <div class="field">
+            <label for="q">Your question</label>
+            <textarea id="q" name="question" required maxlength="1500"></textarea>
+          </div>
+          <div class="field">
+            <label for="c">Email or phone (optional, only if you want a reply)</label>
+            <input id="c" name="contact" type="text" maxlength="200" autocomplete="off">
+          </div>
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn" type="submit">Send</button>
+          <div class="status" id="askstatus" role="status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <section id="contact" class="reveal">
     <div class="wrap section-grid">
       <div class="section-head">
-        <span class="section-num">05 / CONTACT</span>
+        <span class="section-num">06 / CONTACT</span>
         <h2>Let’s talk</h2>
       </div>
       <div class="contact-box">
@@ -777,6 +874,31 @@ footer .wrap{
   } else {
     sections.forEach(function(s){ s.classList.add('is-visible'); });
   }
+})();
+</script>
+<script>
+const ENDPOINT = "";
+(function () {
+  var sec = document.getElementById("ask");
+  var form = document.getElementById("askform");
+  var status = document.getElementById("askstatus");
+  if (!sec || !form || !ENDPOINT) return;
+  sec.hidden = false;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var fd = new FormData(form);
+    if (fd.get("website")) return;
+    status.textContent = "Sending…";
+    fetch(ENDPOINT, { method: "POST", body: fd, headers: { Accept: "application/json" } })
+      .then(function (r) {
+        if (!r.ok) throw new Error("bad response");
+        form.reset();
+        status.textContent = "Thank you. I read every question.";
+      })
+      .catch(function () {
+        status.textContent = "Sorry, that did not send. Please email me instead.";
+      });
+  });
 })();
 </script>
 </body>

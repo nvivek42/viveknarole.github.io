@@ -3,12 +3,16 @@
 > Software builder who creates tools that turn expert know-how into safe, auditable automation. Background in psychology, plus three years of self-study for India's civil services exam (UPSC CSE, Psychology optional). Open to internal tools, process automation and BizOps-tech roles.
 
 ## Work
-- [IT support diagnostics](https://viveknarole.com/#it-diagnostics): A ticketing system with a rule-based diagnostic engine that reads signals from a PC, finds likely root causes and runs seven low-risk fixes automatically behind safety checks and rollback. C#, .NET 8, WPF, MySQL.
+- [IT support diagnostics](https://viveknarole.com/#it-diagnostics): A ticketing system with a rule-based diagnostic engine that reads signals from a PC, finds likely root causes and runs a small set of low-risk fixes automatically behind safety checks and rollback. C#, .NET 8, WPF, MySQL.
 - [Inventory valuation](https://viveknarole.com/#inventory-valuation): A pipeline that automates a manufacturer's inventory valuation to IAS 2 and produces an audit-ready Excel file. Python, MySQL.
 
 ## About
 - [Story](https://viveknarole.com/#story): Three years of UPSC preparation, psychology, and how that shaped the way I build.
 - [What I bring](https://viveknarole.com/#bring): Skills learned through experience and how I can contribute.
+
+## Quick facts
+- Based in India, open to relocating. Open to remote, hybrid or on-site work.
+- Languages: English, Hindi and Marathi (speak and write); Kannada (speak).
 
 ## Contact
 - Email: viveknarole100@gmail.com
