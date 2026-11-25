@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vivek Narole | Tools that turn expert know-how into safe automation</title>
-<meta name="description" content="Vivek Narole builds tools that turn expert know-how into safe, auditable automation: an IT diagnostics system and an inventory valuation pipeline. Open to internal tools, process automation and BizOps-tech roles.">
+<title>Vivek Narole | Internal tools and process automation</title>
+<meta name="description" content="Vivek Narole builds internal tools and process automation in Python and C#: an IT support diagnostics system and a month-end inventory valuation pipeline, both in use. Open to internal tools, process automation and BizOps-tech roles.">
 <meta property="og:title" content="Vivek Narole">
-<meta property="og:description" content="I build tools that turn expert know-how into safe, auditable automation.">
+<meta property="og:description" content="I build tools that automate IT support and month-end accounting.">
 <meta property="og:url" content="https://viveknarole.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vivek Narole">
+<!-- ADD when ready: <meta property="og:image" content="https://viveknarole.com/preview.png"> (1200x630) so link previews are not blank. -->
 <meta name="twitter:card" content="summary">
 <meta name="author" content="Vivek Narole">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
@@ -40,7 +41,7 @@
       "@id": "https://viveknarole.com/#person",
       "name": "Vivek Narole",
       "url": "https://viveknarole.com/",
-      "description": "Software builder who creates tools that turn expert know-how into safe, auditable automation, with a psychology background and three years of self-study for India's civil services exam.",
+      "description": "Builds internal tools and process automation in C# and Python: an IT support diagnostics system and a month-end inventory valuation pipeline.",
       "knowsAbout": ["Root-cause analysis", "IT support automation", "Inventory valuation (IAS 2)", "Process automation", "Psychology", "AI-assisted software development", "C#", "Python"],
       "knowsLanguage": ["en", "hi", "mr", "kn"],
       "homeLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressCountry": "IN" } },
@@ -464,6 +465,11 @@ details li:last-child{margin-bottom:0}
 
 .stack{font-family:var(--mono);font-size:.85rem;color:var(--muted);margin-top:1rem}
 
+/* Screenshots (slots are commented out in the markup until images are ready) */
+.shot{margin:0 0 1.25rem;max-width:44rem}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--rule);border-radius:8px}
+.shot figcaption{font-family:var(--head);font-size:.9rem;color:var(--muted);margin-top:.5rem}
+
 /* Ask form */
 .ask-box{max-width:40rem}
 .ask-box p{margin:0 0 1.5rem}
@@ -545,8 +551,8 @@ footer .wrap{
         <span class="status-dot"></span>
         <span>Open to roles &bull; Operations &amp; Software</span>
       </div>
-      <h1>I build tools that turn expert know-how into <span class="highlight">safe, auditable automation</span>.</h1>
-      <p class="lede">I’m a software builder with a psychology background and three years of intense self-study. I’m looking for <span class="role-pill">internal tools</span>, <span class="role-pill">process automation</span> and <span class="role-pill">BizOps-tech</span> roles, where operations and software meet.</p>
+      <h1>I build tools that automate <span class="highlight">IT support and month-end accounting</span>.</h1>
+      <p class="lede">My tools are in use today: an IT support diagnostics system and a month-end inventory valuation pipeline. I’m looking for <span class="role-pill">internal tools</span>, <span class="role-pill">process automation</span> and <span class="role-pill">BizOps-tech</span> roles, where operations and software meet.</p>
       <div class="actions">
         <a class="btn" href="#story">Read my story &rarr;</a>
         <a class="btn btn-secondary" href="#work">Explore my work</a>
@@ -554,7 +560,6 @@ footer .wrap{
         <!-- <a href="resume.pdf">Resume (PDF)</a> -->
       </div>
       <dl class="facts">
-        <div><dt>Open to</dt><dd>Internal tools, process automation and BizOps-tech roles</dd></div>
         <div><dt>Based in</dt><dd>India, open to relocating</dd></div>
         <div><dt>Work mode</dt><dd>Remote, hybrid or on-site</dd></div>
         <div><dt>Languages</dt><dd>English, Hindi and Marathi (speak and write). Kannada (speak).</dd></div>
@@ -567,10 +572,10 @@ footer .wrap{
       <div class="section-head">
         <span class="section-num">01 / STORY</span>
         <h2>My story</h2>
-        <p class="section-sub">From humanities and self-study to building operational tools.</p>
+        <p class="section-sub">From the civil services exam to building operational tools.</p>
       </div>
       <div class="story">
-        <p>I spent three years preparing for India’s civil services exam. I took it up because I wanted to study the humanities, and I chose psychology as my optional subject. After each failed attempt I went back, worked out what I was missing and rebuilt my method. It was hard, and often lonely, and it taught me two things: how to keep going when the odds are long, and how to look at a problem from several angles before taking a side.</p>
+        <p>I spent three years preparing for India’s civil services exam, with psychology as my optional subject, and I did not clear it. After each attempt I worked out what I was missing and rebuilt my method. It taught me to keep going when the odds are long, and to give a huge, messy body of material a clear structure.<!-- OPTIONAL: one sentence on why you took the exam up, in your own words. Keep this copy consistent with what you actually plan to do about further attempts. --></p>
         <p>Psychology stayed with me. I like working out why people do what they do, and I notice quickly when something is off in a team, a tool or a screen.</p>
         <blockquote class="pull-quote">Watch how people actually do a job, find the root cause of what slows them down, then build something that makes the right way the easy way.</blockquote>
         <p>Engineering is how I act on that. My best work follows that pattern.</p>
@@ -598,7 +603,10 @@ footer .wrap{
             <span class="badge-live">In use today</span>
           </div>
           <p>IT support depended on engineers diagnosing each problem from memory and typing fixes by hand, machine by machine. I built a ticketing system with a diagnostic engine. It reads signals from the user’s PC, works out the likely root cause, and fixes the low-risk problems by itself, behind safety checks and with the ability to undo.</p>
-          <!-- ADD when measured: number of users, tickets per month, time saved. -->
+          <!-- ADD when measured: number of users, tickets per month, share of tickets diagnosed or fixed automatically, auto-fixes run vs. rolled back, time saved. -->
+          <!-- SCREENSHOT SLOT (sample data only). Uncomment and edit:
+          <figure class="shot"><img src="img/it-diagnostics.png" alt="Diagnostic result showing root cause, confidence score and suggested fix" loading="lazy"><figcaption>Diagnostic result with confidence score, shown with sample data.</figcaption></figure>
+          -->
           <div class="pills" aria-label="Technology stack">
             <span class="pill">C#</span>
             <span class="pill">.NET 8</span>
@@ -609,15 +617,12 @@ footer .wrap{
           <details>
             <summary>The approach and what it’s built with</summary>
             <ul>
-              <li>Collectors read common health signals from a PC, such as processor, memory, disk, network, printing and sign-in.</li>
-              <li>A rule engine turns those signals into findings across a few dozen root-cause categories, each with a confidence score. The rules live in an editable file, so the logic can change without rewriting the software.</li>
-              <li>A small set of low-risk fixes can run on their own, but only when three checks pass: a master switch is on, the fix is classed as low risk, and it is on an approved list. The previous state is saved so a failed fix can be rolled back.</li>
-              <li>End users get plain-English steps. IT agents get the technical detail.</li>
-              <li>Includes SLA tracking, role-based access and an audit trail. The installer was cut from about 224 MB to about 33 MB.</li>
-              <li>I built it with AI coding agents. I made the design decisions, including the safety rules, and reviewed the output.</li>
+              <li>Twelve collectors read signals from the PC: processor, memory, disk, network, printers, sign-in, Outlook, VPN, display, licensing and peripherals.</li>
+              <li>A rule engine turns those signals into findings across 28+ root-cause categories, each with a confidence score. The rules live in an editable file, so the logic can change without rewriting the software.</li>
+              <li>Seven low-risk fixes, such as restarting the print spooler or flushing the DNS cache, run on their own only when three checks pass: a master switch is on, the fix is low risk, and it is on an approved list. The previous state is saved so a failed fix can be rolled back.</li>
+              <li>End users get plain-English steps. IT agents get the technical detail and commands.</li>
+              <li>Includes the ticket lifecycle, SLA tracking, role-based access, an audit trail and reporting.</li>
             </ul>
-            <p class="stack">C#, .NET 8, WPF, MySQL, YAML rules</p>
-            <p>I keep company-specific details private. I’m happy to talk through the design in a conversation.</p>
           </details>
         </article>
 
@@ -629,8 +634,11 @@ footer .wrap{
             </div>
             <span class="badge-live">In use today</span>
           </div>
-          <p>A manufacturer valued its inventory using many spreadsheets and a long manual checklist. I built a pipeline that calculates the valuation to the international inventory standard (IAS 2) and produces an audit-ready Excel file. A finance team member can trace any number back to its source.</p>
-          <!-- ADD when known: how long the old process took vs. the pipeline, and how it was checked against the old method. -->
+          <p>A manufacturer valued its inventory across about 184 products using spreadsheets and a long manual checklist. I built a pipeline that calculates the valuation to the international inventory standard (IAS 2) and produces an Excel file in which a finance team member can trace any number back to its source.</p>
+          <!-- ADD when known: how long the old process took vs. the pipeline, how it was checked against the old method, and whether finance or auditors have accepted the output. -->
+          <!-- SCREENSHOT SLOT (sample data only). Uncomment and edit:
+          <figure class="shot"><img src="img/inventory-valuation.png" alt="Valuation workbook showing cost, net realisable value and the lower-of rule per product" loading="lazy"><figcaption>Valuation output for sample products.</figcaption></figure>
+          -->
           <div class="pills" aria-label="Technology stack">
             <span class="pill">Python</span>
             <span class="pill">MySQL</span>
@@ -640,15 +648,12 @@ footer .wrap{
           <details>
             <summary>The approach and what it’s built with</summary>
             <ul>
-              <li>For each product it works out the cost and the net realisable value, then applies the lower-of-the-two rule that the standard requires.</li>
-              <li>The cost build-up combines material rates, production costs and allocated overheads.</li>
+              <li>For every product it calculates production cost, landed cost and net realisable value, then applies the lower-of-cost-or-NRV rule to work in progress, finished goods and goods in transit.</li>
+              <li>The cost build-up covers raw material rates averaged from the purchase ledger, bills of materials, wastage and rejection allowances, melting loss, seven overhead pools split by quantity, weight and net output, plus subcontract, freight and commission costs.</li>
               <li>Money is calculated with exact decimal arithmetic instead of floating-point numbers. The Excel output keeps the original column references, so auditors can compare it with the old workbook.</li>
               <li>A formula-by-formula guide maps every calculation to its source data and code, so someone other than me can maintain it.</li>
-              <li>It has a desktop interface because the web version could not be installed on the users’ machines.</li>
-              <li>I built it with AI coding agents. I set the rules and checked the results.</li>
+              <li>It has a desktop interface because the web version could not be installed on the finance team’s machines.</li>
             </ul>
-            <p class="stack">Python, MySQL, openpyxl, Tkinter</p>
-            <p>I keep company-specific details private. I’m happy to talk through the design in a conversation.</p>
           </details>
         </article>
 
@@ -656,39 +661,21 @@ footer .wrap{
     </div>
   </section>
 
-  <!-- EDIT FREELY: the three blocks below are first drafts. Rewrite them in your own voice. -->
   <section id="bring" class="reveal">
     <div class="wrap section-grid">
       <div class="section-head">
         <span class="section-num">03 / VALUE</span>
         <h2>What I bring</h2>
-        <p class="section-sub">Mindset, habits, and how I fit into a team.</p>
+        <p class="section-sub">How I fit into a team.</p>
       </div>
       <div class="bento">
 
         <article class="bento-card bento-wide">
-          <h3>What play means to me</h3>
-          <p>Play is when the work is its own reward. In college baseball I wasn’t worried about results. I was absorbed in the game and tried to get a little better each time. I look for the same thing at work: problems I’m curious enough about to keep going without being pushed.</p>
-        </article>
-
-        <article class="bento-card">
-          <h3>What experience taught me</h3>
-          <ul class="clean-list">
-            <li><strong>Finding root causes.</strong> I trace a symptom back to what is really behind it, in code, in tools and in how people work.</li>
-            <li><strong>Making sense of a lot of information.</strong> Three years of exam preparation taught me to take a huge, messy body of material and give it a clear structure.</li>
-            <li><strong>Weighing a problem from several sides.</strong> I try to stay neutral and look at the evidence before choosing a position.</li>
-            <li><strong>Reading people.</strong> Studying psychology made me better at noticing when someone is struggling or a process isn’t working for them.</li>
-            <li><strong>Teaching myself.</strong> I learned governance, psychology and now building with AI agents without a classroom.</li>
-            <li><strong>Explaining things plainly.</strong> I write documentation and guides so that the knowledge doesn’t live in one person’s head.</li>
-          </ul>
-        </article>
-
-        <article class="bento-card">
           <h3>How I can contribute</h3>
           <ul class="clean-list">
             <li>I work between the people who do the job and the people who build the tools, and I help each side understand the other.</li>
             <li>I turn a vague problem into a clear statement of what needs fixing, then build a first working version myself.</li>
-            <li>I’m comfortable across areas, such as IT, finance and operations, and I learn a new area quickly.</li>
+            <li>I have built for both IT support and finance, and I pick up a new area quickly.</li>
             <li>I write things down, so the team can keep using and improving what I build after I’ve moved on.</li>
           </ul>
         </article>
@@ -705,8 +692,9 @@ footer .wrap{
         <p class="section-sub">Agents write code; I own the rules and verification.</p>
       </div>
       <div class="ai-box">
-        <p>I build with AI coding agents, including Antigravity, the open-source pi agent, and local models through Ollama. The agents write code. I define the problem, choose the architecture, set the rules and safety limits, and check the results against what I know should be true.</p>
-        <p>Running models locally means company data can stay on the machine it belongs to.</p>
+        <p>I build with AI coding agents. The agents write much of the code. I define the problem, choose the architecture, set the rules and safety limits, and check the results against what I know should be true.</p>
+        <!-- ADD: one real example where the agent got something wrong and you caught it (what it did, how you found it, what you changed). -->
+        <p>I also run local models through Ollama, so company data can stay on the machine it belongs to.</p>
       </div>
     </div>
   </section>
@@ -719,28 +707,16 @@ footer .wrap{
       </div>
       <div class="faq-content">
         <details>
-          <summary>What do you build?</summary>
-          <p>I build tools that take what an expert knows and turn it into software that is safe and easy to check. Two examples are a tool that finds the cause of IT problems on a PC, and a tool that does a company’s inventory valuation.</p>
-        </details>
-        <details>
-          <summary>Does AI write your code?</summary>
-          <p>Yes, AI coding agents write much of the code. I decide what problem to solve, how the system is structured, and what rules and safety limits it has. Then I review and test the result myself.</p>
-        </details>
-        <details>
           <summary>Why can’t you share more about your projects?</summary>
           <p>I built them for an employer, so I keep company details, data and exact rules private. I can explain the design approach and the decisions I made, and I’m happy to talk about them in a conversation.</p>
         </details>
         <details>
-          <summary>Why did you spend three years on UPSC?</summary>
-          <p>I wanted to study the humanities. Preparing taught me to keep going through failure, to read a lot and organise it, and to look at a problem from many sides. Now I want to use those skills in business and technology.</p>
+          <summary>What happened with the civil services exam?</summary>
+          <p>I spent three years preparing and did not clear it. Preparing taught me to keep going through failure, to read a lot and organise it, and to look at a problem from many sides. Now I want to use those skills in business and technology.</p>
         </details>
         <details>
           <summary>What does psychology add to your engineering work?</summary>
           <p>It helps me notice how people really do their work and where they get stuck. I start there, then build something that makes the right way the easy way.</p>
-        </details>
-        <details>
-          <summary>What kind of work are you looking for?</summary>
-          <p>Internal tools, process automation and BizOps-tech roles, where operations and software meet. I enjoy problems that are messy, important and worth solving well. I would also like to meet people who share a similar way of working and learning, and who want to collaborate.</p>
         </details>
       </div>
     </div>
@@ -777,7 +753,7 @@ footer .wrap{
         <h2>Let’s talk</h2>
       </div>
       <div class="contact-box">
-        <p>I’m open to internal tools, process automation and BizOps-tech roles, especially where the problem is messy, important and worth solving properly.</p>
+        <p>I’m open to internal tools, process automation and BizOps-tech roles.</p>
         <div class="contact-links">
           <a class="btn" href="mailto:viveknarole100@gmail.com">viveknarole100@gmail.com</a>
           <button class="copy-btn" id="copy-email" type="button" data-email="viveknarole100@gmail.com">Copy email</button>
