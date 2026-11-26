@@ -262,6 +262,10 @@ nav a.active::after{
   padding:0 .15em;
   border-bottom:2px solid var(--accent);
 }
+.highlight{padding:0;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+@media (min-width:40rem){.highlight{white-space:nowrap}}
+.nb{white-space:nowrap}
+.hero-name{font-family:var(--head);font-weight:600;font-size:1.1rem;letter-spacing:-.005em;color:var(--muted);margin:0 0 .6rem}
 .role-pill{
   display:inline-block;
   font-family:var(--head);
@@ -279,13 +283,14 @@ h1{
   font-family:var(--head);font-weight:700;
   font-size:clamp(2.25rem,6.2vw,4.25rem);
   line-height:1.04;letter-spacing:-.025em;
-  margin:0 0 1.75rem;max-width:20ch;
+  margin:0 0 1.75rem;max-width:22ch;text-wrap:balance;
 }
 .lede{
   font-size:clamp(1.2rem,2.2vw,1.45rem);
   line-height:1.55;color:var(--muted);
-  max-width:40rem;margin:0 0 2.25rem;
+  max-width:44rem;margin:0 0 2.25rem;text-wrap:pretty;
 }
+.lede .ask-line{display:block;margin-top:.9rem}
 .actions{
   display:flex;flex-wrap:wrap;
   gap:1rem 1.25rem;align-items:center;
@@ -468,6 +473,7 @@ details li:last-child{margin-bottom:0}
 /* Screenshots (slots are commented out in the markup until images are ready) */
 .shot{margin:0 0 1.25rem;max-width:44rem}
 .shot img{display:block;width:100%;height:auto;border:1px solid var(--rule);border-radius:8px}
+.list-label{display:block;font-family:var(--mono);font-size:.75rem;color:var(--accent);letter-spacing:.08em;margin:1.5rem 0 .9rem}
 .shot figcaption{font-family:var(--head);font-size:.9rem;color:var(--muted);margin-top:.5rem}
 
 /* Ask form */
@@ -522,7 +528,7 @@ footer .wrap{
 </head>
 <body>
 <script>document.documentElement.classList.add('js');</script>
-<a class="skip" href="#story">Skip to content</a>
+<a class="skip" href="#work">Skip to content</a>
 
 <header id="site-header">
   <div class="wrap">
@@ -532,11 +538,8 @@ footer .wrap{
     </a>
     <div class="nav-wrap">
       <nav aria-label="Main">
-        <a href="#story">Story</a>
         <a href="#work">Work</a>
-        <a href="#bring">What I bring</a>
-        <a href="#ai">AI</a>
-        <a href="#faq">FAQ</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
       <button class="theme-btn" id="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle light/dark mode">◐</button>
@@ -551,11 +554,14 @@ footer .wrap{
         <span class="status-dot"></span>
         <span>Open to roles &bull; Operations &amp; Software</span>
       </div>
-      <h1>I build tools that automate <span class="highlight">IT support and month-end accounting</span>.</h1>
-      <p class="lede">My tools are in use today: an IT support diagnostics system and a month-end inventory valuation pipeline. I’m looking for <span class="role-pill">internal tools</span>, <span class="role-pill">process automation</span> and <span class="role-pill">BizOps-tech</span> roles, where operations and software meet.</p>
+      <p class="hero-name">Vivek Narole</p>
+      <h1>I build tools that automate <span class="highlight nb">IT support</span> and <span class="highlight"><span class="nb">month-end</span> accounting.</span></h1>
+      <!-- ADD when ready to name it: "at [Company], since [year]" in the line below. -->
+      <p class="lede">One tool diagnoses and fixes common PC problems for an IT team. The other turns a manufacturer’s <span class="nb">month-end</span> inventory valuation into a workbook finance can trace line by line. <span class="ask-line">I’m looking for <span class="role-pill">internal tools</span>, <span class="role-pill">process automation</span> and <span class="role-pill">BizOps-tech</span> roles.</span></p>
+      <!-- ADD: one number that proves it, e.g. "used by [N] people" or "cut month-end valuation from [A] to [B]". -->
       <div class="actions">
-        <a class="btn" href="#story">Read my story &rarr;</a>
-        <a class="btn btn-secondary" href="#work">Explore my work</a>
+        <a class="btn" href="#work">See my work &rarr;</a>
+        <a class="btn btn-secondary" href="#about">About me</a>
         <a class="btn btn-secondary" href="mailto:viveknarole100@gmail.com">Email me</a>
         <!-- <a href="resume.pdf">Resume (PDF)</a> -->
       </div>
@@ -567,30 +573,12 @@ footer .wrap{
     </div>
   </div>
 
-  <section id="story" class="reveal">
-    <div class="wrap section-grid">
-      <div class="section-head">
-        <span class="section-num">01 / STORY</span>
-        <h2>My story</h2>
-        <p class="section-sub">From the civil services exam to building operational tools.</p>
-      </div>
-      <div class="story">
-        <p>I spent three years preparing for India’s civil services exam, with psychology as my optional subject, and I did not clear it. After each attempt I worked out what I was missing and rebuilt my method. It taught me to keep going when the odds are long, and to give a huge, messy body of material a clear structure.<!-- OPTIONAL: one sentence on why you took the exam up, in your own words. Keep this copy consistent with what you actually plan to do about further attempts. --></p>
-        <p>Psychology stayed with me. I like working out why people do what they do, and I notice quickly when something is off in a team, a tool or a screen.</p>
-        <blockquote class="pull-quote">Watch how people actually do a job, find the root cause of what slows them down, then build something that makes the right way the easy way.</blockquote>
-        <p>Engineering is how I act on that. My best work follows that pattern.</p>
-        <p>Before all of this, I played baseball in college. It was play for me, not work. I cared less about the result than about getting a little better every game, and I still work that way.</p>
-        <!-- When ready, link the full UPSC and baseball essays here. -->
-      </div>
-    </div>
-  </section>
-
   <section id="work" class="reveal">
     <div class="wrap section-grid">
       <div class="section-head">
-        <span class="section-num">02 / WORK</span>
+        <span class="section-num">01 / WORK</span>
         <h2>What I’ve built</h2>
-        <p class="section-sub">Production tools used by real teams today.</p>
+        <p class="section-sub">What each tool does, in plain English.</p>
       </div>
       <div class="work">
 
@@ -602,8 +590,9 @@ footer .wrap{
             </div>
             <span class="badge-live">In use today</span>
           </div>
-          <p>IT support depended on engineers diagnosing each problem from memory and typing fixes by hand, machine by machine. I built a ticketing system with a diagnostic engine. It reads signals from the user’s PC, works out the likely root cause, and fixes the low-risk problems by itself, behind safety checks and with the ability to undo.</p>
-          <!-- ADD when measured: number of users, tickets per month, share of tickets diagnosed or fixed automatically, auto-fixes run vs. rolled back, time saved. -->
+          <p>IT support depended on engineers diagnosing each problem from memory and typing fixes by hand, machine by machine. I built a ticketing system with a diagnostic engine that reads signals from the user’s PC, works out the likely root cause, and fixes the low-risk problems by itself.</p>
+          <!-- ADD when measured: users, tickets per month, share diagnosed or fixed automatically, auto-fixes run vs. rolled back, time saved. -->
+          <!-- ADD when ready: where and when, e.g. "[Company], [year] to present". -->
           <!-- SCREENSHOT SLOT (sample data only). Uncomment and edit:
           <figure class="shot"><img src="img/it-diagnostics.png" alt="Diagnostic result showing root cause, confidence score and suggested fix" loading="lazy"><figcaption>Diagnostic result with confidence score, shown with sample data.</figcaption></figure>
           -->
@@ -614,16 +603,14 @@ footer .wrap{
             <span class="pill">MySQL</span>
             <span class="pill">YAML rules</span>
           </div>
-          <details>
-            <summary>The approach and what it’s built with</summary>
-            <ul>
-              <li>Twelve collectors read signals from the PC: processor, memory, disk, network, printers, sign-in, Outlook, VPN, display, licensing and peripherals.</li>
-              <li>A rule engine turns those signals into findings across 28+ root-cause categories, each with a confidence score. The rules live in an editable file, so the logic can change without rewriting the software.</li>
-              <li>Seven low-risk fixes, such as restarting the print spooler or flushing the DNS cache, run on their own only when three checks pass: a master switch is on, the fix is low risk, and it is on an approved list. The previous state is saved so a failed fix can be rolled back.</li>
-              <li>End users get plain-English steps. IT agents get the technical detail and commands.</li>
-              <li>Includes the ticket lifecycle, SLA tracking, role-based access, an audit trail and reporting.</li>
-            </ul>
-          </details>
+          <span class="list-label">STUFF I WORKED ON</span>
+          <ul class="clean-list">
+            <li><strong>Signal collectors.</strong> Twelve collectors read the health of a PC: processor, memory, disk, network, printers, sign-in, Outlook, VPN, display, licensing and peripherals.</li>
+            <li><strong>Rule engine.</strong> Turns those signals into a likely root cause across 28+ categories, each with a confidence score. The rules sit in a file IT can edit, so the logic changes without new software.</li>
+            <li><strong>Safe auto-fix.</strong> Seven low-risk fixes, like restarting the print spooler or flushing the DNS cache, run on their own, but only when a master switch is on, the fix is classed low risk and it is on an approved list. The previous state is saved, so a failed fix can be undone.</li>
+            <li><strong>Two audiences.</strong> End users get plain-English steps. IT agents get the technical detail and commands.</li>
+            <li><strong>Ticketing.</strong> Ticket lifecycle, SLA tracking, role-based access, an audit trail and reporting.</li>
+          </ul>
         </article>
 
         <article class="card" id="inventory-valuation">
@@ -636,6 +623,7 @@ footer .wrap{
           </div>
           <p>A manufacturer valued its inventory across about 184 products using spreadsheets and a long manual checklist. I built a pipeline that calculates the valuation to the international inventory standard (IAS 2) and produces an Excel file in which a finance team member can trace any number back to its source.</p>
           <!-- ADD when known: how long the old process took vs. the pipeline, how it was checked against the old method, and whether finance or auditors have accepted the output. -->
+          <!-- ADD when ready: where and when, e.g. "[Company], [year] to present". -->
           <!-- SCREENSHOT SLOT (sample data only). Uncomment and edit:
           <figure class="shot"><img src="img/inventory-valuation.png" alt="Valuation workbook showing cost, net realisable value and the lower-of rule per product" loading="lazy"><figcaption>Valuation output for sample products.</figcaption></figure>
           -->
@@ -645,79 +633,66 @@ footer .wrap{
             <span class="pill">openpyxl</span>
             <span class="pill">Tkinter</span>
           </div>
-          <details>
-            <summary>The approach and what it’s built with</summary>
-            <ul>
-              <li>For every product it calculates production cost, landed cost and net realisable value, then applies the lower-of-cost-or-NRV rule to work in progress, finished goods and goods in transit.</li>
-              <li>The cost build-up covers raw material rates averaged from the purchase ledger, bills of materials, wastage and rejection allowances, melting loss, seven overhead pools split by quantity, weight and net output, plus subcontract, freight and commission costs.</li>
-              <li>Money is calculated with exact decimal arithmetic instead of floating-point numbers. The Excel output keeps the original column references, so auditors can compare it with the old workbook.</li>
-              <li>A formula-by-formula guide maps every calculation to its source data and code, so someone other than me can maintain it.</li>
-              <li>It has a desktop interface because the web version could not be installed on the finance team’s machines.</li>
-            </ul>
-          </details>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="bring" class="reveal">
-    <div class="wrap section-grid">
-      <div class="section-head">
-        <span class="section-num">03 / VALUE</span>
-        <h2>What I bring</h2>
-        <p class="section-sub">How I fit into a team.</p>
-      </div>
-      <div class="bento">
-
-        <article class="bento-card bento-wide">
-          <h3>How I can contribute</h3>
+          <span class="list-label">STUFF I WORKED ON</span>
           <ul class="clean-list">
-            <li>I work between the people who do the job and the people who build the tools, and I help each side understand the other.</li>
-            <li>I turn a vague problem into a clear statement of what needs fixing, then build a first working version myself.</li>
-            <li>I have built for both IT support and finance, and I pick up a new area quickly.</li>
-            <li>I write things down, so the team can keep using and improving what I build after I’ve moved on.</li>
+            <li><strong>Lower of cost or net realisable value.</strong> For every product it works out production cost, landed cost and net realisable value, then applies the lower-of rule to work in progress, finished goods and goods in transit.</li>
+            <li><strong>Cost build-up.</strong> Works out what each product really cost to make: raw material rates averaged from the purchase ledger, bills of materials, wastage and rejection allowances, melting loss, seven overhead pools, plus subcontract, freight and commission.</li>
+            <li><strong>Exact money.</strong> Decimal arithmetic instead of floating-point numbers, so rounding errors do not creep into totals.</li>
+            <li><strong>Built for audit.</strong> The Excel output keeps the original column references, so auditors can compare it with the old workbook.</li>
+            <li><strong>Maintainable.</strong> A formula-by-formula guide maps every calculation to its source data and code, so someone other than me can maintain it.</li>
+            <li><strong>Desktop app.</strong> It has a desktop interface because the web version could not be installed on the finance team’s machines.</li>
           </ul>
         </article>
 
+        <!-- REFERENCE SLOT: one named line from a finance lead or IT head. Uncomment when you have one:
+        <blockquote class="pull-quote">“What this changed, in their words.” <br>Name, role</blockquote>
+        -->
+
       </div>
     </div>
   </section>
 
-  <section id="ai" class="reveal">
+  <!-- PUBLIC PROOF SLOT: uncomment when a public repo, open-source pull requests or a case study exist.
+       Also add <a href="#proof">Proof</a> to the nav, and renumber the section labels (01 Work, 02 Proof, 03 About, 04 Contact).
+  <section id="proof" class="reveal">
     <div class="wrap section-grid">
       <div class="section-head">
-        <span class="section-num">04 / WORKFLOW</span>
-        <h2>How I work with AI</h2>
-        <p class="section-sub">Agents write code; I own the rules and verification.</p>
+        <span class="section-num">02 / PROOF</span>
+        <h2>Open work</h2>
+        <p class="section-sub">Code and writing anyone can check.</p>
       </div>
-      <div class="ai-box">
-        <p>I build with AI coding agents. The agents write much of the code. I define the problem, choose the architecture, set the rules and safety limits, and check the results against what I know should be true.</p>
-        <!-- ADD: one real example where the agent got something wrong and you caught it (what it did, how you found it, what you changed). -->
-        <p>I also run local models through Ollama, so company data can stay on the machine it belongs to.</p>
+      <div class="work">
+        <article class="card">
+          <div class="card-top"><div>
+            <h3 class="card-title"><a href="https://github.com/nvivek42/REPO">Repo name</a></h3>
+            <span class="card-tag">What it does, on sample data</span>
+          </div></div>
+          <p>One or two sentences. Link the README, tests and CI badge.</p>
+          <div class="pills"><span class="pill">Python</span></div>
+        </article>
+        <article class="card">
+          <div class="card-top"><div>
+            <h3 class="card-title"><a href="#">Case study title</a></h3>
+            <span class="card-tag">A decision, its trade-offs, and one time the agent was wrong and I caught it</span>
+          </div></div>
+        </article>
       </div>
     </div>
   </section>
+  -->
 
-  <section id="faq" class="reveal">
+  <section id="about" class="reveal">
     <div class="wrap section-grid">
       <div class="section-head">
-        <span class="section-num">05 / FAQ</span>
-        <h2>Quick answers</h2>
+        <span class="section-num">02 / ABOUT</span>
+        <h2>About me</h2>
+        <p class="section-sub">From the civil services exam to building operational tools.</p>
       </div>
-      <div class="faq-content">
-        <details>
-          <summary>Why can’t you share more about your projects?</summary>
-          <p>I built them for an employer, so I keep company details, data and exact rules private. I can explain the design approach and the decisions I made, and I’m happy to talk about them in a conversation.</p>
-        </details>
-        <details>
-          <summary>What happened with the civil services exam?</summary>
-          <p>I spent three years preparing and did not clear it. Preparing taught me to keep going through failure, to read a lot and organise it, and to look at a problem from many sides. Now I want to use those skills in business and technology.</p>
-        </details>
-        <details>
-          <summary>What does psychology add to your engineering work?</summary>
-          <p>It helps me notice how people really do their work and where they get stuck. I start there, then build something that makes the right way the easy way.</p>
-        </details>
+      <div class="story">
+        <p>I spent three years preparing for India’s civil services exam, with psychology as my optional subject, and I did not clear it. It taught me to keep going when the odds are long, and to give a huge, messy body of material a clear structure.<!-- OPTIONAL: one sentence on why you took the exam up, in your own words. Keep this consistent with what you actually plan to do about further attempts. --></p>
+        <blockquote class="pull-quote">Watch how people actually do a job, find the root cause of what slows them down, then build something that makes the right way the easy way.</blockquote>
+        <p>Before all of this, I played baseball in college, where I cared less about the result than about getting a little better every game. I still work that way.</p>
+        <p>I build with AI coding agents, and I run local models through Ollama when company data should stay on the machine it belongs to. The agents write much of the code. I set the rules and safety limits and check the results myself. I built these tools for an employer, so company details, data and exact rules stay private.<!-- ADD: one real example where the agent got something wrong and you caught it. --></p>
       </div>
     </div>
   </section>
@@ -749,7 +724,7 @@ footer .wrap{
   <section id="contact" class="reveal">
     <div class="wrap section-grid">
       <div class="section-head">
-        <span class="section-num">06 / CONTACT</span>
+        <span class="section-num">03 / CONTACT</span>
         <h2>Let’s talk</h2>
       </div>
       <div class="contact-box">
